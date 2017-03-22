@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lars.wherehaveishit.addShit">
+
+    <TextView
+        android:id="@+id/stxt_addShitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:text="@string/here_you_can_add_your_shit"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
+
+    <TextView
+        android:id="@+id/stxt_NameOfPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/stxt_addShitText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="66dp"
+        android:text="@string/name_of_place" />
+
+    <EditText
+        android:id="@+id/txt_ShitName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/stxt_NameOfPlace"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/stxt_Rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_ShitName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp"
+        android:text="@string/rating" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="0.5"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="135dp"
+        android:layout_alignTop="@+id/stxt_Rating"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp" />
+
+    <Button
+        android:id="@+id/btn_Done"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp"
+        android:text="@string/done"
+        android:onClick="doneShitting"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="537dp" />
+
+</RelativeLayout>

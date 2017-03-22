@@ -2,6 +2,7 @@ package lars.wherehaveishit;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -11,6 +12,9 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.animation.Interpolator;
+import android.widget.EditText;
 import android.widget.Toast;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,6 +25,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
+import static lars.wherehaveishit.R.id.addShit;
 import static lars.wherehaveishit.R.id.map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
@@ -103,24 +109,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
             mMap.setMyLocationEnabled(true);
 
-            // Zooms in on your location
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
+            Location myLocation = mMap.getMyLocation();
 
-            Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-            if (location != null)
-            {
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 1));
-
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                        .zoom(18)                   // Sets the zoom to 18
-                        .build();                   // Creates a CameraPosition from the builder
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-            }
+        if (myLocation != null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(myLocation.getLatitude(), myLocation
+                            .getLongitude()), 18));
+        }
 
 
     }
 
+    protected void btn_addShit(View view)
+    {
+        Intent addShit = new Intent(this,addShit.class);
+        startActivity(addShit);
 
+    }
 }

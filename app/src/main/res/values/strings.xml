@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Where have i shit</string>
     <string name="title_activity_maps">Where have i shit</string>
+    <string name="title_activity_add_shit">Add your Shit</string>
+    <string name="here_you_can_add_your_shit">Here you can add your shit!</string>
+    <string name="done">Done</string>
+    <string name="name_of_place">Name of place:</string>
+    <string name="rating">Rating:</string>
 </resources>
