@@ -126,4 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(addShit);
 
     }
+
+    //TODO: Make map zoom in on location when onCreate()
+    //TODO: Make a screen that only will apprear on first time app open and ask for loc permission
 }
