@@ -120,6 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    // Creates a new Intent and changes over to it
     protected void btn_addShit(View view)
     {
         Intent addShit = new Intent(this,addShit.class);
@@ -127,6 +128,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    //TODO: Make map zoom in on location when onCreate()
-    //TODO: Make a screen that only will apprear on first time app open and ask for loc permission
 }
