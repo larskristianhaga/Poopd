@@ -6,4 +6,9 @@
     <string name="done">Done</string>
     <string name="name_of_place">Name of place:</string>
     <string name="rating">Rating:</string>
+    <string name="title_activity_permission">PermissionActivity</string>
+    <string name="before_you_can_use_the_app_you_need_to_grant_location_permission">Before you can use the app, you need to grant Location permission</string>
+    <string name="grant_location_permission">Grant Location permission</string>
+    <string name="welcome_to_where_have_i_shit_a_app_where_you_can_view_where_you_have_taken_a_shit_on_a_map">Welcome to \'Where have i shit\' a app where you can view where you have taken a shit on a map.</string>
+    <string name="before_you_can_use_the_app_you_need_to_grant_location_permission_else_the_app_is_useless">Before you can use the app you need to grant location permission else the app is useless.</string>
 </resources>

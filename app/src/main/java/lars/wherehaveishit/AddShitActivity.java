@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class addshitActivity extends AppCompatActivity {
+public class AddShitActivity extends AppCompatActivity {
 
     // Declaring what information i need
     protected String shitName;

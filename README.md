@@ -8,3 +8,5 @@ TODO(unsorted):
 - [ ] Created by page
 - [ ] Settings
 - [ ] Implement app shortcut if possible with minimum and selected SDK
+- [ ] A Help page
+- [ ] A splash screen when you first open the app for the first time

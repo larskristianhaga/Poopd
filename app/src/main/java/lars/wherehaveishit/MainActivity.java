@@ -24,7 +24,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -34,7 +35,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)
+    {
         mMap = googleMap;
         mMap.setMapType(googleMap.MAP_TYPE_NORMAL);
 
@@ -45,7 +47,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -71,7 +74,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
         Intent addShit = new Intent(this,AddShitActivity.class);
         startActivity(addShit);
-
     }
 
     /*
