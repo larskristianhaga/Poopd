@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="horizontal">
 
     <fragment xmlns:tools="http://schemas.android.com/tools"
@@ -12,17 +12,18 @@
         tools:context=".MainActivity" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addShit"
+        android:id="@+id/btn_addShit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
         android:clickable="true"
-        android:onClick="btn_addShit"
+        android:onClick="addShitActivity"
         app:backgroundTint="#bebebe"
         app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@android:drawable/ic_menu_add" />
     <!-- Need to change this color of the button to someting more smoother, i dont know what.. -->
+
 
 </RelativeLayout>
