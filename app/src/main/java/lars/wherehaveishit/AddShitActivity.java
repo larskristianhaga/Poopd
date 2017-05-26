@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class AddShitActivity extends AppCompatActivity {
@@ -41,6 +42,8 @@ public class AddShitActivity extends AppCompatActivity {
         //TODO: Save rating
         //TODO: Save cordinates
 
+
+        Log.i("SavingFile","The file is now saved");
         // feks:
         // Lars Hjemme|5.5|15.35334,43.434434
     }
