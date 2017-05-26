@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -14,10 +15,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
+import static android.os.SystemClock.sleep;
 import static lars.wherehaveishit.R.id.map;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback
@@ -25,8 +29,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
+    private boolean locationPermission = false;
 
 
+    // Gets called when this activity is created
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -44,6 +50,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
+    // Gets called when the map is ready, enables different overlays on map
     @Override
     public void onMapReady( GoogleMap googleMap )
     {
@@ -64,13 +72,26 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 // Enables your position in the map
                 mMap.setMyLocationEnabled(true);
+                locationPermission = true;
+
             }
+            //locationPermission = true;
         }
         else
         {
             //Not in api-23, no need to prompt
             mMap.setMyLocationEnabled(true);
+            locationPermission = true;
         }
+    }
+
+
+    // Gets called when you start the activity
+    public void onStart( )
+    {
+        super.onStart();
+
+
     }
 
 
@@ -118,10 +139,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 {
 
                     // permission was granted, yay!
+
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                     {
                         // Enables your position in the map
                         mMap.setMyLocationEnabled(true);
+                        checkIfZoomToLocationandZoom();
                     }
                 }
                 else
@@ -131,6 +154,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     // Makes the button invisible
                     View make_btn_addShit_invisible = findViewById(R.id.btn_addShit);
                     make_btn_addShit_invisible.setVisibility(View.INVISIBLE);
+
+                    // Used to disable zoom to location
+                    locationPermission = false;
 
                     // Prompts a text explaining that some functionality will be disabled
                     Toast.makeText(this, "Some functionality will now be disabled :(", Toast.LENGTH_LONG).show();
@@ -143,6 +169,30 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
+    // Zooms to your location
+    protected void checkIfZoomToLocationandZoom( )
+    {
+
+        if (locationPermission == true)
+        {
+            Location myLocation = mMap.getMyLocation();
+
+            if (myLocation != null)
+            {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 16
+                                                                    ));
+            }
+            else
+            {
+                Toast.makeText(this, "Cannot find your location", Toast.LENGTH_LONG).show();
+                Log.e("Location", "Your location is null");
+            }
+        }
+
+    }
+
     // Code that will run if the user minimize the app and opens it again
     @Override
     public void onResume( )
@@ -150,7 +200,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         super.onResume(); // Always call the superclass method first
 
-
+        //TODO: To be used or removed
         Log.i("resume", "The onResume method ran");
     }
 
@@ -163,9 +213,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(addShit);
     }
 
-    /*
-     Prompt the users and ask if the really want to exit the application.
-     */
+
+    // Prompt the users and ask if the really want to exit the application with a yes or no option
     @Override
     public void onBackPressed( )
     {
@@ -184,7 +233,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 })
                 .setNegativeButton("No", null)
                 .show();
-
 
     }
 
