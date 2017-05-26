@@ -2,6 +2,8 @@
 A android app that allows you to map where you have taken a shit!
 A spare time project for a full time student, just for fun.
 
+All data is stored on device
+
 TODO(unsorted):
 - [ ] Stats page
 - [ ] Login page
