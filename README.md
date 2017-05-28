@@ -12,3 +12,5 @@ TODO(unsorted):
 - [ ] Implement app shortcut if possible with minimum and selected SDK
 - [ ] A Help page
 - [ ] A splash screen when you first open the app for the first time
+- [ ] If location is not granted, load map, then load a screen over it explaining that location services needs to be enabled
+- [ ] If GPS is not enables, load map, then load a screen over it explaining that GPS needs to be on
