@@ -59,7 +59,7 @@ public class AddShitActivity extends AppCompatActivity {
 */
 
     /*
-     Prompt the users and ask if the dont want to save their shit
+     Prompt the users and ask if the don't want to save their shit
      */
     @Override
     public void onBackPressed() {
