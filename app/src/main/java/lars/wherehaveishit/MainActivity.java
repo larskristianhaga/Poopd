@@ -23,7 +23,7 @@ import static lars.wherehaveishit.R.id.map;
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 {
 
-    private GoogleMap mMap;
+    protected static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
 
 

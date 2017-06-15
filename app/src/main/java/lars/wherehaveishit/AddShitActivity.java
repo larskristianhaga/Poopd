@@ -1,15 +1,26 @@
 package lars.wherehaveishit;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 public class AddShitActivity extends AppCompatActivity
 {
@@ -30,10 +41,11 @@ public class AddShitActivity extends AppCompatActivity
 
     }
 
+
     protected void doneShitting( View view )
     {
 
-        savingFile();
+        savingData();
 
 
         // Goes back to maps view
@@ -42,31 +54,18 @@ public class AddShitActivity extends AppCompatActivity
         startActivity(Maps);
     }
 
-    protected void savingFile( )
+    protected void savingData( )
     {
-        //TODO: Save name
-        //TODO: Save rating
-        //TODO: Save cordinates
+        // Saves the current location to a variable.
+        // noinspection deprecation
+        Location currentLocation = MainActivity.mMap.getMyLocation();
+
+        // To be removed, just for dev
+        Toast.makeText(this, "Location:" + currentLocation, Toast.LENGTH_LONG).show();
 
 
-        Log.i("SavingFile", "The file is now saved");
-        // feks:
-        // Lars Hjemme|5.5|15.35334,43.434434
+
     }
-
-
-    public Location getLastLocation( GoogleApiClient client )
-    {
-
-
-        return null;
-    }
-
-
-
-
-
-
 
 
     //Prompt the users and ask if the don't want to save their shit
