@@ -27,10 +27,13 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -74,7 +77,7 @@ public class AddShitActivity extends AppCompatActivity
             startActivity(Maps);
         }
         // Displays a text saying that data was not saved properly
-        Toast.makeText(this, "The data was not saved properly", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "The data was not saved properly", Toast.LENGTH_SHORT).show();
     }
 
     protected void savingData( )
@@ -102,17 +105,44 @@ public class AddShitActivity extends AppCompatActivity
         // Making a string out of current location, name of place, rating, date and time
         String savingShitString = shitName + "|" + shitRating + "|" + shitDate + "/" + shitMonth + "/" + shitYear + "|" + shitHour + ":" + shitMinute;
 
-        // Calling another method that saves the String "savingShitString" to internal storage
+
+        // Save file to internal storage
+        FileOutputStream saveFile;
         try
         {
-            saveFiletoInternalStorage();
-        } catch (IOException e)
+            saveFile = openFileOutput("savedShits", Context.MODE_PRIVATE);
+            saveFile.write(savingShitString.getBytes());
+            saveFile.close();
+
+            Log.i("Saving", "Saved");
+            Toast.makeText(getApplicationContext(), "File saved!", Toast.LENGTH_SHORT).show();
+
+        } catch (FileNotFoundException e) {e.printStackTrace();} catch (IOException e)
         {
             e.printStackTrace();
         }
 
+
+        // Read file
+        StringBuffer stringBuffer = new StringBuffer();
+
+        try
+        {
+            BufferedReader inputReader = new BufferedReader(new InputStreamReader(openFileInput("savedShits")));
+            String inputString;
+            while ((inputString = inputReader.readLine()) != null){
+                stringBuffer.append(inputString + "\n");
+            }
+        }   catch (IOException e){
+            e.printStackTrace();
+        }
+
+        Toast.makeText(getApplicationContext(),stringBuffer.toString(),
+                       Toast.LENGTH_LONG).show();
+
+
+
         // To be removed, just for dev
-        Toast.makeText(this, "Location:" + currentLocation, Toast.LENGTH_SHORT).show();
         Log.i("Saving", shitName);
         Log.i("Saving", String.valueOf(shitRating));
         Log.i("Saving", shitDate + "/" + shitMonth + "/" + shitYear + " At: " + shitHour + ":" + shitMinute);
@@ -124,18 +154,41 @@ public class AddShitActivity extends AppCompatActivity
 
     }
 
-
+    /*
     private void saveFiletoInternalStorage( ) throws IOException
     {
-        String str = "testing123";
-        FileOutputStream saveFile = openFileOutput("allshits",Context.MODE_PRIVATE);
-        saveFile.write(str.getBytes());
-        saveFile.close();
-        Log.i("Saving", "File is now saved");
+        try
+        {
+            String str = "pirates of the carabeaaan";
+            FileOutputStream saveFile = openFileOutput("allshits.txt", Context.MODE_PRIVATE);
+            saveFile.write(str.getBytes());
+            saveFile.close();
+            Log.i("Saving", "File is now saved");
+            Toast.makeText(this, "File is now saved", Toast.LENGTH_SHORT).show();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    */
+    /*
+    private void openFileFromInternalStorage( ) throws IOException
+    {
 
+        FileInputStream fin = openFileInput("allshits.txt");
+        int c;
+        String temp = "";
+        while ((c = fin.read()) != -1)
+        {
+            temp = temp + Character.toString((char) c);
+        }
+        fin.close();
+        Log.i("Open File", String.valueOf(c));
+        Toast.makeText(this, "File is now opened", Toast.LENGTH_SHORT).show();
 
     }
-
+*/
 
     //Prompt the users and ask if the don't want to save their shit
     @Override
