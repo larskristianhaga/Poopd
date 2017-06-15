@@ -18,6 +18,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import static lars.wherehaveishit.R.id.map;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback
@@ -148,10 +152,27 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onResume( )
     {
 
-        super.onResume(); // Always call the superclass method first
+        super.onResume();
 
 
-        Log.i("resume", "The onResume method ran");
+        // Read file
+        StringBuffer stringBuffer = new StringBuffer();
+
+        try
+        {
+            BufferedReader inputReader = new BufferedReader(new InputStreamReader(openFileInput("savedShits")));
+            String inputString;
+            while ((inputString = inputReader.readLine()) != null)
+            {
+                stringBuffer.append(inputString + "\n");
+            }
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        // Prints out the last saved string
+        Toast.makeText(getApplicationContext(), stringBuffer.toString(),
+                       Toast.LENGTH_LONG).show();
     }
 
 
