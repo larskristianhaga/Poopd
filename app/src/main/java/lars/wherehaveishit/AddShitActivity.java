@@ -64,7 +64,7 @@ public class AddShitActivity extends AppCompatActivity
     }
 
 
-    protected void doneShitting( View view )
+    public void doneShitting( View view )
     {
 
         savingData();
@@ -82,7 +82,7 @@ public class AddShitActivity extends AppCompatActivity
         Toast.makeText(this, "The data was not saved properly", Toast.LENGTH_SHORT).show();
     }
 
-    protected void savingData( )
+    public void savingData( )
     {
         // Saves the current location to a variable.
         // noinspection deprecation
@@ -113,45 +113,37 @@ public class AddShitActivity extends AppCompatActivity
         int shitMinute = savingDate.get(Calendar.MINUTE);
 
         // Making a string out of current location, name of place, rating, date and time
-        String savingShitString = currentLocationSubstring + "|" + shitName + "|" + shitRating + "|" + shitDate + "/" + shitMonth + "/" + shitYear + "|" + shitHour + ":" + shitMinute;
+        //String savingShitString = currentLocationSubstring + "|" + shitName + "|" + shitRating + "|" + shitDate + "/" + shitMonth + "/" + shitYear + "|" + shitHour + ":" + shitMinute;
+
+        // Merging date, month and year
+        String shitDateMonthYear = shitDate + "/" + shitMonth + "/" + shitYear;
+
+        // Merging hour and minute
+        String shitHourMinute = shitHour + ":" + shitMinute;
+
+        // Makes a string array of current location, name of place, rating, date and time
+        String[] savingShitString = {currentLocationSubstring, shitName, String.valueOf(shitRating), shitDateMonthYear, shitHourMinute};
+
+        Log.i("Saving", String.valueOf(savingShitString));
 
         // Save file to internal storage
-        FileOutputStream saveFile;
+        FileOutputStream outputStream;
         try
         {
-            saveFile = openFileOutput("savedShits", Context.MODE_PRIVATE);
-            saveFile.write(savingShitString.getBytes());
-            saveFile.close();
+            outputStream = openFileOutput("savedShits", Context.MODE_PRIVATE);
+            for (String s : savingShitString)
+            {
+                outputStream.write(s.getBytes());
+            }
+            outputStream.close();
             dataSaved = true;
 
             Toast.makeText(getApplicationContext(), "File saved!", Toast.LENGTH_SHORT).show();
 
-        } catch (FileNotFoundException e) {e.printStackTrace();} catch (IOException e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
-
-        /*
-        // Read file
-        StringBuffer stringBuffer = new StringBuffer();
-
-        try
-        {
-            BufferedReader inputReader = new BufferedReader(new InputStreamReader(openFileInput("savedShits")));
-            String inputString;
-            while ((inputString = inputReader.readLine()) != null)
-            {
-                stringBuffer.append(inputString + "\n");
-            }
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        */
-
-
-        //dataSaved = true;
-
 
     }
 

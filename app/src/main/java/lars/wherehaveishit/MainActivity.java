@@ -17,8 +17,11 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -155,7 +158,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
 
 
-        // Read file
+        // Read file for array
+        StringBuffer[] savingShitString = new StringBuffer[4];
+
+
+
+
+/*
+        // Read file normal string
         StringBuffer stringBuffer = new StringBuffer();
 
         try
@@ -173,7 +183,29 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         // Prints out the last saved string
         Toast.makeText(getApplicationContext(), stringBuffer.toString(),
                        Toast.LENGTH_LONG).show();
+
+*/
     }
+
+
+    /*
+    public void readFileAndMarkOnMap( )
+    {
+
+        for (int i = 0; i < ; i++)
+    }
+
+    protected Maker createMarker( double latitude, double longitude, String name, String rating, String date, String time )
+    {
+
+        return mMap.addMarker(new MarkerOptions()
+                                      .position(new LatLng(Latitude, Longitude))
+                                      .title(name)
+                                      .snippet()
+
+                             );
+    }
+    */
 
 
     // Creates a new Intent and changes over to it
