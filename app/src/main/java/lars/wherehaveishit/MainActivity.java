@@ -41,6 +41,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Checks the SDK of the phone its running on
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             checkLocationPermission();
@@ -56,6 +57,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
 
         mMap = googleMap;
+        // Sets the map type
         mMap.setMapType(googleMap.MAP_TYPE_NORMAL);
 
         // Enables controls on the Map
@@ -63,7 +65,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        // Checks the SDK build version, and decides what to do with it(location wise).
+        // Checks the SDK build version, and decides from that what it will continue doing.
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             //User has previously accepted this permission
@@ -75,27 +77,25 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
         else
         {
-            //Not in api-23, no need to prompt
+            //Not in api-23 and above, no need to prompt
             mMap.setMyLocationEnabled(true);
         }
     }
 
-
+    // Requests the location permission
     public boolean checkLocationPermission( )
     {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
-            //TODO: Show an explanation why the app needs the spesific permission
+            Toast.makeText(this, "The application will need your location to allow you to track your shits, else will some of the functionality will be disabled", Toast.LENGTH_LONG).show();
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
             {
 
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+                // Show an expanation to the user, this thread waiting for the user's response! After the user sees the explanation, try again to request the permission.
                 Toast.makeText(this, "The app need to know your location, or some functionality will be disabled", Toast.LENGTH_LONG).show();
 
-                //Prompt the user once explanation has been shown
+                // Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
             }
             else
@@ -124,7 +124,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 {
 
-                    // permission was granted, yay!
+                    // Permission was granted, WHOOOP!
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                     {
                         // Enables your position in the map
@@ -133,15 +133,15 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 else
                 {
-                    // permission denied, shit! Disable the functionality that depends on this permission.
+                    // permission denied, shit!
+                    // Disabling the functionality that depends on this permission.
 
-                    // Makes the button invisible
+                    // Makes the button invisible, now only MainActivity is accessible.
                     View make_btn_addShit_invisible = findViewById(R.id.btn_addShit);
                     make_btn_addShit_invisible.setVisibility(View.INVISIBLE);
 
                     // Prompts a text explaining that some functionality will be disabled
-                    Toast.makeText(this, "Some functionality will now be disabled :(", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(this, "You will no longer be able to track your shits :(", Toast.LENGTH_LONG).show();
 
                 }
                 return;
@@ -158,8 +158,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
 
 
+        //
+        // Not here the read code is going to end up in the finished project, just need a way to test it whenever i reopen the application
+        //
+
         // Read file for array
-        StringBuffer[] savingShitString = new StringBuffer[4];
+        //StringBuffer[] savingShitString = new StringBuffer[4];
 
 
 
@@ -216,15 +220,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(addShit);
     }
 
-    /*
-     Prompt the users and ask if the really want to exit the application.
-     */
+
+    // Prompt the users and ask if the really want to exit the application.
     @Override
     public void onBackPressed( )
     {
 
         new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit the app?")
+                .setMessage("Are you sure you want to exit the application?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener()
                 {
 
