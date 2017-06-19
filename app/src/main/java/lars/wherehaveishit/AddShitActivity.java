@@ -32,16 +32,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class AddShitActivity extends AppCompatActivity
 {
 
-    // Declaring what information i need
+    // Used to determine if the data is saved properly
     protected boolean dataSaved = false;
 
 
@@ -59,6 +62,7 @@ public class AddShitActivity extends AppCompatActivity
     {
 
         super.onResume();
+        // Automaticly sets the variable to false
         dataSaved = false;
 
     }
@@ -69,7 +73,7 @@ public class AddShitActivity extends AppCompatActivity
 
         savingData();
 
-        // Goes back to maps view if the data is saved properly
+        // Goes back to maps view if the data is saved properly, and dataSaved == true.
         if (dataSaved == true)
         {
             Intent Maps = new Intent(this, MainActivity.class);
@@ -78,7 +82,7 @@ public class AddShitActivity extends AppCompatActivity
             return;
         }
 
-        // Displays a text saying that data was not saved properly
+        // Displays a text saying that data was not saved properly, if dataSaved != true.
         Toast.makeText(this, "The data was not saved properly", Toast.LENGTH_SHORT).show();
     }
 
@@ -96,7 +100,7 @@ public class AddShitActivity extends AppCompatActivity
         {
             return;
         }
-        Log.i("Saving File", String.valueOf(name.length()));
+        // Saves it to a string
         String shitName = name.getText().toString();
 
 
@@ -112,7 +116,7 @@ public class AddShitActivity extends AppCompatActivity
         int shitHour = savingDate.get(Calendar.HOUR_OF_DAY);
         int shitMinute = savingDate.get(Calendar.MINUTE);
 
-        // Making a string out of current location, name of place, rating, date and time
+        // A alternative way of saving all the variables to a string using delimiters
         //String savingShitString = currentLocationSubstring + "|" + shitName + "|" + shitRating + "|" + shitDate + "/" + shitMonth + "/" + shitYear + "|" + shitHour + ":" + shitMinute;
 
         // Merging date, month and year
@@ -124,23 +128,27 @@ public class AddShitActivity extends AppCompatActivity
         // Makes a string array of current location, name of place, rating, date and time
         String[] savingShitString = {currentLocationSubstring, shitName, String.valueOf(shitRating), shitDateMonthYear, shitHourMinute};
 
-        Log.i("Saving", String.valueOf(savingShitString));
-
         // Save file to internal storage
         FileOutputStream outputStream;
         try
         {
+            // Open a new outputStream and saves the file with filename savedShits, with private mode. I 'm using private mode because no other app needs to access the saved data.
             outputStream = openFileOutput("savedShits", Context.MODE_PRIVATE);
             for (String s : savingShitString)
             {
                 outputStream.write(s.getBytes());
             }
+            // Closes outputStream
             outputStream.close();
+            // Sets dataSaved = true, this makes so you can go back to the main Intent, MainActivity
             dataSaved = true;
 
+            // Prompts a display to the screen that the files where saved successfully
             Toast.makeText(getApplicationContext(), "File saved!", Toast.LENGTH_SHORT).show();
 
-        } catch (Exception e)
+        }
+        // Catches exception
+        catch (Exception e)
         {
             e.printStackTrace();
         }
