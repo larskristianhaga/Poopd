@@ -129,7 +129,7 @@ public class AddShitActivity extends AppCompatActivity
         String shitHourMinute = shitHour + ":" + shitMinute;
 
         // Makes a string array of current location, name of place, rating, date and time
-        String[] savingShitString = {currentLocationLatFin,currentLocationLonFin,shitName, String.valueOf(shitRating), shitDateMonthYear, shitHourMinute};
+        String[] savingShitString = {currentLocationLatFin, currentLocationLonFin, shitName, String.valueOf(shitRating), shitDateMonthYear, shitHourMinute,";"};
 
         // Save file to internal storage
         FileOutputStream outputStream;
@@ -143,6 +143,7 @@ public class AddShitActivity extends AppCompatActivity
             }
             // Closes outputStream
             outputStream.close();
+
             // Sets dataSaved = true, this makes so you can go back to the main Intent, MainActivity
             dataSaved = true;
 

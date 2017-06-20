@@ -1,9 +1,11 @@
 package lars.wherehaveishit;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -49,6 +52,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
+
+
 
     }
 
@@ -141,7 +146,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     make_btn_addShit_invisible.setVisibility(View.INVISIBLE);
 
                     // Prompts a text explaining that some functionality will be disabled
-                    Toast.makeText(this, "You will no longer be able to track your shits :(", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "You will no longer be able to add new shits :(", Toast.LENGTH_LONG).show();
 
                 }
                 return;
@@ -159,16 +164,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //
-        // Not here the read code is going to end up in the finished project, just need a way to test it whenever i reopen the application
-        //
+        //Not here the read code is going to end up in the finished project, just need a way to test it whenever i reopen the application
+        //TODO: Relocate code
 
         // Read file for array
         //StringBuffer[] savingShitString = new StringBuffer[4];
 
 
-
-
-/*
         // Read file normal string
         StringBuffer stringBuffer = new StringBuffer();
 
@@ -185,10 +187,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
         // Prints out the last saved string
-        Toast.makeText(getApplicationContext(), stringBuffer.toString(),
-                       Toast.LENGTH_LONG).show();
+        Log.i("Last saved cords:", stringBuffer.toString());
 
-*/
     }
 
 
