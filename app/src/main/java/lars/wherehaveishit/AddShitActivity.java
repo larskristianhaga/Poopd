@@ -88,11 +88,14 @@ public class AddShitActivity extends AppCompatActivity
 
     public void savingData( )
     {
-        // Saves the current location to a variable.
+        // Saves the current location to a variable
         // noinspection deprecation
         Location currentLocation = MainActivity.mMap.getMyLocation();
-        // Cuts the string so only the cordinates is saved
-        String currentLocationSubstring = currentLocation.toString().substring(15, 34);
+
+        // Saves the Latitude and Longitude to a string variable
+        String currentLocationLatFin = String.valueOf(currentLocation.getLatitude());
+        String currentLocationLonFin = String.valueOf(currentLocation.getLongitude());
+
 
         // Getting info from etxt_shitName and saves it to a String
         EditText name = (EditText) findViewById(R.id.etxt_ShitName);
@@ -126,7 +129,7 @@ public class AddShitActivity extends AppCompatActivity
         String shitHourMinute = shitHour + ":" + shitMinute;
 
         // Makes a string array of current location, name of place, rating, date and time
-        String[] savingShitString = {currentLocationSubstring, shitName, String.valueOf(shitRating), shitDateMonthYear, shitHourMinute};
+        String[] savingShitString = {currentLocationLatFin,currentLocationLonFin,shitName, String.valueOf(shitRating), shitDateMonthYear, shitHourMinute};
 
         // Save file to internal storage
         FileOutputStream outputStream;
@@ -156,7 +159,7 @@ public class AddShitActivity extends AppCompatActivity
     }
 
 
-    //Prompt the users and ask if the don't want to save their shit
+    // Prompt the users and ask if the don't want to save their shit
     @Override
     public void onBackPressed( )
     {
