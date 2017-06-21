@@ -89,7 +89,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             //Not in api-23 and above, no need to prompt
             mMap.setMyLocationEnabled(true);
         }
+
     }
+
 
     // Requests the location permission
     public boolean checkLocationPermission( )
@@ -166,8 +168,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         super.onResume();
 
-        //Not here the read code is going to end up in the finished project, just need a way to test it whenever i reopen the application
-        //TODO: Relocate code
+    }
+
+    @Override
+    public void onStart( )
+    {
+
+        super.onStart();
 
 
         ArrayList<String> readFile = new ArrayList<String>();
@@ -189,6 +196,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
                 // Counts nr of lines in the file and saves adds it to a variable.
+                // Not working, returns 0 lines
                 while (bufferedReader.readLine() != null)
                 {
                     totalNrofLines++;
@@ -210,20 +218,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             Log.e("Read file", "Can not read file: " + e.toString());
         }
 
-        Log.i("Read from File", shitReadFromFile);
-
         String[] shitReadFromFileArr = shitReadFromFile.split(String.valueOf((char) 182));
-        Log.i("Read from File", String.valueOf(shitReadFromFileArr));
-
-
-        // Testing
-        Log.i("Nr0", shitReadFromFileArr[0]);
-        Log.i("Nr1", shitReadFromFileArr[1]);
-        Log.i("Nr2", shitReadFromFileArr[2]);
-        Log.i("Nr3", shitReadFromFileArr[3]);
-        Log.i("Nr4", shitReadFromFileArr[4]);
-        Log.i("Nr5", shitReadFromFileArr[5]);
-
 
         double Latitude = Double.parseDouble(shitReadFromFileArr[0]);
         double Longitude = Double.parseDouble(shitReadFromFileArr[1]);
@@ -232,25 +227,31 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         String Date = shitReadFromFileArr[4];
         String Time = shitReadFromFileArr[5];
 
+        //MarkOnMap(Latitude, Longitude, Name, Rating, Date, Time);
 
-        MarkOnMap(Latitude, Longitude, Name, Rating, Date, Time);
+        Log.i("Testing","Test to see how far it gets");
+        Marker marker = mMap.addMarker(new MarkerOptions()
+                                                            .position(new LatLng(41.3856962, 2.1665669))
+
+
+                                                   );
 
     }
-
-
+/*
     public void MarkOnMap( double Latitude, double Longitude, String Name, String Rating, String Date, String Time )
     {
         //private static final LatLng MELBOURNE = new LatLng(-37.813, 144.962);
 
 
         Marker marker = MainActivity.mMap.addMarker(new MarkerOptions()
-                                                            .position(new LatLng(Latitude, Longitude))
+                                                            .position(new LatLng(41.3856962, 2.1665669))
                                                             .title(Name)
                                                             .draggable(false)
                                                             .snippet("Rating: " + Rating + "\nDate: " + Date + "\nTime: " + Time)
 
                                                    );
     }
+*/
 
     // Creates a new Intent and changes over to it
     protected void addShitActivity( View view )
