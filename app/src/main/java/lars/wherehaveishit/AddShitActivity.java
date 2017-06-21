@@ -35,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -129,8 +130,9 @@ public class AddShitActivity extends AppCompatActivity
         String shitHourMinute = shitHour + ":" + shitMinute;
 
         // Makes a string array of current location, name of place, rating, date and time
-        String[] savingShitString = {currentLocationLatFin, currentLocationLonFin, shitName, shitRating, shitDateMonthYear, shitHourMinute, ";"};
-        //String savingShitString = currentLocationLatFin + "," + currentLocationLonFin + "," + shitName + "," + String.valueOf(shitRating) + "," + shitDateMonthYear + "," + shitHourMinute + ";";
+        //String[] savingShitString = {currentLocationLatFin, currentLocationLonFin, shitName, shitRating, shitDateMonthYear, shitHourMinute, ";"};
+        String savingShitString = currentLocationLatFin + (char) 182 + currentLocationLonFin + (char) 182 + shitName + (char) 182 + String.valueOf(shitRating) + (char) 182 + shitDateMonthYear + (char) 182 + shitHourMinute + ";";
+
         Log.i("lat", currentLocationLatFin);
         Log.i("Lon", currentLocationLonFin);
         Log.i("Name", shitName);
@@ -139,6 +141,21 @@ public class AddShitActivity extends AppCompatActivity
         Log.i("Time", shitHourMinute);
         Log.i("Saved data:", savingShitString.toString());
 
+
+        try
+        {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("savedShits",Context.MODE_PRIVATE));
+            outputStreamWriter.write(savingShitString);
+            outputStreamWriter.close();
+            dataSaved = true;
+            Toast.makeText(getApplicationContext(), "File saved!", Toast.LENGTH_SHORT).show();
+        }
+        catch (IOException e)
+        {
+            Log.e("Exception","File write failed: " + e.toString());
+        }
+
+        /*
         // Save file to internal storage
         FileOutputStream outputStream;
         try
@@ -164,8 +181,9 @@ public class AddShitActivity extends AppCompatActivity
         {
             e.printStackTrace();
         }
-
+    */
     }
+
 
 
     // Prompt the users and ask if the don't want to save their shit

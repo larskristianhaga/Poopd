@@ -17,20 +17,29 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import static lars.wherehaveishit.R.id.map;
+import static lars.wherehaveishit.R.id.wide;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 {
 
     protected static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
+    int totalNrofLines = 0;
 
 
     @Override
@@ -157,73 +166,91 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         super.onResume();
 
-
-        //
         //Not here the read code is going to end up in the finished project, just need a way to test it whenever i reopen the application
         //TODO: Relocate code
 
 
-        // Read file normal string
-        StringBuffer stringBuffer = new StringBuffer();
+        ArrayList<String> readFile = new ArrayList<String>();
+        String shitReadFromFile = "";
 
         try
         {
-            BufferedReader inputReader = new BufferedReader(new InputStreamReader(openFileInput("savedShits")));
-            String inputString;
-            while ((inputString = inputReader.readLine()) != null)
+            InputStream inputStream = getApplicationContext().openFileInput("savedShits");
+
+            if (inputStream != null)
             {
-                stringBuffer.append(inputString + "\n");
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((receiveString = bufferedReader.readLine()) != null)
+                {
+                    stringBuilder.append(receiveString);
+                }
+
+                // Counts nr of lines in the file and saves adds it to a variable.
+                while (bufferedReader.readLine() != null)
+                {
+                    totalNrofLines++;
+                }
+                Log.i("File count", String.valueOf(totalNrofLines));
+
+                // Closes inputStream
+                inputStream.close();
+
+                shitReadFromFile = stringBuilder.toString();
             }
+
+
+        } catch (FileNotFoundException e)
+        {
+            Log.e("Read file", "File not found: " + e.toString());
         } catch (IOException e)
         {
-            e.printStackTrace();
+            Log.e("Read file", "Can not read file: " + e.toString());
         }
-        // Prints out the last saved string
-        Log.i("Last saved cords:", stringBuffer.toString());
 
-        // Makes a new string out of what it found in storage
-        String readShitString = stringBuffer.toString();
+        Log.i("Read from File", shitReadFromFile);
 
-
-    }
+        String[] shitReadFromFileArr = shitReadFromFile.split(String.valueOf((char) 182));
+        Log.i("Read from File", String.valueOf(shitReadFromFileArr));
 
 
-    public void readFileAndMarkOnMap( double latitude, double longitude, String name, String rating, String date, String time )
-    {
-
-        // One round for every line in the file
-        for (int i = 0; i < 1; i++)
-        {
-
-            Marker shitMarker = MainActivity.mMap.addMarker(new MarkerOptions()
-                                                                    .position(latitude, longitude)
-                                                                    .title(name)
-                                                           );
-
-        }
-    }
+        // Testing
+        Log.i("Nr0", shitReadFromFileArr[0]);
+        Log.i("Nr1", shitReadFromFileArr[1]);
+        Log.i("Nr2", shitReadFromFileArr[2]);
+        Log.i("Nr3", shitReadFromFileArr[3]);
+        Log.i("Nr4", shitReadFromFileArr[4]);
+        Log.i("Nr5", shitReadFromFileArr[5]);
 
 
-    /*
-    public void createMarker( double latitude, double longitude, String name, String rating, String date, String time )
-    {
+        double Latitude = Double.parseDouble(shitReadFromFileArr[0]);
+        double Longitude = Double.parseDouble(shitReadFromFileArr[1]);
+        String Name = shitReadFromFileArr[2];
+        String Rating = shitReadFromFileArr[3];
+        String Date = shitReadFromFileArr[4];
+        String Time = shitReadFromFileArr[5];
 
+
+        MarkOnMap(Latitude, Longitude, Name, Rating, Date, Time);
 
     }
-    */
 
 
-    /*public Maker createMarker( double latitude, double longitude, String name, String rating, String date, String time )
+    public void MarkOnMap( double Latitude, double Longitude, String Name, String Rating, String Date, String Time )
     {
+        //private static final LatLng MELBOURNE = new LatLng(-37.813, 144.962);
 
-        return mMap.addMarker(new MarkerOptions()
-                                      .position(new LatLng(Latitude, Longitude))
-                                      .title(name)
-                                      .snippet()
 
-                             );
-    }*/
+        Marker marker = MainActivity.mMap.addMarker(new MarkerOptions()
+                                                            .position(new LatLng(Latitude, Longitude))
+                                                            .title(Name)
+                                                            .draggable(false)
+                                                            .snippet("Rating: " + Rating + "\nDate: " + Date + "\nTime: " + Time)
 
+                                                   );
+    }
 
     // Creates a new Intent and changes over to it
     protected void addShitActivity( View view )
