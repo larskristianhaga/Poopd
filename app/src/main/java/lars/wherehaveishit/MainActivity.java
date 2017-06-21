@@ -162,9 +162,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         //Not here the read code is going to end up in the finished project, just need a way to test it whenever i reopen the application
         //TODO: Relocate code
 
-        // Read file for array
-        //StringBuffer[] savingShitString = new StringBuffer[4];
-
 
         // Read file normal string
         StringBuffer stringBuffer = new StringBuffer();
@@ -181,12 +178,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         {
             e.printStackTrace();
         }
-        String delimiter = ".";
-
-        String[] readShitString = stringBuffer.toString().split(delimiter);
         // Prints out the last saved string
-        Log.i("Saving string", readShitString.toString().toString());
         Log.i("Last saved cords:", stringBuffer.toString());
+
+        // Makes a new string out of what it found in storage
+        String readShitString = stringBuffer.toString();
 
 
     }
