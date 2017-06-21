@@ -1,11 +1,9 @@
 package lars.wherehaveishit;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -16,15 +14,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -52,7 +48,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
-
 
 
     }
@@ -186,20 +181,43 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         {
             e.printStackTrace();
         }
+        String delimiter = ".";
+
+        String[] readShitString = stringBuffer.toString().split(delimiter);
         // Prints out the last saved string
+        Log.i("Saving string", readShitString.toString().toString());
         Log.i("Last saved cords:", stringBuffer.toString());
 
+
+    }
+
+
+    public void readFileAndMarkOnMap( double latitude, double longitude, String name, String rating, String date, String time )
+    {
+
+        // One round for every line in the file
+        for (int i = 0; i < 1; i++)
+        {
+
+            Marker shitMarker = MainActivity.mMap.addMarker(new MarkerOptions()
+                                                                    .position(latitude, longitude)
+                                                                    .title(name)
+                                                           );
+
+        }
     }
 
 
     /*
-    public void readFileAndMarkOnMap( )
+    public void createMarker( double latitude, double longitude, String name, String rating, String date, String time )
     {
 
-        for (int i = 0; i < ; i++)
-    }
 
-    protected Maker createMarker( double latitude, double longitude, String name, String rating, String date, String time )
+    }
+    */
+
+
+    /*public Maker createMarker( double latitude, double longitude, String name, String rating, String date, String time )
     {
 
         return mMap.addMarker(new MarkerOptions()
@@ -208,8 +226,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                       .snippet()
 
                              );
-    }
-    */
+    }*/
 
 
     // Creates a new Intent and changes over to it

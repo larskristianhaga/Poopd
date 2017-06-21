@@ -109,7 +109,7 @@ public class AddShitActivity extends AppCompatActivity
 
         // Getting info from ratingBar and saves it to a float
         RatingBar rating = (RatingBar) findViewById(R.id.ratingBar);
-        float shitRating = rating.getRating();
+        String shitRating = String.valueOf(rating.getRating());
 
         // Getting todays date, month, year, hour and minute, Saves it to int values
         Calendar savingDate = Calendar.getInstance();
@@ -129,7 +129,15 @@ public class AddShitActivity extends AppCompatActivity
         String shitHourMinute = shitHour + ":" + shitMinute;
 
         // Makes a string array of current location, name of place, rating, date and time
-        String[] savingShitString = {currentLocationLatFin, currentLocationLonFin, shitName, String.valueOf(shitRating), shitDateMonthYear, shitHourMinute,";"};
+        String[] savingShitString = {currentLocationLatFin, currentLocationLonFin, shitName, shitRating, shitDateMonthYear, shitHourMinute, ";"};
+        //String savingShitString = currentLocationLatFin + "," + currentLocationLonFin + "," + shitName + "," + String.valueOf(shitRating) + "," + shitDateMonthYear + "," + shitHourMinute + ";";
+        Log.i("lat", currentLocationLatFin);
+        Log.i("Lon", currentLocationLonFin);
+        Log.i("Name", shitName);
+        Log.i("Rating", shitRating);
+        Log.i("Date", shitDateMonthYear);
+        Log.i("Time", shitHourMinute);
+        Log.i("Saved data:", savingShitString.toString());
 
         // Save file to internal storage
         FileOutputStream outputStream;
