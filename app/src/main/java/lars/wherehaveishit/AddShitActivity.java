@@ -74,21 +74,56 @@ public class AddShitActivity extends AppCompatActivity
 
         savingData();
 
-        // Goes back to maps view if the data is saved properly, and dataSaved == true.
+        // Goes back to maps view if the data is saved properly, dataSaved equals true
         if (dataSaved == true)
         {
-            Intent Maps = new Intent(this, MainActivity.class);
-            Maps.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(Maps);
-            return;
+            finish();
+
+        }
+        else
+        {
+            // Displays a text saying that data was not saved properly, if dataSaved != true.
+            Toast.makeText(this, "The data was not saved properly", Toast.LENGTH_LONG).show();
         }
 
-        // Displays a text saying that data was not saved properly, if dataSaved != true.
-        Toast.makeText(this, "The data was not saved properly", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+    private void customFile( )
+    {
+        // Needs to be the right format, else you'll get an error. double, double, String, String, String, String
+        // Type your custom string here:
+        double customLat = 0.0;
+        double customLon = 0.0;
+        String customName = null;
+        String customRating = null;
+        String customDateMonthYear = null;
+        String customHourMinute = null;
+
+        String customShitString = customLat + (char) 182 + customLon + (char) 182 + customName + (char) 182 + customRating + (char) 182 + customDateMonthYear + (char) 182 + customHourMinute + "\n";
+
+        try
+        {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("savedShits", Context.MODE_APPEND));
+            outputStreamWriter.write(customShitString);
+            outputStreamWriter.close();
+            dataSaved = true;
+            Toast.makeText(getApplicationContext(), "Custom file saved!", Toast.LENGTH_SHORT).show();
+        } catch (IOException e)
+        {
+            Log.e("Exception", "Custom file write failed: " + e.toString());
+            e.printStackTrace();
+        }
+
+
     }
 
     public void savingData( )
     {
+        // Used to save custom files
+        //customFile();
+
         // Saves the current location to a variable
         // noinspection deprecation
         Location currentLocation = MainActivity.mMap.getMyLocation();
@@ -100,6 +135,7 @@ public class AddShitActivity extends AppCompatActivity
 
         // Getting info from etxt_shitName and saves it to a String
         EditText name = (EditText) findViewById(R.id.etxt_ShitName);
+        // If there is not a value in name you cannot add the shit and it will prompt the user saying something went wrong when saving the data
         if (name.getText().length() == 0)
         {
             return;
@@ -131,32 +167,23 @@ public class AddShitActivity extends AppCompatActivity
 
         // Makes a string array of current location, name of place, rating, date and time
         //String[] savingShitString = {currentLocationLatFin, currentLocationLonFin, shitName, shitRating, shitDateMonthYear, shitHourMinute, ";"};
-        String savingShitString = currentLocationLatFin + (char) 182 + currentLocationLonFin + (char) 182 + shitName + (char) 182 + String.valueOf(shitRating) + (char) 182 + shitDateMonthYear + (char) 182 + shitHourMinute + ";";
+        String savingShitString = currentLocationLatFin + (char) 182 + currentLocationLonFin + (char) 182 + shitName + (char) 182 + String.valueOf(shitRating) + (char) 182 + shitDateMonthYear + (char) 182 + shitHourMinute + "\n";
 
-        Log.i("lat", currentLocationLatFin);
-        Log.i("Lon", currentLocationLonFin);
-        Log.i("Name", shitName);
-        Log.i("Rating", shitRating);
-        Log.i("Date", shitDateMonthYear);
-        Log.i("Time", shitHourMinute);
-        Log.i("Saved data:", savingShitString.toString());
-
+        Log.i("Write data:", savingShitString + "\n");
 
         try
         {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("savedShits",Context.MODE_PRIVATE));
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("savedShits", Context.MODE_APPEND));
             outputStreamWriter.write(savingShitString);
             outputStreamWriter.close();
             dataSaved = true;
             Toast.makeText(getApplicationContext(), "File saved!", Toast.LENGTH_SHORT).show();
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
-            Log.e("Exception","File write failed: " + e.toString());
+            Log.e("Exception", "File write failed: " + e.toString());
             e.printStackTrace();
         }
     }
-
 
 
     // Prompt the users and ask if the don't want to save their shit
