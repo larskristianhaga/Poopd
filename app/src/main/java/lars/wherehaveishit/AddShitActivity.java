@@ -153,35 +153,8 @@ public class AddShitActivity extends AppCompatActivity
         catch (IOException e)
         {
             Log.e("Exception","File write failed: " + e.toString());
-        }
-
-        /*
-        // Save file to internal storage
-        FileOutputStream outputStream;
-        try
-        {
-            // Open a new outputStream and saves the file with filename savedShits, with private mode. I 'm using private mode because no other app needs to access the saved data.
-            outputStream = openFileOutput("savedShits", Context.MODE_PRIVATE);
-            for (String s : savingShitString)
-            {
-                outputStream.write(s.getBytes());
-            }
-            // Closes outputStream
-            outputStream.close();
-
-            // Sets dataSaved = true, this makes so you can go back to the main Intent, MainActivity
-            dataSaved = true;
-
-            // Prompts a display to the screen that the files where saved successfully
-            Toast.makeText(getApplicationContext(), "File saved!", Toast.LENGTH_SHORT).show();
-
-        }
-        // Catches exception
-        catch (Exception e)
-        {
             e.printStackTrace();
         }
-    */
     }
 
 
