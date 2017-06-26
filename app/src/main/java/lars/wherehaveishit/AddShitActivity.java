@@ -2,52 +2,25 @@ package lars.wherehaveishit;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Xml;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.model.LatLng;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class AddShitActivity extends AppCompatActivity
 {
 
     // Used to determine if the data is saved properly
     protected boolean dataSaved = false;
-
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -156,9 +129,6 @@ public class AddShitActivity extends AppCompatActivity
         int shitHour = savingDate.get(Calendar.HOUR_OF_DAY);
         int shitMinute = savingDate.get(Calendar.MINUTE);
 
-        // A alternative way of saving all the variables to a string using delimiters
-        //String savingShitString = currentLocationSubstring + "|" + shitName + "|" + shitRating + "|" + shitDate + "/" + shitMonth + "/" + shitYear + "|" + shitHour + ":" + shitMinute;
-
         // Merging date, month and year
         String shitDateMonthYear = shitDate + "/" + shitMonth + "/" + shitYear;
 
@@ -169,7 +139,7 @@ public class AddShitActivity extends AppCompatActivity
         //String[] savingShitString = {currentLocationLatFin, currentLocationLonFin, shitName, shitRating, shitDateMonthYear, shitHourMinute, ";"};
         String savingShitString = currentLocationLatFin + (char) 182 + currentLocationLonFin + (char) 182 + shitName + (char) 182 + String.valueOf(shitRating) + (char) 182 + shitDateMonthYear + (char) 182 + shitHourMinute + "\n";
 
-        Log.i("Write data:", savingShitString + "\n");
+        Log.i("Write data:", savingShitString);
 
         try
         {

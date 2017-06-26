@@ -1,6 +1,7 @@
 package lars.wherehaveishit;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -24,13 +26,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 {
 
     protected static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
-    int totalNrofLines = 0;
 
 
     @Override
@@ -92,7 +94,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
-            Toast.makeText(this, "The application will need your location to allow you to track your shits, else will some of the functionality will be disabled", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "The application will need your location to allow you to track your shits, else will some of the functionality will be disabled", Toast.LENGTH_LONG).show();
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
             {
 
@@ -177,6 +179,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
 
         String shitReadFromFile = "";
+        ArrayList<String> shitReadFromFileAr = new ArrayList<String>();
 
         try
         {
@@ -192,24 +195,20 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 while ((receiveString = bufferedReader.readLine()) != null)
                 {
                     stringBuilder.append(receiveString);
-                    //totalNrofLines++;
+                    shitReadFromFileAr.add(receiveString);
                 }
-
-                Log.i("Line count from file", String.valueOf(totalNrofLines));
-                Log.i("Read data", stringBuilder.toString());
 
                 // Closes inputStream
                 inputStream.close();
 
-                shitReadFromFile = stringBuilder.toString();
-
-                if (shitReadFromFile.length() == 0)
+                // Checks the size of the recently read file, if its 0 then return. Because you cant set markers when you have no info
+                if (shitReadFromFileAr.size() == 0)
                 {
-                    Log.i("return", "return");
+                    Log.i("return", "Now returns");
                     return;
                 }
-            }
 
+            }
 
         } catch (FileNotFoundException e)
         {
@@ -223,17 +222,23 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
 
+        //
 
-        String[] shitReadFromFileArr = shitReadFromFile.split(String.valueOf((char) 182));
 
+        for (String s : shitReadFromFileAr)
+        {
+            String[] shitSplit = s.split(String.valueOf((char) 182));
 
-        double Latitude = Double.parseDouble(shitReadFromFileArr[0]);
-        double Longitude = Double.parseDouble(shitReadFromFileArr[1]);
-        String Name = shitReadFromFileArr[2];
-        String Rating = shitReadFromFileArr[3];
-        String Date = shitReadFromFileArr[4];
-        String Time = shitReadFromFileArr[5];
+            Double Latitude = Double.valueOf(shitSplit[0]);
+            Double Longitude = Double.valueOf(shitSplit[1]);
+            String Name = shitSplit[2];
+            String Rating = shitSplit[3];
+            String Date = shitSplit[4];
+            String Time = shitSplit[5];
 
+            createMarker(Latitude, Longitude, Name, Rating, Date, Time);
+
+        }
 
     }
 
@@ -263,7 +268,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onBackPressed( )
     {
-    /*
+
         new AlertDialog.Builder(this)
                 .setMessage("Are you sure you want to exit the application?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener()
@@ -278,8 +283,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 })
                 .setNegativeButton("No", null)
                 .show();
-                */
-        readFileAndMarkOnMap();
+
     }
 
 }
