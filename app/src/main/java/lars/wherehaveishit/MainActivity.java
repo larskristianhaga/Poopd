@@ -178,7 +178,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void readFileAndMarkOnMap( )
     {
 
-        String shitReadFromFile = "";
         ArrayList<String> shitReadFromFileAr = new ArrayList<String>();
 
         try
