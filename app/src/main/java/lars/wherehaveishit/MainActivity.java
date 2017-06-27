@@ -60,7 +60,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
         // Sets the map type
-        mMap.setMapType(googleMap.MAP_TYPE_NORMAL);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         // Enables controls on the Map
         mMap.getUiSettings().setCompassEnabled(true);
@@ -189,11 +189,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
 
                 while ((receiveString = bufferedReader.readLine()) != null)
                 {
-                    stringBuilder.append(receiveString);
                     shitReadFromFileAr.add(receiveString);
                 }
 
@@ -201,7 +199,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 inputStream.close();
 
                 // Checks the size of the recently read file, if its 0 then return. Because you cant set markers when you have no info
-                if (shitReadFromFileAr.size() == 0)
+                if (shitReadFromFileAr.isEmpty() || shitReadFromFileAr.size() == 0)
                 {
                     Log.i("return", "Now returns");
                     return;
@@ -228,8 +226,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         {
             String[] shitSplit = s.split(String.valueOf((char) 182));
 
-            Double Latitude = Double.valueOf(shitSplit[0]);
-            Double Longitude = Double.valueOf(shitSplit[1]);
+            String Latitude = shitSplit[0];
+            String Longitude = shitSplit[1];
             String Name = shitSplit[2];
             String Rating = shitSplit[3];
             String Date = shitSplit[4];
@@ -241,11 +239,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public Marker createMarker( double Latitude, double Longitude, String Name, String Rating, String Date, String Time )
+    public Marker createMarker( String Latitude, String Longitude, String Name, String Rating, String Date, String Time )
     {
-
+        double LatitudeFin = Double.parseDouble(Latitude);
+        double LongitudeFin = Double.parseDouble(Longitude);
         return mMap.addMarker(new MarkerOptions()
-                                      .position(new LatLng(Latitude, Longitude))
+                                      .position(new LatLng(LatitudeFin, LongitudeFin))
                                       .title(Name)
                                       .draggable(false)
                                       .snippet(Rating + " Stars" + " , " + Date + " , " + Time)
