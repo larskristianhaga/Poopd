@@ -20,7 +20,7 @@ public class AddShitActivity extends AppCompatActivity
 {
 
     // Used to determine if the data is saved properly
-    protected boolean dataSaved = false;
+    private boolean dataSaved = false;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -42,13 +42,13 @@ public class AddShitActivity extends AppCompatActivity
     }
 
 
-    public void doneShitting( View view )
+    public void doneShitting( View view)
     {
 
         savingData();
 
         // Goes back to maps view if the data is saved properly, dataSaved equals true
-        if (dataSaved == true)
+        if (dataSaved)
         {
             finish();
 
@@ -63,6 +63,7 @@ public class AddShitActivity extends AppCompatActivity
     }
 
 
+    /*
     private void customFile( )
     {
         // Needs to be the right format, else you'll get an error. double, double, String, String, String, String
@@ -88,11 +89,11 @@ public class AddShitActivity extends AppCompatActivity
             Log.e("Exception", "Custom file write failed: " + e.toString());
             e.printStackTrace();
         }
-
-
     }
+    */
 
-    public void savingData( )
+
+    private void savingData( )
     {
         // Used to save custom files
         //customFile();

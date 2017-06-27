@@ -6,6 +6,7 @@ android {
     defaultConfig {
         applicationId "lars.wherehaveishit"
         minSdkVersion 23
+        //noinspection OldTargetApi
         targetSdkVersion 25
         versionCode 1
         versionName "1.00"
@@ -24,9 +25,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //noinspection GradleDependency
     compile 'com.android.support:appcompat-v7:25.3.0'
+    //noinspection GradleDependency
     compile 'com.google.android.gms:play-services-maps:10.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //noinspection GradleDependency
     compile 'com.android.support:design:25.3.0'
     testCompile 'junit:junit:4.12'
 }

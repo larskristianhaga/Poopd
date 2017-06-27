@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -28,10 +29,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+@SuppressWarnings("UnusedReturnValue")
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 {
 
-    protected static GoogleMap mMap;
+    static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
 
 
@@ -89,7 +91,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     // Requests the location permission
-    public boolean checkLocationPermission( )
+    private boolean checkLocationPermission( )
     {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -119,7 +121,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     @Override
-    public void onRequestPermissionsResult( int requestCode, String permissions[], int[] grantResults )
+    public void onRequestPermissionsResult( int requestCode, @NonNull String permissions[], @NonNull int[] grantResults )
     {
 
         switch (requestCode)
@@ -150,7 +152,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     Toast.makeText(this, "You will no longer be able to add new shits :(", Toast.LENGTH_LONG).show();
 
                 }
-                return;
             }
 
         }
@@ -175,10 +176,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public void readFileAndMarkOnMap( )
+    private void readFileAndMarkOnMap( )
     {
 
-        ArrayList<String> shitReadFromFileAr = new ArrayList<String>();
+        ArrayList<String> shitReadFromFileAr = new ArrayList<>();
 
         try
         {
@@ -188,7 +189,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
+                String receiveString;
 
                 while ((receiveString = bufferedReader.readLine()) != null)
                 {
@@ -239,7 +240,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public Marker createMarker( String Latitude, String Longitude, String Name, String Rating, String Date, String Time )
+    private Marker createMarker( String Latitude, String Longitude, String Name, String Rating, String Date, String Time )
     {
         double LatitudeFin = Double.parseDouble(Latitude);
         double LongitudeFin = Double.parseDouble(Longitude);
@@ -254,6 +255,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     // Creates a new Intent and changes over to it
+    @SuppressWarnings("UnusedParameters")
     protected void addShitActivity( View view )
     {
 
@@ -265,6 +267,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     // Prompt the users and ask if the really want to exit the application.
     @Override
     public void onBackPressed( )
+
     {
 
         new AlertDialog.Builder(this)
@@ -283,5 +286,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 .show();
 
     }
+
 
 }
