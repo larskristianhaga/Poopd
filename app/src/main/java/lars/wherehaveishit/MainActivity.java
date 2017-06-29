@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -36,7 +37,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
 
-
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -55,6 +55,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
+
 
     @Override
     public void onMapReady( GoogleMap googleMap )
@@ -242,6 +243,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Marker createMarker( String Latitude, String Longitude, String Name, String Rating, String Date, String Time )
     {
+
         double LatitudeFin = Double.parseDouble(Latitude);
         double LongitudeFin = Double.parseDouble(Longitude);
         return mMap.addMarker(new MarkerOptions()
@@ -286,6 +288,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 .show();
 
     }
+
 
 
 }
