@@ -4,16 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="2dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        android:layout_marginTop="0mm"/>
-
     <fragment xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/map"
               android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -21,8 +11,7 @@
               android:layout_height="match_parent"
               android:layout_alignParentBottom="true"
               android:layout_alignParentStart="true"
-              tools:context=".MainActivity"
-              android:layout_below="@+id/toolbar"/>
+              tools:context=".MainActivity"/>
 
     <!--suppress AndroidMissingOnClickHandler -->
     <android.support.design.widget.FloatingActionButton

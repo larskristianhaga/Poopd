@@ -2,6 +2,7 @@ package lars.wherehaveishit;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -42,7 +43,7 @@ public class AddShitActivity extends AppCompatActivity
     }
 
 
-    public void doneShitting( View view)
+    public void doneShitting( View view )
     {
 
         savingData();
@@ -50,7 +51,10 @@ public class AddShitActivity extends AppCompatActivity
         // Goes back to maps view if the data is saved properly, dataSaved equals true
         if (dataSaved)
         {
-            finish();
+            //finish();
+
+            Intent Maps = new Intent(this, MainActivity.class);
+            startActivity(Maps);
 
         }
         else
@@ -154,6 +158,8 @@ public class AddShitActivity extends AppCompatActivity
             Log.e("Exception", "File write failed: " + e.toString());
             e.printStackTrace();
         }
+
+
     }
 
 

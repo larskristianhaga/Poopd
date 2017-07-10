@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -87,7 +89,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
             readFileAndMarkOnMap();
         }
-
     }
 
 
@@ -138,6 +139,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     {
                         // Enables your position in the map
                         mMap.setMyLocationEnabled(true);
+
+
                     }
                 }
                 else
@@ -165,6 +168,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         super.onResume();
 
+
     }
 
 
@@ -173,11 +177,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
 
         super.onStart();
-
     }
 
 
-    private void readFileAndMarkOnMap( )
+    public void readFileAndMarkOnMap( )
     {
 
         ArrayList<String> shitReadFromFileAr = new ArrayList<>();
@@ -269,7 +272,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     // Prompt the users and ask if the really want to exit the application.
     @Override
     public void onBackPressed( )
-
     {
 
         new AlertDialog.Builder(this)
@@ -286,9 +288,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 })
                 .setNegativeButton("No", null)
                 .show();
-
     }
-
 
 
 }
