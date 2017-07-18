@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -89,7 +90,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             //Not in api-23 and above, no need to prompt
             mMap.setMyLocationEnabled(true);
             readFileAndMarkOnMap();
+
         }
+
     }
 
 
@@ -168,7 +171,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     {
 
         super.onResume();
-
 
     }
 

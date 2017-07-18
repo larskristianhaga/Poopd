@@ -106,6 +106,21 @@ public class AddShitActivity extends AppCompatActivity
         // noinspection deprecation
         Location currentLocation = MainActivity.mMap.getMyLocation();
 
+
+        try
+        {
+            // Tries to save the latitude and longitude inside a scope, if it fails it returns.
+            String currentLocationLatScope = String.valueOf(currentLocation.getLatitude());
+            String currentLocationLonScope = String.valueOf(currentLocation.getLongitude());
+        }
+        catch (NullPointerException e)
+        {
+            Log.e("Location", "Location is null: " + e.toString());
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Cannot detect location", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         // Saves the Latitude and Longitude to a string variable
         String currentLocationLatFin = String.valueOf(currentLocation.getLatitude());
         String currentLocationLonFin = String.valueOf(currentLocation.getLongitude());
@@ -120,7 +135,6 @@ public class AddShitActivity extends AppCompatActivity
         }
         // Saves it to a string
         String shitName = name.getText().toString();
-
 
         // Getting info from ratingBar and saves it to a float
         RatingBar rating = (RatingBar) findViewById(R.id.ratingBar);
