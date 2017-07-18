@@ -5,11 +5,11 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "lars.wherehaveishit"
-        minSdkVersion 23
+        minSdkVersion 21
         //noinspection OldTargetApi
         targetSdkVersion 25
         versionCode 1
-        versionName "1.10"
+        versionName "1.25"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
