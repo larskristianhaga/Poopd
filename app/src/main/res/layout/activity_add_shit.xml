@@ -40,7 +40,7 @@
         android:id="@+id/stxt_Rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rating"
+        android:text="@string/rating_of_place"
         android:layout_marginTop="26dp"
         android:layout_below="@+id/etxt_ShitName"
         android:layout_centerHorizontal="true"/>
