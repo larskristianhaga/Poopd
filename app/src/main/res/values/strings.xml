@@ -4,4 +4,6 @@
     <string name="done">Blast away!</string>
     <string name="name_of_place">Name of place:</string>
     <string name="rating_of_place">Rating:</string>
+    <string name="title_activity_maps">Jada</string>
+
 </resources>
