@@ -8,6 +8,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -46,6 +47,19 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FloatingActionButton btnAddShit = (FloatingActionButton) findViewById(R.id.btn_addShit);
+        btnAddShit.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick( View view )
+            {
+
+                Intent addShit = new Intent(MainActivity.this,AddShitActivity.class);
+                startActivity(addShit);
+            }
+        });
 
         // Checks the SDK of the phone its running on
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -259,16 +273,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                                       .snippet(Rating + " Stars" + " , " + Date + " , " + Time)
 
                              );
-    }
-
-
-    // Creates a new Intent and changes over to it
-    @SuppressWarnings("UnusedParameters")
-    protected void addShitActivity( View view )
-    {
-
-        Intent addShit = new Intent(this, AddShitActivity.class);
-        startActivity(addShit);
     }
 
 
