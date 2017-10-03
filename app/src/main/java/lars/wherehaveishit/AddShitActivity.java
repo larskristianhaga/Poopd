@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,41 +61,11 @@ public class AddShitActivity extends AppCompatActivity
         else
         {
             // Displays a text saying that data was not saved properly, if dataSaved != true.
-            Toast.makeText(this, "The data was not saved properly", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Data was not saved properly", Toast.LENGTH_LONG).show();
         }
 
 
     }
-
-
-    /*
-    private void customFile( )
-    {
-        // Needs to be the right format, else you'll get an error. double, double, String, String, String, String
-        // Type your custom string here:
-        double customLat = 0.0;
-        double customLon = 0.0;
-        String customName = null;
-        String customRating = null;
-        String customDateMonthYear = null;
-        String customHourMinute = null;
-
-        String customShitString = customLat + (char) 182 + customLon + (char) 182 + customName + (char) 182 + customRating + (char) 182 + customDateMonthYear + (char) 182 + customHourMinute + "\n";
-
-        try
-        {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("savedShits", Context.MODE_APPEND));
-            outputStreamWriter.write(customShitString);
-            outputStreamWriter.close();
-            dataSaved = true;
-            Toast.makeText(getApplicationContext(), "Custom file saved!", Toast.LENGTH_SHORT).show();
-        } catch (IOException e)
-        {
-            Log.e("Exception", "Custom file write failed: " + e.toString());
-            e.printStackTrace();
-        }
-    }
-    */
 
 
     private void savingData( )

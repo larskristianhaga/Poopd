@@ -9,12 +9,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,8 +41,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-@SuppressWarnings("UnusedReturnValue")
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
 
     static GoogleMap mMap;
@@ -48,6 +54,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         FloatingActionButton btnAddShit = (FloatingActionButton) findViewById(R.id.btn_addShit);
         btnAddShit.setOnClickListener(new View.OnClickListener()
         {
@@ -56,7 +65,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick( View view )
             {
 
-                Intent addShit = new Intent(MainActivity.this,AddShitActivity.class);
+                Intent addShit = new Intent(MainActivity.this, AddShitActivity.class);
                 startActivity(addShit);
             }
         });
@@ -69,6 +78,15 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
 
     }
@@ -281,21 +299,54 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onBackPressed( )
     {
 
-        new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit the application?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-
-                    @Override
-                    public void onClick( DialogInterface dialog, int which )
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START))
+        {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else
+        {
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to exit the application?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
                     {
 
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
+                        @Override
+                        public void onClick( DialogInterface dialog, int which )
+                        {
+
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+
+        }
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
+    public boolean onNavigationItemSelected( MenuItem item )
+    {
+
+        switch (item.getItemId())
+        {
+            case R.id.howtouse:
+                Log.i("Navigation", "How to use");
+                break;
+            case R.id.about:
+                Log.i("Navigation", "About");
+                break;
+            case R.id.statsistics:
+                Log.i("Navigation", "Statistics");
+                break;
+            case R.id.settings:
+                Log.i("Navigation", "Settings");
+                break;
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
 }
