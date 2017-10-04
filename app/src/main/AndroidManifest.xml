@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"/>
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/poop_launcher"
@@ -26,6 +25,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -35,8 +35,16 @@
             android:name=".AddShitActivity"
             android:label="@string/app_name"
             android:parentActivityName=".MainActivity">
-
         </activity>
+
+        <activity android:name=".HowToUseActivity">
+        </activity>
+
+        <activity android:name=".StatisticsActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/statsistics">
+        </activity>
+
     </application>
 
 </manifest>

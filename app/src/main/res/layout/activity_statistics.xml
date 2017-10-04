@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,4 +7,44 @@
     android:layout_height="match_parent"
     tools:context="lars.wherehaveishit.StatisticsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/how_many_shits_total"
+        android:id="@+id/textView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxt_numberoftotalshits"
+        android:text=" "
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/most_shits_in_country"
+        android:layout_below="@+id/etxt_numberoftotalshits"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="7dp"
+        android:id="@+id/textView2"/>
+
+    <TextView
+        android:id="@+id/etxt_mostshitsincountry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_toEndOf="@+id/etxt_country_with_most_shits"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/etxt_country_with_most_shits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etxt_mostshitsincountry"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="33dp"/>
+
+</RelativeLayout>
