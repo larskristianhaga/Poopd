@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
+    int numberOfTotalShits;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -245,17 +246,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     return;
                 }
 
+                numberOfTotalShits = shitReadFromFileAr.size();
+
             }
 
         } catch (FileNotFoundException e)
         {
             Log.e("Read file", "File not found: " + e.toString());
-            e.printStackTrace();
             return;
         } catch (IOException e)
         {
             Log.e("Read file", "Can not read file: " + e.toString());
-            e.printStackTrace();
             return;
         }
 
@@ -337,7 +338,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.i("Navigation", "About");
                 break;
             case R.id.statsistics:
-                Log.i("Navigation", "Statistics");
+                Intent seeStatistics = new Intent(this,StatisticsActivity.class);
+                seeStatistics.putExtra("TotalNumberOfShits",numberOfTotalShits);
+                startActivity(seeStatistics);
                 break;
             case R.id.settings:
                 Log.i("Navigation", "Settings");

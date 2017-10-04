@@ -14,4 +14,6 @@
     <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="howtouse">How to use</string>
+    <string name="most_shits_in_country">Most shits in country</string>
+    <string name="how_many_shits_total">How many shits in total</string>
 </resources>
