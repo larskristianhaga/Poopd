@@ -21,7 +21,7 @@
 
         <!-- A new activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".MapsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -33,34 +33,34 @@
         <activity
             android:name=".AddShitActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MapsActivity">
         </activity>
 
         <activity
             android:name=".HowToUseActivity"
             android:label="@string/how_to_use_activity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MapsActivity">
         </activity>
 
         <activity
             android:name=".StatisticsActivity"
             android:label="@string/statsistics"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MapsActivity">
         </activity>
 
         <activity
             android:name=".AboutActivity"
             android:label="@string/about"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MapsActivity">
         </activity>
 
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MapsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="lars.wherehaveishit.MainActivity"/>
+                android:value="lars.wherehaveishit.MapsActivity"/>
         </activity>
     </application>
 

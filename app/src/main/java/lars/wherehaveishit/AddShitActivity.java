@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +53,7 @@ public class AddShitActivity extends AppCompatActivity
         {
             //finish();
 
-            Intent Maps = new Intent(this, MainActivity.class);
+            Intent Maps = new Intent(this, MapsActivity.class);
             startActivity(Maps);
 
         }
@@ -75,7 +74,7 @@ public class AddShitActivity extends AppCompatActivity
 
         // Saves the current location to a variable
         // noinspection deprecation
-        Location currentLocation = MainActivity.mMap.getMyLocation();
+        Location currentLocation = MapsActivity.mMap.getMyLocation();
 
 
         try

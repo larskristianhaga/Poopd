@@ -4,17 +4,12 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -27,8 +22,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -42,10 +35,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
 
     static GoogleMap mMap;
@@ -70,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick( View view )
             {
 
-                Intent addShit = new Intent(MainActivity.this, AddShitActivity.class);
+                Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
                 startActivity(addShit);
             }
         });
@@ -189,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     // permission denied, shit!
                     // Disabling the functionality that depends on this permission.
 
-                    // Makes the button invisible, now only MainActivity is accessible.
+                    // Makes the button invisible, now only MapsActivity is accessible.
                     View make_btn_addShit_invisible = findViewById(R.id.btn_addShit);
                     make_btn_addShit_invisible.setVisibility(View.INVISIBLE);
 
