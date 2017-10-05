@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +42,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
@@ -332,18 +336,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId())
         {
             case R.id.howtouse:
-                Log.i("Navigation", "How to use");
+                Intent seeHowToUse = new Intent(this,HowToUseActivity.class);
+                startActivity(seeHowToUse);
                 break;
             case R.id.about:
-                Log.i("Navigation", "About");
+                Intent seeAbout = new Intent(this,AboutActivity.class);
+                startActivity(seeAbout);
                 break;
             case R.id.statsistics:
-                Intent seeStatistics = new Intent(this,StatisticsActivity.class);
-                seeStatistics.putExtra("TotalNumberOfShits",numberOfTotalShits);
+                Intent seeStatistics = new Intent(this, StatisticsActivity.class);
+                seeStatistics.putExtra("TotalNumberOfShits", numberOfTotalShits);
                 startActivity(seeStatistics);
                 break;
             case R.id.settings:
-                Log.i("Navigation", "Settings");
+                Intent seeSettings = new Intent(this,SettingsActivity.class);
+                startActivity(seeSettings);
                 break;
         }
 
@@ -351,5 +358,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }
