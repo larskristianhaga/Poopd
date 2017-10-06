@@ -12,6 +12,8 @@ import android.widget.Toast;
 public class StatisticsActivity extends AppCompatActivity
 {
 
+    int total;
+
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -26,9 +28,9 @@ public class StatisticsActivity extends AppCompatActivity
 
         Intent fromMain = getIntent();
         Bundle bundle = fromMain.getExtras();
-        int numberOfShitsFromMain = bundle.getInt("TotalNumberOfShits");
+        total = bundle.getInt("TotalNumberOfShits");
 
-        Log.i("shits", String.valueOf(numberOfShitsFromMain));
+        //Log.i("shits", String.valueOf(numberOfShitsFromMain));
         Log.i("shits", String.valueOf(totalNumberOfShits));
 
         TextView sendFeedbackToDev = (TextView) findViewById(R.id.mailFeedbackToDeveloper);
@@ -52,8 +54,21 @@ public class StatisticsActivity extends AppCompatActivity
                 {
                     Toast.makeText(StatisticsActivity.this, "There are no email clients installed.", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
+        testinggg();
+
+    }
+
+    public void testinggg()
+    {
+        Log.i("Testing","1");
+        TextView testingg = (TextView)findViewById(R.id.etxt_numberoftotalshits);
+        Log.i("Testing","2");
+
+        testingg.setText("test");
+        Log.i("Testing","3");
 
     }
 
