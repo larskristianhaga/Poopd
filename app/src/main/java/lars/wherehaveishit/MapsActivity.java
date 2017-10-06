@@ -53,6 +53,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         FloatingActionButton btnAddShit = (FloatingActionButton) findViewById(R.id.btn_addShit);
         btnAddShit.setOnClickListener(new View.OnClickListener()
         {
