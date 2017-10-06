@@ -29,8 +29,7 @@ public class AboutActivity extends AppCompatActivity
                 Intent sendFeedback = new Intent(Intent.ACTION_SEND);
                 sendFeedback.setType("message/rfc822");
                 sendFeedback.putExtra(Intent.EXTRA_EMAIL, new String[]{"LarsKHaga@gmail.com"});
-                sendFeedback.putExtra(Intent.EXTRA_SUBJECT, "");
-                sendFeedback.putExtra(Intent.EXTRA_TEXT, "");
+                sendFeedback.putExtra(Intent.EXTRA_SUBJECT, "Feedback about Where have i shit application");
                 try
                 {
                     startActivity(Intent.createChooser(sendFeedback, "Send mail to developer"));
@@ -38,6 +37,7 @@ public class AboutActivity extends AppCompatActivity
                 {
                     Toast.makeText(AboutActivity.this, "There are no email clients installed.", Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 
