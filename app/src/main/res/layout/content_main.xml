@@ -21,11 +21,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="2.5mm"
         android:clickable="true"
-        android:onClick="addShitActivity"
-        app:backgroundTint="#bebebe"
+        app:backgroundTint="@color/Poop_brown"
         app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_menu_add" />
-    <!-- Need to change this color of the button to someting more smoother, i dont know what.. -->
-
+        app:srcCompat="@android:drawable/ic_menu_add"/>
 
 </RelativeLayout>
