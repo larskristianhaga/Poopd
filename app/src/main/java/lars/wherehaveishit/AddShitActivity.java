@@ -69,19 +69,19 @@ public class AddShitActivity extends AppCompatActivity
 
     private void savingData( )
     {
-        // Used to save custom files
-        //customFile();
 
         // Saves the current location to a variable
         // noinspection deprecation
         Location currentLocation = MapsActivity.mMap.getMyLocation();
 
+        String currentLocationLatFin = null;
+        String currentLocationLonFin = null;
 
         try
         {
             // Tries to save the latitude and longitude inside a scope, if it fails it returns.
-            String currentLocationLatScope = String.valueOf(currentLocation.getLatitude());
-            String currentLocationLonScope = String.valueOf(currentLocation.getLongitude());
+            currentLocationLatFin = String.valueOf(currentLocation.getLatitude());
+            currentLocationLonFin = String.valueOf(currentLocation.getLongitude());
         }
         catch (NullPointerException e)
         {
@@ -91,18 +91,26 @@ public class AddShitActivity extends AppCompatActivity
             return;
         }
 
-        // Saves the Latitude and Longitude to a string variable
-        String currentLocationLatFin = String.valueOf(currentLocation.getLatitude());
-        String currentLocationLonFin = String.valueOf(currentLocation.getLongitude());
-
 
         // Getting info from etxt_shitName and saves it to a String
         EditText name = (EditText) findViewById(R.id.etxt_ShitName);
+
+
         // If there is not a value in name you cannot add the shit and it will prompt the user saying something went wrong when saving the data
         if (name.getText().length() == 0)
         {
+            Log.i("returns","name.getText().lenght() == 0");
             return;
         }
+
+        String delimiter = String.valueOf(((char) 182));
+        if (name.getText().toString().contains(delimiter))
+        {
+            Log.i("returns","name.getText().toString().contains(delimiter)");
+            Toast.makeText(getApplicationContext(), "Sorry, you cannot use that character in the name", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         // Saves it to a string
         String shitName = name.getText().toString();
 
