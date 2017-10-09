@@ -244,6 +244,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
 
                 numberOfTotalShits = shitReadFromFileAr.size();
+                Log.i("testl", String.valueOf(shitReadFromFileAr.iterator().toString()));
+
+                for (int i = 0; i < shitReadFromFileAr.size(); i++)
+                {
+                    Log.i("test",i + " " + shitReadFromFileAr.get(i));
+                }
 
             }
 
@@ -351,6 +357,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
 }
