@@ -6,71 +6,120 @@
                 tools:context="lars.wherehaveishit.AddShitActivity">
 
     <TextView
-        android:id="@+id/stxt_addShitText"
+        android:id="@+id/txt_addShitText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:text="@string/here_you_can_add_your_shit"
-        />
+        android:layout_marginTop="15dp"
+        android:text="@string/here_you_can_add_your_shit"/>
 
     <TextView
-        android:id="@+id/stxt_NameOfPlace"
+        android:id="@+id/txt_nameOfPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:text="@string/name_of_place"
-        android:layout_below="@+id/stxt_addShitText"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/txt_addShitText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/name_of_place"/>
 
     <EditText
-        android:id="@+id/etxt_ShitName"
+        android:id="@+id/edit_shitName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_below="@+id/txt_nameOfPlace"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:ems="15"
         android:inputType="text"
-        android:selectAllOnFocus="false"
-        tools:ignore="LabelFor"
-        android:layout_marginTop="11dp"
-        android:layout_below="@+id/stxt_NameOfPlace"
-        android:layout_centerHorizontal="true"/>
+        android:selectAllOnFocus="true"/>
 
     <TextView
-        android:id="@+id/stxt_Rating"
+        android:id="@+id/txt_ratingBarCleanness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rating_of_place"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/etxt_ShitName"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/edit_shitName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/rating_of_place_cleanness"/>
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/ratingBarCleanness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/txt_ratingBarCleanness"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:numStars="5"
         android:rating="0"
-        android:stepSize="0.5"
-        android:visibility="visible"
-        tools:layout_editor_absoluteX="67dp"
-        tools:layout_editor_absoluteY="135dp"
-        android:layout_marginTop="11dp"
-        android:layout_below="@+id/stxt_Rating"
-        android:layout_centerHorizontal="true"/>
+        android:stepSize="0.5"/>
 
-    <!--suppress AndroidMissingOnClickHandler -->
+    <TextView
+        android:id="@+id/txt_ratingBarPrivacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBarCleanness"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/rating_of_place_privacy"/>
+
+    <RatingBar
+        android:id="@+id/ratingBarPrivacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_ratingBarPrivacy"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="0.5"/>
+
+    <TextView
+        android:id="@+id/txt_ratingBarOverall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBarPrivacy"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/rating_of_place_overall"/>
+
+    <RatingBar
+        android:id="@+id/ratingBarOverall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_ratingBarOverall"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="0.5"/>
+
+    <TextView
+        android:id="@+id/txt_addShitNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBarOverall"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/add_shit_note"/>
+
+    <EditText
+        android:id="@+id/edit_shitNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_addShitNote"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:ems="15"
+        android:inputType="text"/>
+
     <Button
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"
+        android:layout_margin="15dp"
         android:onClick="doneShitting"
-        android:text="@string/done"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="537dp"
-        />
-
+        android:text="@string/done"/>
 
 </RelativeLayout>
