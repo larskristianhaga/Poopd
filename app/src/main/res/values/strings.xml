@@ -93,4 +93,8 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="about_application">The application is a part time project by a software engineer student at HiOA. The project is open-source and is hosted on my Github page.</string>
     <string name="have_any_feedback">Click here to send feedback to developer</string>
+    <string name="rating_of_place_privacy">Rating privacy</string>
+    <string name="rating_of_place_overall">Rating overall</string>
+    <string name="rating_of_place_cleanness">Rating cleanness</string>
+    <string name="add_shit_note">Add shit note</string>
 </resources>
