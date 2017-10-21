@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -16,12 +17,21 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddShitActivity extends AppCompatActivity
 {
 
     // Used to determine if the data is saved properly
     private boolean dataSaved = false;
+    EditText shitName;
+    EditText shitNote;
+    RatingBar shitRatingCleanness;
+    RatingBar shitRatingPrivary;
+    RatingBar shitRatingOverall;
+    Button saveShit;
+    DBHandler db;
+
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -30,6 +40,38 @@ public class AddShitActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shit);
 
+        shitName = (EditText) findViewById(R.id.edit_shitName);
+        shitRatingCleanness = (RatingBar) findViewById(R.id.ratingBarCleanness);
+        shitRatingPrivary = (RatingBar) findViewById(R.id.ratingBarPrivacy);
+        shitRatingOverall = (RatingBar) findViewById(R.id.ratingBarOverall);
+        shitNote = (EditText) findViewById(R.id.edit_shitNote);
+        saveShit = (Button) findViewById(R.id.doneShitting);
+
+        saveShit.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick( View v )
+            {
+
+                savingData();
+
+                // Goes back to maps view if the data is saved properly, dataSaved equals true
+                if (dataSaved)
+                {
+                    //finish();
+
+                    Intent Maps = new Intent(AddShitActivity.this, MapsActivity.class);
+                    startActivity(Maps);
+
+                }
+                else
+                {
+                    // Displays a text saying that data was not saved properly, if dataSaved != true.
+                    Toast.makeText(AddShitActivity.this, "Data was not saved properly", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 
@@ -43,47 +85,20 @@ public class AddShitActivity extends AppCompatActivity
     }
 
 
-    public void doneShitting( View view )
-    {
-
-        savingData();
-
-        // Goes back to maps view if the data is saved properly, dataSaved equals true
-        if (dataSaved)
-        {
-            //finish();
-
-            Intent Maps = new Intent(this, MapsActivity.class);
-            startActivity(Maps);
-
-        }
-        else
-        {
-            // Displays a text saying that data was not saved properly, if dataSaved != true.
-            Toast.makeText(this, "Data was not saved properly", Toast.LENGTH_LONG).show();
-        }
-
-
-    }
-
-
     private void savingData( )
     {
-
         // Saves the current location to a variable
-        // noinspection deprecation
         Location currentLocation = MapsActivity.mMap.getMyLocation();
 
-        String currentLocationLatFin = null;
-        String currentLocationLonFin = null;
+        String currentLocationLatFin;
+        String currentLocationLonFin;
 
         try
         {
             // Tries to save the latitude and longitude inside a scope, if it fails it returns.
             currentLocationLatFin = String.valueOf(currentLocation.getLatitude());
             currentLocationLonFin = String.valueOf(currentLocation.getLongitude());
-        }
-        catch (NullPointerException e)
+        } catch (NullPointerException e)
         {
             Log.e("Location", "Location is null: " + e.toString());
             e.printStackTrace();
@@ -91,32 +106,13 @@ public class AddShitActivity extends AppCompatActivity
             return;
         }
 
-
-        // Getting info from etxt_shitName and saves it to a String
-        EditText name = (EditText) findViewById(R.id.etxt_ShitName);
-
-
         // If there is not a value in name you cannot add the shit and it will prompt the user saying something went wrong when saving the data
-        if (name.getText().length() == 0)
+        if (shitName.getText().length() == 0)
         {
-            Log.i("returns","name.getText().lenght() == 0");
+            Log.i("returns", "name.getText().lenght() == 0");
             return;
         }
 
-        String delimiter = String.valueOf(((char) 182));
-        if (name.getText().toString().contains(delimiter))
-        {
-            Log.i("returns","name.getText().toString().contains(delimiter)");
-            Toast.makeText(getApplicationContext(), "Sorry, you cannot use that character in the name", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        // Saves it to a string
-        String shitName = name.getText().toString();
-
-        // Getting info from ratingBar and saves it to a float
-        RatingBar rating = (RatingBar) findViewById(R.id.ratingBar);
-        String shitRating = String.valueOf(rating.getRating());
 
         // Getting todays date, month, year, hour and minute, Saves it to int values
         Calendar savingDate = Calendar.getInstance();
@@ -126,32 +122,27 @@ public class AddShitActivity extends AppCompatActivity
         int shitHour = savingDate.get(Calendar.HOUR_OF_DAY);
         int shitMinute = savingDate.get(Calendar.MINUTE);
 
-        // Merging date, month and year
-        String shitDateMonthYear = shitDate + "/" + shitMonth + "/" + shitYear;
+        String shitNameFin = shitName.getText().toString();
+        String shitDateFin = shitDate + "/" + shitMonth + "-" + shitYear + ", " + shitHour + ":" + shitMinute;
+        double shitRatingCleannessFin = shitRatingCleanness.getRating();
+        double shitRatingPrivacyFin = shitRatingPrivary.getRating();
+        double shitRatingOverallFin = shitRatingOverall.getRating();
+        String shitNoteFin = shitNote.getText().toString();
 
-        // Merging hour and minute
-        String shitHourMinute = shitHour + ":" + shitMinute;
 
-        // Makes a string array of current location, name of place, rating, date and time
-        //String[] savingShitString = {currentLocationLatFin, currentLocationLonFin, shitName, shitRating, shitDateMonthYear, shitHourMinute, ";"};
-        String savingShitString = currentLocationLatFin + (char) 182 + currentLocationLonFin + (char) 182 + shitName + (char) 182 + String.valueOf(shitRating) + (char) 182 + shitDateMonthYear + (char) 182 + shitHourMinute + "\n";
+        Shit shit = new Shit(shitNameFin, shitDateFin, currentLocationLonFin, currentLocationLatFin, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+        db.addShit(shit);
 
-        Log.i("Write data:", savingShitString);
 
-        try
+        List<Shit> allShits = db.findAllShits();
+        String tekst = "";
+
+        for (Shit shits : allShits)
         {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getApplicationContext().openFileOutput("savedShits", Context.MODE_APPEND));
-            outputStreamWriter.write(savingShitString);
-            outputStreamWriter.close();
-            dataSaved = true;
-            Toast.makeText(getApplicationContext(), "File saved!", Toast.LENGTH_SHORT).show();
-        } catch (IOException e)
-        {
-            Log.e("Exception", "File write failed: " + e.toString());
-            e.printStackTrace();
+            tekst = tekst + "ID: " + shits.get_ID() + "ShitName: " + shits.getShitName() + "ShitDate: " + shits.getShitDate() + "Long: " + shits.getShitLongitude() + "Lat: " + shits.getShitLatitude() + "RatingClean: " + shits.getShitRatingCleanness() + "RatingPrivacy: " + shits.getShitRatingPrivacy() + "RatingOverall: " + shit.getShitRatingOverall() + "ShitNote: " + shits.getShitNote();
         }
-
-
+        Log.i("allShits", tekst);
+        finish();
     }
 
 
@@ -177,6 +168,5 @@ public class AddShitActivity extends AppCompatActivity
                 .setNegativeButton("No", null)
                 .show();
     }
-
 
 }

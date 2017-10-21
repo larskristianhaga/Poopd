@@ -111,15 +111,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="15"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:selectAllOnFocus="true"/>
 
     <Button
+        android:id="@+id/doneShitting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="15dp"
-        android:onClick="doneShitting"
         android:text="@string/done"/>
 
 </RelativeLayout>

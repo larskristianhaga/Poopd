@@ -15,12 +15,14 @@ public class DBHandler extends SQLiteOpenHelper
 
     static String TABLE_SHITS = "Shit";
     static String KEY_ID = "_ID";
-    static String KEY_SHITNAME = "Shitname";
+    static String KEY_SHITNAME = "ShitName";
     static String KEY_DATE = "ShitDate";
     static String KEY_LONGITUDE = "ShitLongitude";
     static String KEY_LATITUDE = "ShitLatitude";
     static String KEY_CLEANNESS = "ShitRatingCleanness";
     static String KEY_PRIVACY = "ShitRatingPrivacy";
+    static String KEY_OVERALL = "ShitRatingOverall";
+    static String KEY_SHITNOTE = "ShitNote";
     static int DATABASE_VERSION = 1;
     static String DATABASE_NAME = "ShitsInApp";
 
@@ -35,7 +37,7 @@ public class DBHandler extends SQLiteOpenHelper
     public void onCreate( SQLiteDatabase studentDB )
     {
 
-        String MAKE_TABLE = "CREATE TABLE " + TABLE_SHITS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_SHITNAME + " TEXT," + KEY_DATE + " TEXT," + KEY_LONGITUDE + "TEXT," + KEY_LATITUDE + "TEXT," + KEY_CLEANNESS + "TEXT," + KEY_PRIVACY + "TEXT" + ")";
+        String MAKE_TABLE = "CREATE TABLE " + TABLE_SHITS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_SHITNAME + " TEXT," + KEY_DATE + " TEXT," + KEY_LONGITUDE + "TEXT," + KEY_LATITUDE + "TEXT," + KEY_CLEANNESS + "TEXT," + KEY_PRIVACY + "TEXT," + KEY_OVERALL + "TEXT" + ")";
         Log.d("SQL", MAKE_TABLE);
         studentDB.execSQL(MAKE_TABLE);
     }
@@ -59,7 +61,8 @@ public class DBHandler extends SQLiteOpenHelper
         values.put(KEY_LATITUDE, shit.getShitLatitude());
         values.put(KEY_CLEANNESS, shit.getShitRatingCleanness());
         values.put(KEY_PRIVACY, shit.getShitRatingPrivacy());
-
+        values.put(KEY_OVERALL, shit.getShitRatingOverall());
+        values.put(KEY_SHITNOTE, shit.getShitNote());
         db.insert(TABLE_SHITS, null, values);
         db.close();
     }
@@ -80,8 +83,10 @@ public class DBHandler extends SQLiteOpenHelper
                 shit.setShitDate(cursor.getString(1));
                 shit.setShitLongitude(cursor.getString(2));
                 shit.setShitLatitude(cursor.getString(3));
-                shit.setShitRatingCleanness(cursor.getString(4));
-                shit.setShitRatingPrivacy(cursor.getString(5));
+                shit.setShitRatingCleanness(cursor.getDouble(4));
+                shit.setShitRatingPrivacy(cursor.getDouble(5));
+                shit.setShitRatingOverall(cursor.getDouble(6));
+                shit.setShitNote(cursor.getString(7));
                 shitsArrayList.add(shit); ;
             } while (cursor.moveToNext());
             cursor.close();
