@@ -60,10 +60,7 @@ public class AddShitActivity extends AppCompatActivity
                 // Goes back to maps view if the data is saved properly, dataSaved equals true
                 if (dataSaved)
                 {
-                    //finish();
-
-                    Intent Maps = new Intent(AddShitActivity.this, MapsActivity.class);
-                    startActivity(Maps);
+                    finish();
 
                 }
                 else
@@ -130,30 +127,10 @@ public class AddShitActivity extends AppCompatActivity
         double shitRatingOverallFin = shitRatingOverall.getRating();
         String shitNoteFin = shitNote.getText().toString();
 
-
-        Log.i("shitNameFin",shitNameFin);
-        Log.i("shitDateFin",shitDateFin);
-        Log.i("currentLocationLonFin",currentLocationLonFin);
-        Log.i("currentLocationLatFin",currentLocationLatFin);
-        Log.i("shitRatingCleannessFin", String.valueOf(shitRatingCleannessFin));
-        Log.i("shitRatingPrivacyFin", String.valueOf(shitRatingPrivacyFin));
-        Log.i("shitRatingOverallFin", String.valueOf(shitRatingOverallFin));
-        Log.i("shitNoteFin",shitNoteFin);
-
-
-        Shit shit = new Shit(shitNameFin, shitDateFin, currentLocationLonFin, currentLocationLatFin,shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+        Shit shit = new Shit(shitNameFin, shitDateFin, currentLocationLonFin, currentLocationLatFin, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
         db.addShit(shit);
 
-
-        List<Shit> allShits = db.findAllShits();
-        String tekst = "";
-
-        for (Shit shits : allShits)
-        {
-            tekst = tekst + "ID: " + shits.get_ID() + " ,ShitName: " + shits.getShitName() + " ,ShitDate: " + shits.getShitDate() + " ,Long: " + shits.getShitLongitude() + " ,Lat: " + shits.getShitLatitude() + " ,RatingClean: " + shits.getShitRatingCleanness() + " ,RatingPrivacy: " + shits.getShitRatingPrivacy() + " ,RatingOverall: " + shit.getShitRatingOverall() + " ,ShitNote: " + shits.getShitNote();
-        }
-        Log.i("allShits", tekst);
-        finish();
+        dataSaved = true;
     }
 
 
