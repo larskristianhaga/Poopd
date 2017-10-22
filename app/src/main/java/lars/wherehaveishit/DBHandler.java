@@ -80,13 +80,14 @@ public class DBHandler extends SQLiteOpenHelper
             {
                 Shit shit = new Shit();
                 shit.set_ID(cursor.getLong(0));
-                shit.setShitDate(cursor.getString(1));
-                shit.setShitLongitude(cursor.getString(2));
-                shit.setShitLatitude(cursor.getString(3));
-                shit.setShitRatingCleanness(cursor.getDouble(4));
-                shit.setShitRatingPrivacy(cursor.getDouble(5));
-                shit.setShitRatingOverall(cursor.getDouble(6));
-                shit.setShitNote(cursor.getString(7));
+                shit.setShitName(cursor.getString(1));
+                shit.setShitDate(cursor.getString(2));
+                shit.setShitLongitude(cursor.getString(3));
+                shit.setShitLatitude(cursor.getString(4));
+                shit.setShitRatingCleanness(cursor.getDouble(5));
+                shit.setShitRatingPrivacy(cursor.getDouble(6));
+                shit.setShitRatingOverall(cursor.getDouble(7));
+                shit.setShitNote(cursor.getString(8));
                 shitsArrayList.add(shit); ;
             } while (cursor.moveToNext());
             cursor.close();

@@ -131,14 +131,14 @@ public class AddShitActivity extends AppCompatActivity
         String shitNoteFin = shitNote.getText().toString();
 
 
-        Log.i("Test",shitNameFin);
-        Log.i("Test",shitDateFin);
-        Log.i("Test",currentLocationLonFin);
-        Log.i("Test",currentLocationLatFin);
-        Log.i("Test", String.valueOf(shitRatingCleannessFin));
-        Log.i("Test", String.valueOf(shitRatingCleannessFin));
-        Log.i("Test", String.valueOf(shitRatingOverallFin));
-        Log.i("Test",shitNoteFin);
+        Log.i("shitNameFin",shitNameFin);
+        Log.i("shitDateFin",shitDateFin);
+        Log.i("currentLocationLonFin",currentLocationLonFin);
+        Log.i("currentLocationLatFin",currentLocationLatFin);
+        Log.i("shitRatingCleannessFin", String.valueOf(shitRatingCleannessFin));
+        Log.i("shitRatingPrivacyFin", String.valueOf(shitRatingPrivacyFin));
+        Log.i("shitRatingOverallFin", String.valueOf(shitRatingOverallFin));
+        Log.i("shitNoteFin",shitNoteFin);
 
 
         Shit shit = new Shit(shitNameFin, shitDateFin, currentLocationLonFin, currentLocationLatFin,shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
@@ -150,7 +150,7 @@ public class AddShitActivity extends AppCompatActivity
 
         for (Shit shits : allShits)
         {
-            tekst = tekst + "ID: " + shits.get_ID() + "ShitName: " + shits.getShitName() + "ShitDate: " + shits.getShitDate() + "Long: " + shits.getShitLongitude() + "Lat: " + shits.getShitLatitude() + "RatingClean: " + shits.getShitRatingCleanness() + "RatingPrivacy: " + shits.getShitRatingPrivacy() + "RatingOverall: " + shit.getShitRatingOverall() + "ShitNote: " + shits.getShitNote();
+            tekst = tekst + "ID: " + shits.get_ID() + " ,ShitName: " + shits.getShitName() + " ,ShitDate: " + shits.getShitDate() + " ,Long: " + shits.getShitLongitude() + " ,Lat: " + shits.getShitLatitude() + " ,RatingClean: " + shits.getShitRatingCleanness() + " ,RatingPrivacy: " + shits.getShitRatingPrivacy() + " ,RatingOverall: " + shit.getShitRatingOverall() + " ,ShitNote: " + shits.getShitNote();
         }
         Log.i("allShits", tekst);
         finish();
