@@ -9,7 +9,7 @@ android {
         //noinspection OldTargetApi
         targetSdkVersion 25
         versionCode 1
-        versionName "2.0"
+        versionName "I had a cat"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
