@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
@@ -42,10 +43,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     int numberOfTotalShits;
+    DBHandler db;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
+
+        db = new DBHandler(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -216,85 +220,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void readFileAndMarkOnMap( )
     {
 
-        ArrayList<String> shitReadFromFileAr = new ArrayList<>();
 
-        try
+        final List<Shit> allShitsInDB = db.findAllShits();
+
+        for (Shit shitInMap : allShitsInDB)
         {
-            InputStream inputStream = getApplicationContext().openFileInput("savedShits");
-
-            if (inputStream != null)
-            {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString;
-
-                while ((receiveString = bufferedReader.readLine()) != null)
-                {
-                    shitReadFromFileAr.add(receiveString);
-                }
-
-                // Closes inputStream
-                inputStream.close();
-
-                // Checks the size of the recently read file, if its 0 then return. Because you cant set markers when you have no info
-                if (shitReadFromFileAr.isEmpty() || shitReadFromFileAr.size() == 0)
-                {
-                    Log.i("return", "Now returns");
-                    return;
-                }
-
-                numberOfTotalShits = shitReadFromFileAr.size();
-                Log.i("testl", String.valueOf(shitReadFromFileAr.iterator().toString()));
-
-                for (int i = 0; i < shitReadFromFileAr.size(); i++)
-                {
-                    Log.i("test",i + " " + shitReadFromFileAr.get(i));
-                }
-
-            }
-
-        } catch (FileNotFoundException e)
-        {
-            Log.e("Read file", "File not found: " + e.toString());
-            return;
-        } catch (IOException e)
-        {
-            Log.e("Read file", "Can not read file: " + e.toString());
-            return;
-        }
-
-        //
-
-
-        for (String s : shitReadFromFileAr)
-        {
-            String[] shitSplit = s.split(String.valueOf((char) 182));
-
-            String Latitude = shitSplit[0];
-            String Longitude = shitSplit[1];
-            String Name = shitSplit[2];
-            String Rating = shitSplit[3];
-            String Date = shitSplit[4];
-            String Time = shitSplit[5];
-
-            createMarker(Latitude, Longitude, Name, Rating, Date, Time);
-
+            createMarker(shitInMap.getShitName(), shitInMap.getShitDate(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitNote());
         }
 
     }
 
-    private Marker createMarker( String Latitude, String Longitude, String Name, String Rating, String Date, String Time )
+    private Marker createMarker( String shitName, String shitDate, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy, double shitRatingOverall, String shitNote )
     {
 
-        double LatitudeFin = Double.parseDouble(Latitude);
-        double LongitudeFin = Double.parseDouble(Longitude);
+        double shitLongitudeFin = Double.parseDouble(shitLongitude);
+        double shitLatitudeFin = Double.parseDouble(shitLatitude);
         return mMap.addMarker(new MarkerOptions()
-                                      .position(new LatLng(LatitudeFin, LongitudeFin))
-                                      .title(Name)
+                                      .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
+                                      .title(shitName)
                                       .draggable(false)
-                                      .snippet(Rating + " Stars" + " , " + Date + " , " + Time)
-
-                             );
+                                      .snippet("Cleanness: " + shitRatingCleanness + " Privacy : " + shitRatingPrivacy + " Overall " + shitRatingOverall + " Note: " + shitNote + " Date: " + shitDate));
     }
 
 
@@ -335,11 +280,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId())
         {
             case R.id.howtouse:
-                Intent seeHowToUse = new Intent(this,HowToUseActivity.class);
+                Intent seeHowToUse = new Intent(this, HowToUseActivity.class);
                 startActivity(seeHowToUse);
                 break;
             case R.id.about:
-                Intent seeAbout = new Intent(this,AboutActivity.class);
+                Intent seeAbout = new Intent(this, AboutActivity.class);
                 startActivity(seeAbout);
                 break;
             case R.id.statsistics:
@@ -348,7 +293,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(seeStatistics);
                 break;
             case R.id.settings:
-                Intent seeSettings = new Intent(this,SettingsActivity.class);
+                Intent seeSettings = new Intent(this, SettingsActivity.class);
                 startActivity(seeSettings);
                 break;
         }
@@ -357,8 +302,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 
 }
