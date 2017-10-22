@@ -205,17 +205,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     {
 
         super.onResume();
+        readFileAndMarkOnMap();
 
     }
-
-
-    @Override
-    public void onStart( )
-    {
-
-        super.onStart();
-    }
-
 
     public void readFileAndMarkOnMap( )
     {
@@ -226,6 +218,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         for (Shit shitInMap : allShitsInDB)
         {
             createMarker(shitInMap.getShitName(), shitInMap.getShitDate(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitNote());
+            numberOfTotalShits++;
         }
 
     }
