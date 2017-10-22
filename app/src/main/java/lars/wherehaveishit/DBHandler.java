@@ -37,7 +37,7 @@ public class DBHandler extends SQLiteOpenHelper
     public void onCreate( SQLiteDatabase studentDB )
     {
 
-        String MAKE_TABLE = "CREATE TABLE " + TABLE_SHITS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_SHITNAME + " TEXT," + KEY_DATE + " TEXT," + KEY_LONGITUDE + "TEXT," + KEY_LATITUDE + "TEXT," + KEY_CLEANNESS + "TEXT," + KEY_PRIVACY + "TEXT," + KEY_OVERALL + "TEXT" + ")";
+        String MAKE_TABLE = "CREATE TABLE " + TABLE_SHITS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_SHITNAME + " TEXT," + KEY_DATE + " TEXT," + KEY_LONGITUDE + " TEXT," + KEY_LATITUDE + " TEXT," + KEY_CLEANNESS + " TEXT," + KEY_PRIVACY + " TEXT," + KEY_OVERALL + " TEXT," + KEY_SHITNOTE + " TEXT" + ")";
         Log.d("SQL", MAKE_TABLE);
         studentDB.execSQL(MAKE_TABLE);
     }

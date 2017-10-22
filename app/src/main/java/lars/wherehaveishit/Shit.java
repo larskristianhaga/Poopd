@@ -123,7 +123,7 @@ public class Shit
     public double getShitRatingOverall( )
     {
 
-        return getShitRatingOverall();
+        return ShitRatingOverall;
     }
 
     public void setShitRatingOverall( double ShitRatingOverall )
@@ -135,7 +135,7 @@ public class Shit
     public String getShitNote( )
     {
 
-        return getShitNote();
+        return ShitNote ;
     }
 
     public void setShitNote( String ShitNote )

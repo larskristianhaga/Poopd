@@ -46,6 +46,7 @@ public class AddShitActivity extends AppCompatActivity
         shitRatingOverall = (RatingBar) findViewById(R.id.ratingBarOverall);
         shitNote = (EditText) findViewById(R.id.edit_shitNote);
         saveShit = (Button) findViewById(R.id.doneShitting);
+        db = new DBHandler(this);
 
         saveShit.setOnClickListener(new View.OnClickListener()
         {
@@ -130,7 +131,17 @@ public class AddShitActivity extends AppCompatActivity
         String shitNoteFin = shitNote.getText().toString();
 
 
-        Shit shit = new Shit(shitNameFin, shitDateFin, currentLocationLonFin, currentLocationLatFin, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+        Log.i("Test",shitNameFin);
+        Log.i("Test",shitDateFin);
+        Log.i("Test",currentLocationLonFin);
+        Log.i("Test",currentLocationLatFin);
+        Log.i("Test", String.valueOf(shitRatingCleannessFin));
+        Log.i("Test", String.valueOf(shitRatingCleannessFin));
+        Log.i("Test", String.valueOf(shitRatingOverallFin));
+        Log.i("Test",shitNoteFin);
+
+
+        Shit shit = new Shit(shitNameFin, shitDateFin, currentLocationLonFin, currentLocationLatFin,shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
         db.addShit(shit);
 
 
