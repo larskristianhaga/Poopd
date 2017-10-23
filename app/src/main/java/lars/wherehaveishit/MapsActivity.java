@@ -105,7 +105,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Enables controls on the Map
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(false);
 
         // Checks the SDK build version, and decides from that what it will continue doing.
