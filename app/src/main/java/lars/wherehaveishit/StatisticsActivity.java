@@ -21,8 +21,6 @@ public class StatisticsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        TextView mostShitsInCountry = (TextView) findViewById(R.id.etxt_mostshitsincountry);
-        TextView countryWithMostShits = (TextView) findViewById(R.id.etxt_country_with_most_shits);
         TextView totalNumberOfShits = (TextView) findViewById(R.id.etxt_numberoftotalshits);
 
 
