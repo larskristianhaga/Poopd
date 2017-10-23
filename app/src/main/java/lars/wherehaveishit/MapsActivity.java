@@ -205,7 +205,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     {
 
         super.onResume();
-        readFileAndMarkOnMap();
+//        readFileAndMarkOnMap();
 
     }
 
