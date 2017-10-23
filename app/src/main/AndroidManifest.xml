@@ -54,14 +54,6 @@
             android:parentActivityName=".MapsActivity">
         </activity>
 
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MapsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="lars.wherehaveishit.MapsActivity"/>
-        </activity>
     </application>
 
 </manifest>
