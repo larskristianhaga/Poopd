@@ -15,7 +15,7 @@
     <string name="about">About</string>
     <string name="howtouse">How to use</string>
     <string name="most_shits_in_country">Most shits in country</string>
-    <string name="how_many_shits_total">How many shits in total</string>
+    <string name="how_many_shits_total">How many shits you have logged:</string>
     <string name="how_to_use">JADA HER SKAL DET STÅ HVORDAN MAN BRUKER APPEN</string>
     <string name="how_to_use_activity">How to use</string>
     <string name="title_activity_settings">Settings</string>
@@ -97,4 +97,5 @@
     <string name="rating_of_place_overall">Rating overall</string>
     <string name="rating_of_place_cleanness">Rating cleanness</string>
     <string name="add_shit_note">Add shit note</string>
+    <string name="more_coming_soon">More statistics coming soon!</string>
 </resources>
