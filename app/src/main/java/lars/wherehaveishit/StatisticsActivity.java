@@ -18,19 +18,21 @@ public class StatisticsActivity extends AppCompatActivity
     protected void onCreate( Bundle savedInstanceState )
     {
 
-        TextView totalNumberOfShits = (TextView) findViewById(R.id.etxt_numberoftotalshits);
-        TextView mostShitsInCountry = (TextView) findViewById(R.id.etxt_mostshitsincountry);
-        TextView countryWithMostShits = (TextView) findViewById(R.id.etxt_country_with_most_shits);
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+
+        TextView mostShitsInCountry = (TextView) findViewById(R.id.etxt_mostshitsincountry);
+        TextView countryWithMostShits = (TextView) findViewById(R.id.etxt_country_with_most_shits);
+        TextView totalNumberOfShits = (TextView) findViewById(R.id.etxt_numberoftotalshits);
+
 
         Intent fromMain = getIntent();
         Bundle bundle = fromMain.getExtras();
         total = bundle.getInt("TotalNumberOfShits");
 
         Log.i("TotalNumberOfShits", String.valueOf(total));
+        totalNumberOfShits.setText(String.valueOf(total));
+
 
         TextView sendFeedbackToDev = (TextView) findViewById(R.id.mailFeedbackToDeveloper);
 
@@ -55,20 +57,7 @@ public class StatisticsActivity extends AppCompatActivity
 
             }
         });
-        testinggg();
 
     }
-
-    public void testinggg()
-    {
-        Log.i("Testing","1");
-        TextView testingg = (TextView)findViewById(R.id.etxt_numberoftotalshits);
-        Log.i("Testing","2");
-
-        testingg.setText("test");
-        Log.i("Testing","3");
-
-    }
-
 
 }
