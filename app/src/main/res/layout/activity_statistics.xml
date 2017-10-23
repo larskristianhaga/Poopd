@@ -8,44 +8,29 @@
     tools:context="lars.wherehaveishit.StatisticsActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:id="@+id/howmanyshitsintotal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/how_many_shits_total"/>
+        android:layout_alignParentStart="true"
+        android:text="@string/how_many_shits_total"
+        android:layout_margin="10dp"/>
 
     <TextView
         android:id="@+id/etxt_numberoftotalshits"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="18dp"
-        />
+        android:layout_alignBottom="@id/howmanyshitsintotal"
+        android:layout_toEndOf="@+id/howmanyshitsintotal"/>
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/etxt_numberoftotalshits"
-        android:layout_marginTop="7dp"
-        android:text="@string/most_shits_in_country"/>
+        android:text="@string/more_coming_soon"
+        android:layout_below="@id/etxt_numberoftotalshits"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="100dp"
+        android:textSize="25dp"/>
 
-    <TextView
-        android:id="@+id/etxt_mostshitsincountry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/etxt_country_with_most_shits"/>
-
-    <TextView
-        android:id="@+id/etxt_country_with_most_shits"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/etxt_mostshitsincountry"
-        android:layout_marginTop="33dp"/>
 
     <TextView
         android:id="@+id/mailFeedbackToDeveloper"
