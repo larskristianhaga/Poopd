@@ -44,7 +44,7 @@
 
         <activity
             android:name=".StatisticsActivity"
-            android:label="@string/statsistics"
+            android:label="@string/statistics"
             android:parentActivityName=".MapsActivity">
         </activity>
 

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:text="@string/how_many_shits_total"
+        android:text="@string/how_many_poops_total"
         android:layout_margin="10dp"/>
 
     <TextView

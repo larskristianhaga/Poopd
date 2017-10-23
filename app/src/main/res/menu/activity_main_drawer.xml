@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/howtouse"
-        android:title="@string/howtouse"/>
+        android:title="@string/how_to_use"/>
 
     <item
         android:id="@+id/about"
@@ -11,7 +11,7 @@
 
     <item
         android:id="@+id/statsistics"
-        android:title="@string/statsistics"/>
+        android:title="@string/statistics"/>
 
     <item
         android:id="@+id/settings"

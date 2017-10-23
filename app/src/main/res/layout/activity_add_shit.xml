@@ -101,7 +101,7 @@
         android:layout_below="@+id/ratingBarOverall"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="@string/add_shit_note"/>
+        android:text="@string/add_poop_note"/>
 
     <EditText
         android:id="@+id/edit_shitNote"
