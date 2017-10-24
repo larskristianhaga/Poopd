@@ -52,6 +52,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
+    FloatingActionButton btn_addPoop;
     int numberOfTotalShits;
     DBHandler db;
 
@@ -204,7 +205,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         // Enables your position in the map
                         mMap.setMyLocationEnabled(true);
 
-
                     }
                 }
                 else
@@ -213,8 +213,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     // Disabling the functionality that depends on this permission.
 
                     // Makes the button invisible, now only MapsActivity is accessible.
-                    View make_btn_addShit_invisible = findViewById(R.id.btn_addShit);
-                    make_btn_addShit_invisible.setVisibility(View.INVISIBLE);
+                    btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
+                    btn_addPoop.setVisibility(View.INVISIBLE);
 
                     // Prompts a text explaining that some functionality will be disabled
                     Toast.makeText(this, "You will no longer be able to add new shits :(", Toast.LENGTH_LONG).show();
@@ -236,6 +236,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mMap != null)
         {
             readFileAndMarkOnMap();
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
+            // Enables your position in the map
+            mMap.setMyLocationEnabled(true);
+            btn_addPoop.setVisibility(View.VISIBLE);
+
+
         }
     }
 
