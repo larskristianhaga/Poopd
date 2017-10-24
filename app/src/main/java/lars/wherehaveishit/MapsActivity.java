@@ -101,6 +101,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
+
     }
 
 
@@ -213,7 +215,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     // Disabling the functionality that depends on this permission.
 
                     // Makes the button invisible, now only MapsActivity is accessible.
-                    btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
                     btn_addPoop.setVisibility(View.INVISIBLE);
 
                     // Prompts a text explaining that some functionality will be disabled
@@ -240,8 +241,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
         {
-            // Enables your position in the map
-            mMap.setMyLocationEnabled(true);
+            if (mMap != null)
+            {
+                mMap.setMyLocationEnabled(true);
+            }
             btn_addPoop.setVisibility(View.VISIBLE);
 
 

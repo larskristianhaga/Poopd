@@ -8,7 +8,7 @@ android {
         minSdkVersion 21
         //noinspection OldTargetApi
         targetSdkVersion 25
-        versionCode 2
+        versionCode 3
         versionName "I had a cat"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
