@@ -3,8 +3,7 @@
     <string name="here_you_can_add_your_shit">Here you can add your poop!</string>
     <string name="add_your_poop">Here you can add your poop!</string>
     <string name="done">Blast away!</string>
-    <string name="name_of_place">poop name:</string>
-    <string name="rating_of_place">Rating:</string>
+    <string name="name_of_place">Poop name:</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
@@ -19,10 +18,12 @@
     <string name="title_activity_settings">Settings</string>
     <string name="about_application">The application is a part time project by a software engineer student at HiOA. The project is open-source and is hosted on my Github page.</string>
     <string name="have_any_feedback">Click here to send feedback to developer</string>
-    <string name="rating_of_place_privacy">Rating privacy</string>
-    <string name="rating_of_place_overall">Rating overall</string>
-    <string name="rating_of_place_cleanness">Rating cleanness</string>
-    <string name="add_poop_note">Add poop note:</string>
+    <string name="rating_of_place_privacy">Rating privacy:</string>
+    <string name="rating_of_place_overall">Rating overall:</string>
+    <string name="rating_of_place_cleanness">Rating cleanness:</string>
+    <string name="add_poop_note">Poop note:</string>
     <string name="more_coming_soon">More coming soon!</string>
     <string name="app_info">App info</string>
+    <string name="add_new_poop">Add new poop</string>
+    <string name="add_poop">Add my new poop</string>
 </resources>
