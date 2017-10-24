@@ -208,6 +208,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         super.onResume();
 
+        // Reads file and marks on the map if mMap is not null
+        if (mMap != null)
+        {
+            readFileAndMarkOnMap();
+        }
+
     }
 
     public void readFileAndMarkOnMap( )
