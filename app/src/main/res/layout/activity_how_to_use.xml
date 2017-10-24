@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
-        android:text="@string/how_to_use"/>
+        android:text="@string/how_to_use_informal"/>
 
     <TextView
         android:id="@+id/mailFeedbackToDeveloper"
