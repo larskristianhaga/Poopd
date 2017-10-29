@@ -53,7 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     FloatingActionButton btn_addPoop;
-    int numberOfTotalShits;
+    int numberOfTotalShits = 0;
     DBHandler db;
 
     @Override
@@ -255,7 +255,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void readFileAndMarkOnMap( )
     {
 
-
+        numberOfTotalShits = 0;
         final List<Shit> allShitsInDB = db.findAllShits();
 
         for (Shit shitInMap : allShitsInDB)
@@ -325,6 +325,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case R.id.statsistics:
                 Intent seeStatistics = new Intent(this, StatisticsActivity.class);
+                Log.i("TotalNumberOfShitsLOG", String.valueOf(numberOfTotalShits));
                 seeStatistics.putExtra("TotalNumberOfShits", numberOfTotalShits);
                 startActivity(seeStatistics);
                 break;

@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class StatisticsActivity extends AppCompatActivity
 {
 
-    int total;
+    int total = 0;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
