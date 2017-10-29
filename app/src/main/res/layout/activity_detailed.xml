@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailedActivity">
+
+    <TextView
+        android:id="@+id/poopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:text="@string/name_of_place"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/editPoopName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:enabled="false"/>
+
+    <TextView
+        android:id="@+id/poopRatingCleanness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:text="@string/rating_of_place_cleanness"
+        android:textStyle="bold"/>
+
+    <RatingBar
+        android:id="@+id/editPoopCleanness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing"
+        android:enabled="false"
+        android:numStars="5"
+        android:stepSize="0.5"/>
+
+
+    <TextView
+        android:id="@+id/poopRatingPrivacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:text="@string/rating_of_place_privacy"
+        android:textStyle="bold"/>
+
+    <RatingBar
+        android:id="@+id/editPoopPrivacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing"
+        android:enabled="false"
+        android:numStars="5"
+        android:stepSize="0.5"/>
+
+    <TextView
+        android:id="@+id/poopRatingOverall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:text="@string/rating_of_place_overall"
+        android:textStyle="bold"/>
+
+    <RatingBar
+        android:id="@+id/editPoopOverall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing"
+        android:clickable="false"
+        android:numStars="5"
+        android:stepSize="0.5"/>
+
+    <TextView
+        android:id="@+id/poopNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:text="@string/add_poop_note"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/editPoopNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:enabled="false"/>
+
+    <TextView
+        android:id="@+id/poopDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:text="@string/poop_date"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/editPoopDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing"
+        android:enabled="false"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/poopLocationLat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location_latitude"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/poopLocationLatValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/poopLocationLat"
+            android:layout_toEndOf="@id/poopLocationLat"/>
+
+        <TextView
+            android:id="@+id/poopLocationLon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/poopLocationLat"
+            android:text="@string/location_longitude"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/poopLocationLonValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/poopLocationLon"
+            android:layout_toEndOf="@id/poopLocationLon"/>
+    </RelativeLayout>
+
+</LinearLayout>

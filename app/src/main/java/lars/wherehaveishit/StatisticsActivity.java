@@ -1,11 +1,10 @@
 package lars.wherehaveishit;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +28,10 @@ public class StatisticsActivity extends AppCompatActivity
         total = bundle.getInt("TotalNumberOfShits");
 
         Log.i("TotalNumberOfShits", String.valueOf(total));
+        if (String.valueOf(total) == String.valueOf(0))
+        {
+            totalNumberOfShits.setText(R.string.no_poop);
+        }
         totalNumberOfShits.setText(String.valueOf(total));
 
 

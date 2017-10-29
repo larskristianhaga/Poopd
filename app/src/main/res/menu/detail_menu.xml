@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:id="@+id/editPoop"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
+        android:title="@string/edit"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/deletePoop"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:title="@string/delete"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/editPoopDone"
+        android:icon="@drawable/ic_done_black_24dp"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+
+</menu>

@@ -1,12 +1,10 @@
 package lars.wherehaveishit;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.location.Location;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +12,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.Calendar;
-import java.util.List;
 
 public class AddShitActivity extends AppCompatActivity
 {
@@ -119,9 +114,10 @@ public class AddShitActivity extends AppCompatActivity
         int shitYear = savingDate.get(Calendar.YEAR);
         int shitHour = savingDate.get(Calendar.HOUR_OF_DAY);
         int shitMinute = savingDate.get(Calendar.MINUTE);
+        int shitMilli = savingDate.get(Calendar.MILLISECOND);
 
         String shitNameFin = shitName.getText().toString();
-        String shitDateFin = shitDate + "/" + shitMonth + "-" + shitYear + ", " + shitHour + ":" + shitMinute;
+        String shitDateFin = shitDate + "/" + shitMonth + "-" + shitYear + ", " + shitHour + ":" + shitMinute + ":" + shitMilli;
         double shitRatingCleannessFin = shitRatingCleanness.getRating();
         double shitRatingPrivacyFin = shitRatingPrivary.getRating();
         double shitRatingOverallFin = shitRatingOverall.getRating();

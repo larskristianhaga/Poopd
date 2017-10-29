@@ -1,8 +1,5 @@
 package lars.wherehaveishit;
 
-import android.widget.EditText;
-import android.widget.RatingBar;
-
 public class Shit
 {
 
@@ -135,7 +132,7 @@ public class Shit
     public String getShitNote( )
     {
 
-        return ShitNote ;
+        return ShitNote;
     }
 
     public void setShitNote( String ShitNote )

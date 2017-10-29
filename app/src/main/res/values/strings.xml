@@ -26,4 +26,11 @@
     <string name="app_info">App info</string>
     <string name="add_new_poop">Add new poop</string>
     <string name="add_poop">Add my new poop</string>
+    <string name="no_poop">None :(</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="location_latitude">Latitude:</string>
+    <string name="location_longitude">Longitude:</string>
+    <string name="poop_details">Details</string>
+    <string name="poop_date">Date:</string>
 </resources>

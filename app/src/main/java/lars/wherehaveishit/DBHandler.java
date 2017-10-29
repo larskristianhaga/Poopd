@@ -23,7 +23,7 @@ public class DBHandler extends SQLiteOpenHelper
     static String KEY_PRIVACY = "ShitRatingPrivacy";
     static String KEY_OVERALL = "ShitRatingOverall";
     static String KEY_SHITNOTE = "ShitNote";
-    static int DATABASE_VERSION = 1;
+    static int DATABASE_VERSION = 2;
     static String DATABASE_NAME = "ShitsInApp";
 
 
@@ -97,4 +97,34 @@ public class DBHandler extends SQLiteOpenHelper
     }
 
 
+    public List<Shit> findAPoop( String markerName )
+    {
+
+        List<Shit> poopArrayList = new ArrayList<>();
+        Log.i("markerName",markerName);
+        Log.i("Query","SELECT * FROM " + TABLE_SHITS + " WHERE " + KEY_SHITNAME + " = '" + markerName + "';");
+        String selectQuery = "SELECT * FROM " + TABLE_SHITS + " WHERE " + KEY_SHITNAME + " = '" + markerName + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                Shit shit = new Shit();
+                shit.set_ID(cursor.getLong(0));
+                shit.setShitName(cursor.getString(1));
+                shit.setShitDate(cursor.getString(2));
+                shit.setShitLongitude(cursor.getString(3));
+                shit.setShitLatitude(cursor.getString(4));
+                shit.setShitRatingCleanness(cursor.getDouble(5));
+                shit.setShitRatingPrivacy(cursor.getDouble(6));
+                shit.setShitRatingOverall(cursor.getDouble(7));
+                shit.setShitNote(cursor.getString(8));
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+        }
+        Log.i("test", String.valueOf(poopArrayList));
+        return poopArrayList;
+    }
 }

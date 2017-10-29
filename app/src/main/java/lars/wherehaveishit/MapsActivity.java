@@ -28,8 +28,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -39,12 +37,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
@@ -70,8 +62,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        FloatingActionButton btnAddShit = (FloatingActionButton) findViewById(R.id.btn_addShit);
-        btnAddShit.setOnClickListener(new View.OnClickListener()
+        btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
+        btn_addPoop.setOnClickListener(new View.OnClickListener()
         {
 
             @Override
@@ -100,8 +92,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
 
     }
 
@@ -156,7 +146,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
+        {
 
+            @Override
+            public boolean onMarkerClick( Marker marker )
+            {
+
+
+                return false;
+            }
+        });
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
+        {
+
+            @Override
+            public void onInfoWindowClick( Marker marker )
+            {
+                Log.i("markerName",marker.getTitle());
+
+                Intent seeDetailedPoop = new Intent(MapsActivity.this, DetailedActivity.class);
+                seeDetailedPoop.putExtra("markerName", marker.getTitle());
+                startActivity(seeDetailedPoop);
+            }
+        });
     }
 
     // Requests the location permission
@@ -344,6 +358,4 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 }
