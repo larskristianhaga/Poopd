@@ -12,8 +12,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.Marker;
-
 import java.util.List;
 
 public class DetailedActivity extends AppCompatActivity
@@ -27,11 +25,11 @@ public class DetailedActivity extends AppCompatActivity
     EditText poopDateLayout;
     TextView poopLocationLatLayout;
     TextView poopLocationLonLayout;
-    Marker marker;
+    String detailedPoopID = null;
     MenuItem editMenuIcon;
     MenuItem doneMenuIcon;
     MenuItem deleteMenuIcon;
-
+    long markerTag;
     DBHandler db;
 
     @Override
@@ -48,16 +46,17 @@ public class DetailedActivity extends AppCompatActivity
         poopPrivacyLayout = (RatingBar) findViewById(R.id.editPoopPrivacy);
         poopOverallLayout = (RatingBar) findViewById(R.id.editPoopOverall);
         poopNoteLayout = (EditText) findViewById(R.id.editPoopNote);
-        poopLocationLatLayout = (TextView) findViewById(R.id.poopLocationLat);
-        poopLocationLonLayout = (TextView) findViewById(R.id.poopLocationLon);
+        poopLocationLatLayout = (TextView) findViewById(R.id.poopLocationLatValue);
+        poopLocationLonLayout = (TextView) findViewById(R.id.poopLocationLonValue);
         poopDateLayout = (EditText) findViewById(R.id.editPoopDate);
 
         Intent markerFromMapsActivity = getIntent();
         Bundle bundle = markerFromMapsActivity.getExtras();
-        String markerName = bundle.getString("markerName");
-        Log.i("markerName", markerName);
+        markerTag = bundle.getLong("markerTag");
+        Log.i("markerTAG", String.valueOf(markerTag));
 
-        final List<Shit> poops = db.findAPoop(markerName);
+        final List<Shit> poops = db.findAPoop(markerTag);
+        Log.i("poopsList", String.valueOf(poops));
 
         for (Shit poop : poops)
         {
@@ -69,8 +68,14 @@ public class DetailedActivity extends AppCompatActivity
             poopLocationLatLayout.setText(poop.getShitLatitude());
             poopLocationLonLayout.setText(poop.getShitLongitude());
             poopDateLayout.setText(poop.getShitDate());
+            detailedPoopID = String.valueOf(poop.get_ID());
         }
+
+        poopCleannessLayout.setEnabled(false);
+        poopPrivacyLayout.setEnabled(false);
+        poopOverallLayout.setEnabled(false);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu )
@@ -92,14 +97,18 @@ public class DetailedActivity extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.deletePoop:
-                //db.slettKontaktString(detailsAboutStudentFirstName, detailsAboutStudentLastName);
-                //Toast.makeText(DetailedActivity.this, "You deleted: " + detailedStudentName, Toast.LENGTH_SHORT).show();
+                db.deleteAPoop(markerTag);
+                Toast.makeText(DetailedActivity.this, "Poop deleted", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.editPoop:
 
                 poopNameLayout.setEnabled(true);
                 poopNoteLayout.setEnabled(true);
+                poopCleannessLayout.setEnabled(true);
+                poopPrivacyLayout.setEnabled(true);
+                poopOverallLayout.setEnabled(true);
+                poopDateLayout.setEnabled(true);
 
                 editMenuIcon.setVisible(false);
                 deleteMenuIcon.setVisible(false);
@@ -108,7 +117,7 @@ public class DetailedActivity extends AppCompatActivity
                 Toast.makeText(DetailedActivity.this, "You can now edit your poop!", Toast.LENGTH_LONG).show();
                 break;
             case R.id.editPoopDone:
-                //oppdater();
+                updatePoop();
 
                 finish();
                 break;
@@ -116,5 +125,19 @@ public class DetailedActivity extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    public void updatePoop( )
+    {
+
+        Shit updatePoop = new Shit();
+        updatePoop.setShitName(poopNameLayout.getText().toString());
+        updatePoop.setShitNote(poopNoteLayout.getText().toString());
+        updatePoop.setShitDate(poopDateLayout.getText().toString());
+        updatePoop.setShitRatingCleanness(poopCleannessLayout.getRating());
+        updatePoop.setShitRatingPrivacy(poopPrivacyLayout.getRating());
+        updatePoop.setShitRatingOverall(poopOverallLayout.getRating());
+        updatePoop.set_ID(Long.parseLong(detailedPoopID));
+        db.updateAPoop(updatePoop);
     }
 }

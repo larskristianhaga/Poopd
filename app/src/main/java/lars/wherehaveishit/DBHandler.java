@@ -23,7 +23,7 @@ public class DBHandler extends SQLiteOpenHelper
     static String KEY_PRIVACY = "ShitRatingPrivacy";
     static String KEY_OVERALL = "ShitRatingOverall";
     static String KEY_SHITNOTE = "ShitNote";
-    static int DATABASE_VERSION = 2;
+    static int DATABASE_VERSION = 3;
     static String DATABASE_NAME = "ShitsInApp";
 
 
@@ -88,22 +88,20 @@ public class DBHandler extends SQLiteOpenHelper
                 shit.setShitRatingPrivacy(cursor.getDouble(6));
                 shit.setShitRatingOverall(cursor.getDouble(7));
                 shit.setShitNote(cursor.getString(8));
-                shitsArrayList.add(shit); ;
+                shitsArrayList.add(shit);
             } while (cursor.moveToNext());
             cursor.close();
             db.close();
         }
+        Log.i("shitsArrayList", String.valueOf(shitsArrayList));
         return shitsArrayList;
     }
 
-
-    public List<Shit> findAPoop( String markerName )
+    public List<Shit> findAPoop( long poopID )
     {
 
-        List<Shit> poopArrayList = new ArrayList<>();
-        Log.i("markerName",markerName);
-        Log.i("Query","SELECT * FROM " + TABLE_SHITS + " WHERE " + KEY_SHITNAME + " = '" + markerName + "';");
-        String selectQuery = "SELECT * FROM " + TABLE_SHITS + " WHERE " + KEY_SHITNAME + " = '" + markerName + "';";
+        List<Shit> shitsArrayList = new ArrayList<Shit>();
+        String selectQuery = "SELECT * FROM " + TABLE_SHITS + " WHERE " + KEY_ID + "='" + poopID + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst())
@@ -120,11 +118,38 @@ public class DBHandler extends SQLiteOpenHelper
                 shit.setShitRatingPrivacy(cursor.getDouble(6));
                 shit.setShitRatingOverall(cursor.getDouble(7));
                 shit.setShitNote(cursor.getString(8));
+                shitsArrayList.add(shit);
             } while (cursor.moveToNext());
             cursor.close();
             db.close();
         }
-        Log.i("test", String.valueOf(poopArrayList));
-        return poopArrayList;
+        Log.i("findAnShit", String.valueOf(shitsArrayList));
+        return shitsArrayList;
+    }
+
+    public void deleteAPoop( long poopID )
+    {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_SHITS, KEY_ID + "=" + poopID, new String[]{ });
+        db.close();
+    }
+
+    public int updateAPoop( Shit change )
+    {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_SHITNAME, change.getShitName());
+        values.put(KEY_DATE, change.getShitDate());
+        values.put(KEY_CLEANNESS, change.getShitRatingCleanness());
+        values.put(KEY_PRIVACY, change.getShitRatingPrivacy());
+        values.put(KEY_OVERALL, change.getShitRatingOverall());
+        values.put(KEY_SHITNOTE, change.getShitNote());
+
+        int changedPoop = db.update(TABLE_SHITS, values, KEY_ID + "= ?", new String[]{String.valueOf(change.get_ID())});
+        db.close();
+
+        return changedPoop;
     }
 }

@@ -146,17 +146,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
-        {
-
-            @Override
-            public boolean onMarkerClick( Marker marker )
-            {
-
-
-                return false;
-            }
-        });
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
         {
@@ -164,10 +153,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onInfoWindowClick( Marker marker )
             {
-                Log.i("markerName",marker.getTitle());
+                Log.i("markerTag", String.valueOf(marker.getTag()));
 
                 Intent seeDetailedPoop = new Intent(MapsActivity.this, DetailedActivity.class);
-                seeDetailedPoop.putExtra("markerName", marker.getTitle());
+                seeDetailedPoop.putExtra("markerTag", (Long) marker.getTag());
                 startActivity(seeDetailedPoop);
             }
         });
@@ -250,7 +239,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Reads file and marks on the map if mMap is not null
         if (mMap != null)
         {
+            mMap.clear();
             readFileAndMarkOnMap();
+            Log.i("readFileAndMarkOnMap","readFileAndMarkOnMap");
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
@@ -274,7 +265,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (Shit shitInMap : allShitsInDB)
         {
-            createMarker(shitInMap.getShitName(), shitInMap.getShitDate(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitNote());
+            createMarker(shitInMap.getShitName(), shitInMap.getShitDate(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitNote()).setTag(shitInMap.get_ID());
             numberOfTotalShits++;
         }
 
