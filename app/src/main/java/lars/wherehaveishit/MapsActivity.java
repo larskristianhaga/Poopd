@@ -325,7 +325,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case R.id.statsistics:
                 Intent seeStatistics = new Intent(this, StatisticsActivity.class);
-                Log.i("TotalNumberOfShitsLOG", String.valueOf(numberOfTotalShits));
                 seeStatistics.putExtra("TotalNumberOfShits", numberOfTotalShits);
                 startActivity(seeStatistics);
                 break;
