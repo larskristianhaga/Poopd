@@ -74,6 +74,12 @@ public class DetailedActivity extends AppCompatActivity
         poopCleannessLayout.setEnabled(false);
         poopPrivacyLayout.setEnabled(false);
         poopOverallLayout.setEnabled(false);
+        poopNameLayout.setFocusable(false);
+        poopCleannessLayout.setFocusable(false);
+        poopPrivacyLayout.setFocusable(false);
+        poopOverallLayout.setFocusable(false);
+        poopNoteLayout.setFocusable(false);
+
     }
 
 
@@ -102,7 +108,6 @@ public class DetailedActivity extends AppCompatActivity
                 finish();
                 break;
             case R.id.editPoop:
-
                 poopNameLayout.setEnabled(true);
                 poopNoteLayout.setEnabled(true);
                 poopCleannessLayout.setEnabled(true);
