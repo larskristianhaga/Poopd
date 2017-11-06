@@ -34,4 +34,6 @@
     <string name="poop_details">Details</string>
     <string name="poop_date">Poop date:</string>
     <string name="poop_time">Poop time:</string>
+    <string name="edit_location">Adjust location</string>
+    <string name="title_activity_edit_location">EditLocationMap</string>
 </resources>
