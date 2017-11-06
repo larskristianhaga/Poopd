@@ -22,15 +22,6 @@
         android:layout_alignBottom="@id/howmanyshitsintotal"
         android:layout_toEndOf="@+id/howmanyshitsintotal"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/more_coming_soon"
-        android:layout_below="@id/etxt_numberoftotalshits"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="100dp"
-        android:textSize="25dp"/>
-
 
     <TextView
         android:id="@+id/mailFeedbackToDeveloper"
