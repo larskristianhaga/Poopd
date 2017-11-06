@@ -147,12 +147,42 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
 
+        mMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener()
+        {
+
+            @Override
+            public void onInfoWindowLongClick( final Marker marker )
+            {
+
+                new AlertDialog.Builder(MapsActivity.this)
+                        //.setIcon(android.R.drawable.ic_dialog_alert)
+                        .setMessage("Are you sure you want to delete this poop?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+
+                            @Override
+                            public void onClick( DialogInterface dialog, int which )
+                            {
+
+                                Log.i("LongPress", String.valueOf(marker.getTag()));
+                                db.deleteAPoop((Long) marker.getTag());
+                                Toast.makeText(MapsActivity.this, "Poop deleted", Toast.LENGTH_SHORT).show();
+                                recreate();
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
         {
 
             @Override
             public void onInfoWindowClick( Marker marker )
             {
+
                 Log.i("markerTag", String.valueOf(marker.getTag()));
 
                 Intent seeDetailedPoop = new Intent(MapsActivity.this, DetailedActivity.class);
@@ -241,7 +271,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         {
             mMap.clear();
             readFileAndMarkOnMap();
-            Log.i("readFileAndMarkOnMap","readFileAndMarkOnMap");
+            Log.i("readFileAndMarkOnMap", "readFileAndMarkOnMap");
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
