@@ -11,8 +11,6 @@ import android.widget.Toast;
 public class StatisticsActivity extends AppCompatActivity
 {
 
-    int total = 0;
-
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -22,6 +20,7 @@ public class StatisticsActivity extends AppCompatActivity
 
         TextView totalNumberOfShits = (TextView) findViewById(R.id.etxt_numberoftotalshits);
 
+        int total = 0;
 
         Intent fromMain = getIntent();
         Bundle bundle = fromMain.getExtras();
@@ -32,7 +31,11 @@ public class StatisticsActivity extends AppCompatActivity
         {
             totalNumberOfShits.setText(R.string.no_poop);
         }
-        totalNumberOfShits.setText(String.valueOf(total));
+        else
+        {
+            totalNumberOfShits.setText(String.valueOf(total));
+        }
+
 
 
         TextView sendFeedbackToDev = (TextView) findViewById(R.id.mailFeedbackToDeveloper);
