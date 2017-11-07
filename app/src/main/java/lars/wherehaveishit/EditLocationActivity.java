@@ -108,6 +108,8 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
+        Toast.makeText(EditLocationActivity.this,"You can now adjust poop location within the circle",Toast.LENGTH_LONG).show();
+
     }
 
 

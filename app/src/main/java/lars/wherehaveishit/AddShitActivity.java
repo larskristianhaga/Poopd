@@ -119,18 +119,22 @@ public class AddShitActivity extends AppCompatActivity
         double shitRatingOverallFin = shitRatingOverall.getRating();
         String shitNoteFin = shitNote.getText().toString();
 
+        Shit shit;
+
         if (!locationIsAdjusted)
         {
-            Shit shit = new Shit(shitNameFin, shitDateFin, locationFromMapLon, locationFromMapLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+
+            shit = new Shit(shitNameFin, shitDateFin, locationFromMapLon, locationFromMapLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
             Log.i("OriginalLocation", String.valueOf(shit));
             db.addShit(shit);
         }
         else
         {
-            Shit shit = new Shit(shitNameFin, shitDateFin, adjustedLocationLon, adjustedLocationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+            shit = new Shit(shitNameFin, shitDateFin, adjustedLocationLon, adjustedLocationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
             Log.i("AdjustedLocation", String.valueOf(shit));
             db.addShit(shit);
         }
+        db.addShit(shit);
 
         dataSaved = true;
     }
@@ -205,8 +209,7 @@ public class AddShitActivity extends AppCompatActivity
                 adjustedLocationLat = data.getStringExtra("AdjustedLocationLat");
                 adjustedLocationLon = data.getStringExtra("AdjustedLocationLon");
 
-                Log.i("adjustedLocationLat", adjustedLocationLat);
-                Log.i("adjustedLocationLon", adjustedLocationLon);
+                Toast.makeText(AddShitActivity.this,"Location is adjusted",Toast.LENGTH_LONG).show();
 
                 locationIsAdjusted = true;
             }
