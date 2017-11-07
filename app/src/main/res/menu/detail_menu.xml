@@ -2,7 +2,6 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
     <item
         android:id="@+id/editPoop"
         android:icon="@drawable/ic_mode_edit_black_24dp"

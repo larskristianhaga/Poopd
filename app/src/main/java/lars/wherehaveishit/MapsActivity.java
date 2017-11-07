@@ -70,8 +70,33 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick( View view )
             {
 
+                String currentLocationLonFin;
+                String currentLocationLatFin;
+                float currentLocationAccuracy;
+
+                try
+                {
+                    Location getCurrentLocation = MapsActivity.mMap.getMyLocation();
+
+                    currentLocationLatFin = String.valueOf(getCurrentLocation.getLatitude());
+                    currentLocationLonFin = String.valueOf(getCurrentLocation.getLongitude());
+                    currentLocationAccuracy = getCurrentLocation.getAccuracy();
+                } catch (NullPointerException e)
+                {
+                    Log.e("Location", "Location is null/or not reachable: " + e.toString());
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Cannot detect location, therefor cannot add poop", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
+                addShit.putExtra("LocationLatitude", currentLocationLatFin);
+                addShit.putExtra("LocationLongitude", currentLocationLonFin);
+                addShit.putExtra("LocationAccuracy",currentLocationAccuracy);
+                Log.i("Location", "Lat: " + currentLocationLatFin + " Lon: " + currentLocationLonFin);
+                Log.i("Location","Accuracy: " + currentLocationAccuracy);
                 startActivity(addShit);
+
             }
         });
 

@@ -1,11 +1,14 @@
 package lars.wherehaveishit;
 
 import android.content.DialogInterface;
-import android.location.Location;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +29,13 @@ public class AddShitActivity extends AppCompatActivity
     RatingBar shitRatingOverall;
     Button saveShit;
     DBHandler db;
+    MenuItem adjustMenuIcon;
+    String locationFromMapLat;
+    String locationFromMapLon;
+    float locationFromMapAccuracy;
+    double adjustedLocationLat;
+    double adjustedLocationLon;
+
 
 
     @Override
@@ -66,6 +76,11 @@ public class AddShitActivity extends AppCompatActivity
             }
         });
 
+        Intent locationFromMain = getIntent();
+        Bundle bundle = locationFromMain.getExtras();
+        locationFromMapLat = bundle.getString("LocationLatitude");
+        locationFromMapLon = bundle.getString("LocationLongitude");
+        locationFromMapAccuracy = bundle.getFloat("LocationAccuracy");
     }
 
     protected void onResume( )
@@ -80,24 +95,6 @@ public class AddShitActivity extends AppCompatActivity
 
     private void savingData( )
     {
-        // Saves the current location to a variable
-        Location currentLocation = MapsActivity.mMap.getMyLocation();
-
-        String currentLocationLatFin;
-        String currentLocationLonFin;
-
-        try
-        {
-            // Tries to save the latitude and longitude inside a scope, if it fails it returns.
-            currentLocationLatFin = String.valueOf(currentLocation.getLatitude());
-            currentLocationLonFin = String.valueOf(currentLocation.getLongitude());
-        } catch (NullPointerException e)
-        {
-            Log.e("Location", "Location is null: " + e.toString());
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Cannot detect location", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         // If there is not a value in name you cannot add the shit and it will prompt the user saying something went wrong when saving the data
         if (shitName.getText().length() == 0)
@@ -122,12 +119,11 @@ public class AddShitActivity extends AppCompatActivity
         double shitRatingOverallFin = shitRatingOverall.getRating();
         String shitNoteFin = shitNote.getText().toString();
 
-        Shit shit = new Shit(shitNameFin, shitDateFin, currentLocationLonFin, currentLocationLatFin, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+        Shit shit = new Shit(shitNameFin, shitDateFin, locationFromMapLon, locationFromMapLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
         db.addShit(shit);
 
         dataSaved = true;
     }
-
 
     // Prompt the users and ask if the don't want to save their shit
     @Override
@@ -152,4 +148,54 @@ public class AddShitActivity extends AppCompatActivity
                 .show();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu )
+    {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add_poop_menu, menu);
+        adjustMenuIcon = menu.findItem(R.id.editLocation);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected( MenuItem item )
+    {
+
+        if (item.getItemId() == R.id.editLocation)
+        {
+            // Handles the menu press
+            Log.i("Menu", "editLocation pressed");
+            Intent adjustLocation = new Intent(AddShitActivity.this, EditLocationActivity.class);
+            adjustLocation.putExtra("locationLatitude", locationFromMapLat);
+            adjustLocation.putExtra("locationLongitude", locationFromMapLon);
+            adjustLocation.putExtra("locationAccuracy", locationFromMapAccuracy);
+            Log.i("Location", "Lat: " + locationFromMapLat + " Lon: " + locationFromMapLon);
+            startActivity(adjustLocation);
+        }
+        else
+        {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult( int requestCode, int resultCode, Intent data )
+    {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+            Log.i("Yes","Yes");
+
+
+            adjustedLocationLat = data.getDoubleExtra("AdjustedLocationLat", Double.parseDouble(null));
+            adjustedLocationLon = data.getDoubleExtra("AdjustedLocationLon", Double.parseDouble(null));
+
+            Log.i("NewLoc", String.valueOf(adjustedLocationLat));
+            Log.i("NewLoc", String.valueOf(adjustedLocationLon));
+
+    }
 }
+

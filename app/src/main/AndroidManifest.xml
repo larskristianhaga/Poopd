@@ -55,7 +55,7 @@
         </activity>
         <activity
             android:name=".EditLocationActivity"
-            android:label="@string/title_activity_edit_location"
+            android:label="@string/edit_poop_location"
             android:parentActivityName=".AddShitActivity">
         </activity>
     </application>
