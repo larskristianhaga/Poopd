@@ -33,9 +33,9 @@ public class AddShitActivity extends AppCompatActivity
     String locationFromMapLat;
     String locationFromMapLon;
     float locationFromMapAccuracy;
-    double adjustedLocationLat;
-    double adjustedLocationLon;
-
+    String adjustedLocationLat;
+    String adjustedLocationLon;
+    boolean locationIsAdjusted = false;
 
 
     @Override
@@ -99,7 +99,7 @@ public class AddShitActivity extends AppCompatActivity
         // If there is not a value in name you cannot add the shit and it will prompt the user saying something went wrong when saving the data
         if (shitName.getText().length() == 0)
         {
-            Log.i("returns", "name.getText().lenght() == 0");
+            Log.i("returns", "name.getText().length() == 0");
             return;
         }
 
@@ -119,8 +119,18 @@ public class AddShitActivity extends AppCompatActivity
         double shitRatingOverallFin = shitRatingOverall.getRating();
         String shitNoteFin = shitNote.getText().toString();
 
-        Shit shit = new Shit(shitNameFin, shitDateFin, locationFromMapLon, locationFromMapLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
-        db.addShit(shit);
+        if (!locationIsAdjusted)
+        {
+            Shit shit = new Shit(shitNameFin, shitDateFin, locationFromMapLon, locationFromMapLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+            Log.i("OriginalLocation", String.valueOf(shit));
+            db.addShit(shit);
+        }
+        else
+        {
+            Shit shit = new Shit(shitNameFin, shitDateFin, adjustedLocationLon, adjustedLocationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+            Log.i("AdjustedLocation", String.valueOf(shit));
+            db.addShit(shit);
+        }
 
         dataSaved = true;
     }
@@ -167,12 +177,14 @@ public class AddShitActivity extends AppCompatActivity
         {
             // Handles the menu press
             Log.i("Menu", "editLocation pressed");
+
+
             Intent adjustLocation = new Intent(AddShitActivity.this, EditLocationActivity.class);
             adjustLocation.putExtra("locationLatitude", locationFromMapLat);
             adjustLocation.putExtra("locationLongitude", locationFromMapLon);
             adjustLocation.putExtra("locationAccuracy", locationFromMapAccuracy);
             Log.i("Location", "Lat: " + locationFromMapLat + " Lon: " + locationFromMapLon);
-            startActivity(adjustLocation);
+            startActivityForResult(adjustLocation, 555);
         }
         else
         {
@@ -186,16 +198,23 @@ public class AddShitActivity extends AppCompatActivity
     {
 
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 555)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                adjustedLocationLat = data.getStringExtra("AdjustedLocationLat");
+                adjustedLocationLon = data.getStringExtra("AdjustedLocationLon");
 
-            Log.i("Yes","Yes");
+                Log.i("adjustedLocationLat", adjustedLocationLat);
+                Log.i("adjustedLocationLon", adjustedLocationLon);
 
-
-            adjustedLocationLat = data.getDoubleExtra("AdjustedLocationLat", Double.parseDouble(null));
-            adjustedLocationLon = data.getDoubleExtra("AdjustedLocationLon", Double.parseDouble(null));
-
-            Log.i("NewLoc", String.valueOf(adjustedLocationLat));
-            Log.i("NewLoc", String.valueOf(adjustedLocationLon));
-
+                locationIsAdjusted = true;
+            }
+            if (resultCode == RESULT_CANCELED)
+            {
+                Log.i("resultCode", "RESULT_CANCELED");
+            }
+        }
     }
 }
 

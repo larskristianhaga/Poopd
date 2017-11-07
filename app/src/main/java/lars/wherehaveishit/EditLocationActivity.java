@@ -1,6 +1,5 @@
 package lars.wherehaveishit;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -138,10 +137,17 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
             }
             else
             {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("AdjustedLocationLat", poopMarker.getPosition().latitude);
-                resultIntent.putExtra("AdjustedLocationLon", poopMarker.getPosition().longitude);
-                setResult(Activity.RESULT_OK, resultIntent);
+                Bundle bundle = new Bundle();
+
+                String sendBackLocationLat = String.valueOf(poopMarker.getPosition().latitude);
+                String sendBackLocationLon = String.valueOf(poopMarker.getPosition().longitude);
+
+                bundle.putString("AdjustedLocationLat", sendBackLocationLat);
+                bundle.putString("AdjustedLocationLon", sendBackLocationLon);
+
+                Intent goBackToAddPoop = new Intent();
+                goBackToAddPoop.putExtras(bundle);
+                setResult(RESULT_OK, goBackToAddPoop);
                 Log.i("NewLoc", "Lat: " + poopMarker.getPosition().latitude + " Lon: " + poopMarker.getPosition().longitude);
                 finish();
             }
