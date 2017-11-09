@@ -35,17 +35,13 @@
         </activity>
         <activity
             android:name=".HowToUseActivity"
-            android:label="@string/how_to_use_activity"
+            android:label="@string/help"
             android:parentActivityName=".MapsActivity">
         </activity>
         <activity
             android:name=".StatisticsActivity"
+            android:icon="@drawable/ic_statistics_24dp"
             android:label="@string/statistics"
-            android:parentActivityName=".MapsActivity">
-        </activity>
-        <activity
-            android:name=".AboutActivity"
-            android:label="@string/about"
             android:parentActivityName=".MapsActivity">
         </activity>
         <activity
@@ -57,6 +53,14 @@
             android:name=".EditLocationActivity"
             android:label="@string/edit_poop_location"
             android:parentActivityName=".AddShitActivity">
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".MapsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="lars.wherehaveishit.MapsActivity"/>
         </activity>
     </application>
 
