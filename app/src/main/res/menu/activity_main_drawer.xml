@@ -3,22 +3,17 @@
 
     <item
         android:id="@+id/howtouse"
-        android:title="@string/how_to_use"/>
-
-    <item
-        android:id="@+id/about"
-        android:title="@string/about"/>
+        android:title="@string/help"
+        android:icon="@drawable/ic_help_24dp"/>
 
     <item
         android:id="@+id/statsistics"
-        android:title="@string/statistics"/>
+        android:title="@string/statistics"
+        android:icon="@drawable/ic_statistics_24dp"/>
 
     <item
         android:id="@+id/settings"
-        android:title="@string/settings"/>
-
-    <item
-        android:id="@+id/applicationsettingspage"
-        android:title="@string/app_info"/>
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings_24dp"/>
 
 </menu>
