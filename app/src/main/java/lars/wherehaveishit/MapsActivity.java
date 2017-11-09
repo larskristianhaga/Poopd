@@ -8,10 +8,8 @@ import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -92,9 +90,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
                 addShit.putExtra("LocationLatitude", currentLocationLatFin);
                 addShit.putExtra("LocationLongitude", currentLocationLonFin);
-                addShit.putExtra("LocationAccuracy",currentLocationAccuracy);
+                addShit.putExtra("LocationAccuracy", currentLocationAccuracy);
                 Log.i("Location", "Lat: " + currentLocationLatFin + " Lon: " + currentLocationLonFin);
-                Log.i("Location","Accuracy: " + currentLocationAccuracy);
+                Log.i("Location", "Accuracy: " + currentLocationAccuracy);
                 startActivity(addShit);
 
             }
@@ -379,10 +377,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Intent seeHowToUse = new Intent(this, HowToUseActivity.class);
                 startActivity(seeHowToUse);
                 break;
-            case R.id.about:
-                Intent seeAbout = new Intent(this, AboutActivity.class);
-                startActivity(seeAbout);
-                break;
             case R.id.statsistics:
                 Intent seeStatistics = new Intent(this, StatisticsActivity.class);
                 seeStatistics.putExtra("TotalNumberOfShits", numberOfTotalShits);
@@ -390,13 +384,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case R.id.settings:
                 Toast.makeText(this, "Coming soon", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.applicationsettingspage:
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
+                Intent seeSettings = new Intent(this,SettingsActivity.class);
+                startActivity(seeSettings);
                 break;
         }
 
