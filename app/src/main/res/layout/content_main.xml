@@ -12,7 +12,7 @@
               android:layout_alignParentBottom="true"
               tools:context=".MapsActivity"/>
 
-    <!--suppress AndroidMissingOnClickHandler -->
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_addShit"
         android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="2.5mm"
         android:clickable="true"
-        app:backgroundTint="@color/Poop_brown"
+        app:backgroundTint="@color/secondaryColor"
         app:fabSize="normal"
         app:srcCompat="@android:drawable/ic_menu_add"/>
 
