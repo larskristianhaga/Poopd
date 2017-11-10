@@ -43,9 +43,9 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
 
         Intent markerFromMapsActivity = getIntent();
         Bundle bundle = markerFromMapsActivity.getExtras();
-        latitude = Double.parseDouble(bundle.getString("locationLatitude"));
-        longitude = Double.parseDouble(bundle.getString("locationLongitude"));
-        accuracy = bundle.getFloat("locationAccuracy");
+        latitude = Double.parseDouble(bundle.getString("LocationLatitude"));
+        longitude = Double.parseDouble(bundle.getString("LocationLongitude"));
+        accuracy = bundle.getFloat("LocationAccuracy");
 
         Log.i("Latitude: ", String.valueOf(latitude));
         Log.i("Longitude: ", String.valueOf(longitude));
@@ -144,8 +144,8 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
                 String sendBackLocationLat = String.valueOf(poopMarker.getPosition().latitude);
                 String sendBackLocationLon = String.valueOf(poopMarker.getPosition().longitude);
 
-                bundle.putString("AdjustedLocationLat", sendBackLocationLat);
-                bundle.putString("AdjustedLocationLon", sendBackLocationLon);
+                bundle.putString("LocationLatitude", sendBackLocationLat);
+                bundle.putString("LocationLongitude", sendBackLocationLon);
 
                 Intent goBackToAddPoop = new Intent();
                 goBackToAddPoop.putExtras(bundle);

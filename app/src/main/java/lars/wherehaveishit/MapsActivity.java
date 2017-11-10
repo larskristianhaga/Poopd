@@ -315,15 +315,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (Shit shitInMap : allShitsInDB)
         {
-            createMarker(shitInMap.getShitName(), shitInMap.getShitDate(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitNote()).setTag(shitInMap.get_ID());
-            numberOfTotalShits++;
+            // Try catching here because if someone gets a Nullpointer as location as manages to save it, it beaks the app and you have to delete the entire database.
+            try
+            {
+                createMarker(shitInMap.getShitName(), shitInMap.getShitDate(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitNote()).setTag(shitInMap.get_ID());
+                numberOfTotalShits++;
+            } catch (NullPointerException e)
+            {
+                Log.e("createMaker", "Trying to add a maker with a value null" + e.toString());
+            }
         }
 
     }
 
     private Marker createMarker( String shitName, String shitDate, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy, double shitRatingOverall, String shitNote )
     {
-
         double shitLongitudeFin = Double.parseDouble(shitLongitude);
         double shitLatitudeFin = Double.parseDouble(shitLatitude);
         return mMap.addMarker(new MarkerOptions()

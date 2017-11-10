@@ -30,11 +30,9 @@ public class AddShitActivity extends AppCompatActivity
     Button saveShit;
     DBHandler db;
     MenuItem adjustMenuIcon;
-    String locationFromMapLat;
-    String locationFromMapLon;
+    String locationLat;
+    String locationLon;
     float locationFromMapAccuracy;
-    String adjustedLocationLat;
-    String adjustedLocationLon;
     boolean locationIsAdjusted = false;
 
 
@@ -60,10 +58,7 @@ public class AddShitActivity extends AppCompatActivity
             public void onClick( View v )
             {
 
-                savingData();
-
-                // Goes back to maps view if the data is saved properly, dataSaved equals true
-                if (dataSaved)
+                if (savingData())
                 {
                     finish();
 
@@ -83,12 +78,10 @@ public class AddShitActivity extends AppCompatActivity
         {
             Intent locationFromOtherActivity = getIntent();
             Bundle bundle = locationFromOtherActivity.getExtras();
-            String testing = bundle.getString("AdjustedLocationLon");
 
-            locationFromMapLat = bundle.getString("LocationLatitude");
-            locationFromMapLon = bundle.getString("LocationLongitude");
+            locationLat = bundle.getString("LocationLatitude");
+            locationLon = bundle.getString("LocationLongitude");
             locationFromMapAccuracy = bundle.getFloat("LocationAccuracy");
-            Log.i("testing",testing);
 
         } catch (NullPointerException e)
         {
@@ -107,7 +100,7 @@ public class AddShitActivity extends AppCompatActivity
     }
 
 
-    private void savingData( )
+    private boolean savingData( )
     {
 
         // If there is not a value in name you cannot add the shit and it will prompt the user saying something went wrong when saving the data
@@ -115,7 +108,7 @@ public class AddShitActivity extends AppCompatActivity
         {
             Toast.makeText(this, "You need to enter a name", Toast.LENGTH_LONG).show();
             Log.i("returns", "name.getText().length() == 0");
-            return;
+            return dataSaved = false;
         }
 
 
@@ -136,22 +129,11 @@ public class AddShitActivity extends AppCompatActivity
 
         Shit shit;
 
-        if (!locationIsAdjusted)
-        {
-
-            shit = new Shit(shitNameFin, shitDateFin, locationFromMapLon, locationFromMapLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
-            Log.i("OriginalLocation", String.valueOf(shit));
-            db.addShit(shit);
-        }
-        else
-        {
-            shit = new Shit(shitNameFin, shitDateFin, adjustedLocationLon, adjustedLocationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
-            Log.i("AdjustedLocation", String.valueOf(shit));
-            db.addShit(shit);
-        }
+        shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+        Log.i("OriginalLocation", String.valueOf(shit));
         db.addShit(shit);
 
-        dataSaved = true;
+        return dataSaved = true;
     }
 
     // Prompt the users and ask if the don't want to save their shit
@@ -199,10 +181,10 @@ public class AddShitActivity extends AppCompatActivity
 
 
             Intent adjustLocation = new Intent(AddShitActivity.this, EditLocationActivity.class);
-            adjustLocation.putExtra("locationLatitude", locationFromMapLat);
-            adjustLocation.putExtra("locationLongitude", locationFromMapLon);
-            adjustLocation.putExtra("locationAccuracy", locationFromMapAccuracy);
-            Log.i("Location", "Lat: " + locationFromMapLat + " Lon: " + locationFromMapLon);
+            adjustLocation.putExtra("LocationLatitude", locationLat);
+            adjustLocation.putExtra("LocationLongitude", locationLon);
+            adjustLocation.putExtra("LocationAccuracy", locationFromMapAccuracy);
+            Log.i("Location", "Lat: " + locationLat + " Lon: " + locationLon);
             startActivityForResult(adjustLocation, 555);
         }
         else
@@ -221,8 +203,8 @@ public class AddShitActivity extends AppCompatActivity
         {
             if (resultCode == RESULT_OK)
             {
-                adjustedLocationLat = data.getStringExtra("AdjustedLocationLat");
-                adjustedLocationLon = data.getStringExtra("AdjustedLocationLon");
+                locationLat = data.getStringExtra("LocationLatitude");
+                locationLon = data.getStringExtra("LocationLongitude");
 
                 Toast.makeText(AddShitActivity.this, "Location is adjusted", Toast.LENGTH_LONG).show();
 
