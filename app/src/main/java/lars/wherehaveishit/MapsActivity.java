@@ -386,7 +386,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(seeStatistics);
                 break;
             case R.id.settings:
-                Toast.makeText(this, "Coming soon", Toast.LENGTH_LONG).show();
                 Intent seeSettings = new Intent(this, SettingsActivity.class);
                 startActivity(seeSettings);
                 break;

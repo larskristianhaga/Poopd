@@ -8,9 +8,9 @@ android {
         minSdkVersion 21
         //noinspection OldTargetApi
         targetSdkVersion 25
-        versionCode 7
+        versionCode 8
         versionName "I ha"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.An2droidJUnitRunner"
     }
     buildTypes {
         release {
