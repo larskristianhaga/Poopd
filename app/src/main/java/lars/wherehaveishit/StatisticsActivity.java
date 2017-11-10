@@ -1,12 +1,13 @@
 package lars.wherehaveishit;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class StatisticsActivity extends AppCompatActivity
 {
@@ -37,7 +38,6 @@ public class StatisticsActivity extends AppCompatActivity
         }
 
 
-
         TextView sendFeedbackToDev = (TextView) findViewById(R.id.mailFeedbackToDeveloper);
 
         sendFeedbackToDev.setOnClickListener(new View.OnClickListener()
@@ -47,18 +47,23 @@ public class StatisticsActivity extends AppCompatActivity
             public void onClick( View v )
             {
 
-                Intent sendFeedback = new Intent(Intent.ACTION_SEND);
-                sendFeedback.setType("message/rfc822");
-                sendFeedback.putExtra(Intent.EXTRA_EMAIL, new String[]{"LarsKHaga@gmail.com"});
-                sendFeedback.putExtra(Intent.EXTRA_SUBJECT, "Feedback about Where have i shit application");
+
+                String body = null;
                 try
                 {
-                    startActivity(Intent.createChooser(sendFeedback, "Send mail to developer"));
-                } catch (android.content.ActivityNotFoundException ex)
+                    body = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0).versionName;
+                    body = "\n\n-----------------------------\nPlease don't remove this information\n Device OS: Android \n Device OS version: " +
+                            Build.VERSION.RELEASE + "\n App Version: " + body + "\n Device Brand: " + Build.BRAND +
+                            "\n Device Model: " + Build.MODEL + "\n Device Manufacturer: " + Build.MANUFACTURER;
+                } catch (PackageManager.NameNotFoundException e)
                 {
-                    Toast.makeText(StatisticsActivity.this, "There are no email clients installed.", Toast.LENGTH_LONG).show();
                 }
-
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("message/rfc822");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"LarsKHaga@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback about Poopd!");
+                intent.putExtra(Intent.EXTRA_TEXT, body);
+                getApplicationContext().startActivity(Intent.createChooser(intent, getApplicationContext().getString(R.string.choose_email_client)));
             }
         });
 
