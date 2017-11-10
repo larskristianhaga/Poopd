@@ -72,15 +72,29 @@ public class AddShitActivity extends AppCompatActivity
                 {
                     // Displays a text saying that data was not saved properly, if dataSaved != true.
                     Toast.makeText(AddShitActivity.this, "Data was not saved properly", Toast.LENGTH_LONG).show();
+
+                    return;
                 }
             }
         });
 
-        Intent locationFromMain = getIntent();
-        Bundle bundle = locationFromMain.getExtras();
-        locationFromMapLat = bundle.getString("LocationLatitude");
-        locationFromMapLon = bundle.getString("LocationLongitude");
-        locationFromMapAccuracy = bundle.getFloat("LocationAccuracy");
+
+        try
+        {
+            Intent locationFromOtherActivity = getIntent();
+            Bundle bundle = locationFromOtherActivity.getExtras();
+            String testing = bundle.getString("AdjustedLocationLon");
+
+            locationFromMapLat = bundle.getString("LocationLatitude");
+            locationFromMapLon = bundle.getString("LocationLongitude");
+            locationFromMapAccuracy = bundle.getFloat("LocationAccuracy");
+            Log.i("testing",testing);
+
+        } catch (NullPointerException e)
+        {
+            Log.e("Location from bundle", "Location is null/or not reachable from bundle " + e.toString());
+        }
+
     }
 
     protected void onResume( )
@@ -99,6 +113,7 @@ public class AddShitActivity extends AppCompatActivity
         // If there is not a value in name you cannot add the shit and it will prompt the user saying something went wrong when saving the data
         if (shitName.getText().length() == 0)
         {
+            Toast.makeText(this, "You need to enter a name", Toast.LENGTH_LONG).show();
             Log.i("returns", "name.getText().length() == 0");
             return;
         }
@@ -209,13 +224,14 @@ public class AddShitActivity extends AppCompatActivity
                 adjustedLocationLat = data.getStringExtra("AdjustedLocationLat");
                 adjustedLocationLon = data.getStringExtra("AdjustedLocationLon");
 
-                Toast.makeText(AddShitActivity.this,"Location is adjusted",Toast.LENGTH_LONG).show();
+                Toast.makeText(AddShitActivity.this, "Location is adjusted", Toast.LENGTH_LONG).show();
 
                 locationIsAdjusted = true;
             }
             if (resultCode == RESULT_CANCELED)
             {
                 Log.i("resultCode", "RESULT_CANCELED");
+                locationIsAdjusted = false;
             }
         }
     }

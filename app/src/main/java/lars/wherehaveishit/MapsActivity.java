@@ -79,22 +79,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     currentLocationLatFin = String.valueOf(getCurrentLocation.getLatitude());
                     currentLocationLonFin = String.valueOf(getCurrentLocation.getLongitude());
                     currentLocationAccuracy = getCurrentLocation.getAccuracy();
+
+                    Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
+                    addShit.putExtra("LocationLatitude", currentLocationLatFin);
+                    addShit.putExtra("LocationLongitude", currentLocationLonFin);
+                    addShit.putExtra("LocationAccuracy", currentLocationAccuracy);
+                    startActivity(addShit);
+
                 } catch (NullPointerException e)
                 {
                     Log.e("Location", "Location is null/or not reachable: " + e.toString());
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Cannot detect location, therefor cannot add poop", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.no_location), Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
-                addShit.putExtra("LocationLatitude", currentLocationLatFin);
-                addShit.putExtra("LocationLongitude", currentLocationLonFin);
-                addShit.putExtra("LocationAccuracy", currentLocationAccuracy);
-                Log.i("Location", "Lat: " + currentLocationLatFin + " Lon: " + currentLocationLonFin);
-                Log.i("Location", "Accuracy: " + currentLocationAccuracy);
-                startActivity(addShit);
-
             }
         });
 
@@ -384,7 +381,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case R.id.settings:
                 Toast.makeText(this, "Coming soon", Toast.LENGTH_LONG).show();
-                Intent seeSettings = new Intent(this,SettingsActivity.class);
+                Intent seeSettings = new Intent(this, SettingsActivity.class);
                 startActivity(seeSettings);
                 break;
         }
