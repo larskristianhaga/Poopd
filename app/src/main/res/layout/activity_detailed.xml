@@ -100,34 +100,48 @@
         android:layout_weight="1"
         android:enabled="false"/>
 
-    <TextView
-        android:id="@+id/poopDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
-        android:layout_weight="1"
-        android:text="@string/poop_date"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/editPoopDate"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/poopDate"
         android:layout_margin="@dimen/spacing"
-        android:layout_weight="1"
-        android:enabled="false"/>
+        android:layout_weight="1">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/poopDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/poop_date"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textPoopDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/poopDate"
+            android:layout_marginLeft="@dimen/spacingMore"
+            android:layout_toEndOf="@id/poopDate"/>
+
+        <TextView
+            android:id="@+id/poopTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/poopDate"
+            android:text="@string/poop_time"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textPoopTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/poopTime"
+            android:layout_marginLeft="@dimen/spacingMore"
+            android:layout_toEndOf="@id/poopTime"/>
 
         <TextView
             android:id="@+id/poopLocationLat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing"
-            android:layout_weight="1"
+            android:layout_below="@id/poopTime"
             android:text="@string/location_latitude"
             android:textStyle="bold"/>
 
@@ -136,17 +150,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopLocationLat"
-            android:layout_marginLeft="@dimen/spacing"
-            android:layout_toEndOf="@id/poopLocationLat"
-            android:layout_weight="1"/>
+            android:layout_marginLeft="@dimen/spacingMore"
+            android:layout_toEndOf="@id/poopLocationLat"/>
 
         <TextView
             android:id="@+id/poopLocationLon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/poopLocationLat"
-            android:layout_marginLeft="@dimen/spacing"
-            android:layout_weight="1"
             android:text="@string/location_longitude"
             android:textStyle="bold"/>
 
@@ -155,10 +166,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopLocationLon"
-            android:layout_marginBottom="@dimen/spacing"
-            android:layout_marginLeft="@dimen/spacing"
-            android:layout_toEndOf="@id/poopLocationLon"
-            android:layout_weight="1"/>
+            android:layout_marginLeft="@dimen/spacingMore"
+            android:layout_toEndOf="@id/poopLocationLon"/>
 
     </RelativeLayout>
 </LinearLayout>
