@@ -3,6 +3,7 @@ package lars.wherehaveishit;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -13,8 +14,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity
 {
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
-    private final String versionName = BuildConfig.VERSION_NAME;
-    private final int versionCode = BuildConfig.VERSION_CODE;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -26,16 +25,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity
         // load settings fragment
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
 
-        addPreferencesFromResource(R.xml.pref_main);
-
-        Preference versionName = findPreference("versionName");
-        try
-        {
-            versionName.setSummary(appVersionName());
-        } catch (PackageManager.NameNotFoundException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public static class MainPreferenceFragment extends PreferenceFragment
@@ -49,7 +38,37 @@ public class SettingsActivity extends AppCompatPreferenceActivity
             addPreferencesFromResource(R.xml.pref_main);
 
 
-            // feedback preference click listener
+            Preference versionName = findPreference("versionName");
+            versionName.setSummary(BuildConfig.VERSION_NAME);
+
+            Preference appInfo = findPreference("appInfo");
+            appInfo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            {
+
+                @Override
+                public boolean onPreferenceClick( Preference preference )
+                {
+
+                    Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    intent.setData(Uri.parse("package:" + "lars.wherehaveishit"));
+                    startActivity(intent);
+                    return true;
+                }
+            });
+
+            /*Preference connectToGoogle = findPreference("connectToGoogle");
+            connectToGoogle.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            {
+
+                @Override
+                public boolean onPreferenceClick( Preference preference )
+                {
+
+
+                    return true;
+                }
+            });*/
+
             Preference myPref = findPreference(getString(R.string.key_send_feedback));
             myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
             {
@@ -95,12 +114,5 @@ public class SettingsActivity extends AppCompatPreferenceActivity
         intent.putExtra(Intent.EXTRA_TEXT, body);
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.choose_email_client)));
     }
-
-    public String appVersionName( ) throws PackageManager.NameNotFoundException
-    {
-
-        return BuildConfig.VERSION_NAME;
-    }
-
 
 }
