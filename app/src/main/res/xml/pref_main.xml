@@ -19,8 +19,12 @@
         </Preference>
 
         <Preference
-            android:summary="@string/app_version"
+            android:key="versionName"
             android:title="@string/title_version"/>
+
+        <Preference
+            android:summary="@string/developer_name"
+            android:title="@string/developer"/>
 
         <Preference
             android:key="@string/key_send_feedback"
