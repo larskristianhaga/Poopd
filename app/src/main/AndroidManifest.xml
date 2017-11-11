@@ -62,6 +62,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="lars.wherehaveishit.MapsActivity"/>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIpkfMaBwh5Cl0-m3_ANzoHgkOv6lAD7mDt-jhCQ"/>
     </application>
 
 </manifest>
