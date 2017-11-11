@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="General">
+    <PreferenceCategory android:title="@string/general">
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/backup">
+
+        <SwitchPreference
+            android:enabled="false"
+            android:key="backup_to_cloud"
+            android:title="@string/backup_to_cloud"/>
 
     </PreferenceCategory>
 
@@ -9,6 +19,22 @@
         <Preference
             android:selectable="false"
             android:summary="@string/about_application"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/other">
+
+        <Preference
+            android:key="versionName"
+            android:title="@string/title_version"/>
+
+        <Preference
+            android:summary="@string/see_on_google_play_summary"
+            android:title="@string/see_on_google_play">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_google_play"/>
+        </Preference>
 
         <Preference
             android:summary="@string/see_source_code"
@@ -19,15 +45,12 @@
         </Preference>
 
         <Preference
-            android:key="versionName"
-            android:title="@string/title_version"/>
-
-        <Preference
-            android:summary="@string/developer_name"
-            android:title="@string/developer"/>
+            android:key="appInfo"
+            android:title="@string/see_app_information"/>
 
         <Preference
             android:key="@string/key_send_feedback"
             android:title="@string/title_send_feedback"/>
+
     </PreferenceCategory>
 </PreferenceScreen>
