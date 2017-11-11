@@ -13,6 +13,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity
 {
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
+    private final String versionName = BuildConfig.VERSION_NAME;
+    private final int versionCode = BuildConfig.VERSION_CODE;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -23,6 +25,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity
 
         // load settings fragment
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
+
+        addPreferencesFromResource(R.xml.pref_main);
+
+        Preference versionName = findPreference("versionName");
+        try
+        {
+            versionName.setSummary(appVersionName());
+        } catch (PackageManager.NameNotFoundException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public static class MainPreferenceFragment extends PreferenceFragment
@@ -82,4 +95,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity
         intent.putExtra(Intent.EXTRA_TEXT, body);
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.choose_email_client)));
     }
+
+    public String appVersionName( ) throws PackageManager.NameNotFoundException
+    {
+
+        return BuildConfig.VERSION_NAME;
+    }
+
+
 }

@@ -22,7 +22,8 @@ public class DetailedActivity extends AppCompatActivity
     RatingBar poopPrivacyLayout;
     RatingBar poopOverallLayout;
     EditText poopNoteLayout;
-    EditText poopDateLayout;
+    TextView poopDateLayout;
+    TextView poopTimeLayout;
     TextView poopLocationLatLayout;
     TextView poopLocationLonLayout;
     String detailedPoopID = null;
@@ -48,7 +49,8 @@ public class DetailedActivity extends AppCompatActivity
         poopNoteLayout = (EditText) findViewById(R.id.editPoopNote);
         poopLocationLatLayout = (TextView) findViewById(R.id.poopLocationLatValue);
         poopLocationLonLayout = (TextView) findViewById(R.id.poopLocationLonValue);
-        poopDateLayout = (EditText) findViewById(R.id.editPoopDate);
+        poopDateLayout = (TextView) findViewById(R.id.textPoopDate);
+        poopTimeLayout = (TextView) findViewById(R.id.textPoopTime);
 
         Intent markerFromMapsActivity = getIntent();
         Bundle bundle = markerFromMapsActivity.getExtras();
@@ -67,7 +69,8 @@ public class DetailedActivity extends AppCompatActivity
             poopNoteLayout.setText(poop.getShitNote());
             poopLocationLatLayout.setText(poop.getShitLatitude());
             poopLocationLonLayout.setText(poop.getShitLongitude());
-            poopDateLayout.setText(poop.getShitDate());
+            poopDateLayout.setText(poop.getShitDate().split(",")[0].trim());
+            poopTimeLayout.setText(poop.getShitDate().split(",")[1].trim());
             detailedPoopID = String.valueOf(poop.get_ID());
         }
 
@@ -113,7 +116,7 @@ public class DetailedActivity extends AppCompatActivity
                 poopCleannessLayout.setEnabled(true);
                 poopPrivacyLayout.setEnabled(true);
                 poopOverallLayout.setEnabled(true);
-                poopDateLayout.setEnabled(true);
+                poopNameLayout.setFocusable(true);
 
                 editMenuIcon.setVisible(false);
                 deleteMenuIcon.setVisible(false);
@@ -138,7 +141,6 @@ public class DetailedActivity extends AppCompatActivity
         Shit updatePoop = new Shit();
         updatePoop.setShitName(poopNameLayout.getText().toString());
         updatePoop.setShitNote(poopNoteLayout.getText().toString());
-        updatePoop.setShitDate(poopDateLayout.getText().toString());
         updatePoop.setShitRatingCleanness(poopCleannessLayout.getRating());
         updatePoop.setShitRatingPrivacy(poopPrivacyLayout.getRating());
         updatePoop.setShitRatingOverall(poopOverallLayout.getRating());

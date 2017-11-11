@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -22,8 +24,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -176,22 +181,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 new AlertDialog.Builder(MapsActivity.this)
                         //.setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage("Are you sure you want to delete this poop?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        .setMessage(getResources().getString(R.string.sure_you_want_to_delete))
+                        .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener()
                         {
 
                             @Override
                             public void onClick( DialogInterface dialog, int which )
                             {
 
-                                Log.i("LongPress", String.valueOf(marker.getTag()));
                                 db.deleteAPoop((Long) marker.getTag());
-                                Toast.makeText(MapsActivity.this, "Poop deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MapsActivity.this, getResources().getString(R.string.poop_deleted), Toast.LENGTH_SHORT).show();
                                 recreate();
                             }
 
                         })
-                        .setNegativeButton("No", null)
+                        .setNegativeButton(getResources().getString(R.string.no), null)
                         .show();
             }
         });
@@ -223,7 +227,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             {
 
                 // Show an expanation to the user, this thread waiting for the user's response! After the user sees the explanation, try again to request the permission.
-                Toast.makeText(this, "The app need to know your location, or some functionality will be disabled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getResources().getString(R.string.need_location), Toast.LENGTH_LONG).show();
 
                 // Prompt the user once explanation has been shown
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
@@ -271,7 +275,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     btn_addPoop.setVisibility(View.INVISIBLE);
 
                     // Prompts a text explaining that some functionality will be disabled
-                    Toast.makeText(this, "You will no longer be able to add new shits :(", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getResources().getString(R.string.no_longer_able_to_add_poop), Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -318,25 +322,62 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             // Try catching here because if someone gets a Nullpointer as location as manages to save it, it beaks the app and you have to delete the entire database.
             try
             {
-                createMarker(shitInMap.getShitName(), shitInMap.getShitDate(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitNote()).setTag(shitInMap.get_ID());
+                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall()).setTag(shitInMap.get_ID());
                 numberOfTotalShits++;
-            } catch (NullPointerException e)
+            } catch (NullPointerException | StringIndexOutOfBoundsException e)
             {
                 Log.e("createMaker", "Trying to add a maker with a value null" + e.toString());
             }
+
+            mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
+            {
+
+                @Override
+                public View getInfoWindow( Marker marker )
+                {
+
+                    return null;
+                }
+
+                @Override
+                public View getInfoContents( Marker marker )
+                {
+
+                    LinearLayout info = new LinearLayout(getApplicationContext());
+                    info.setOrientation(LinearLayout.VERTICAL);
+
+                    TextView title = new TextView(getApplicationContext());
+                    title.setTextColor(Color.BLACK);
+                    title.setGravity(Gravity.CENTER);
+                    title.setTypeface(null, Typeface.BOLD);
+                    title.setText(marker.getTitle());
+
+                    TextView snippet = new TextView(getApplicationContext());
+                    snippet.setTextColor(Color.GRAY);
+                    snippet.setText(marker.getSnippet());
+
+                    info.addView(title);
+                    info.addView(snippet);
+
+                    return info;
+                }
+            });
         }
 
     }
 
-    private Marker createMarker( String shitName, String shitDate, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy, double shitRatingOverall, String shitNote )
+    private Marker createMarker( String shitName, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy, double shitRatingOverall )
     {
+
         double shitLongitudeFin = Double.parseDouble(shitLongitude);
         double shitLatitudeFin = Double.parseDouble(shitLatitude);
+        String avgRating = String.valueOf(((shitRatingCleanness + shitRatingPrivacy + shitRatingOverall) / 3));
         return mMap.addMarker(new MarkerOptions()
                                       .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
                                       .title(shitName)
                                       .draggable(false)
-                                      .snippet("Cleanness: " + shitRatingCleanness + " Privacy : " + shitRatingPrivacy + " Overall " + shitRatingOverall + " Note: " + shitNote + " Date: " + shitDate));
+                                      .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating.substring(0, 4) + "\n" + getResources().getString(R.string.click_to_see_more)));
+
     }
 
 
@@ -353,8 +394,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         else
         {
             new AlertDialog.Builder(this)
-                    .setMessage("Are you sure you want to exit the application?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    .setMessage(getResources().getString(R.string.sure_you_want_to_exit))
+                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener()
                     {
 
                         @Override
@@ -364,7 +405,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             finish();
                         }
                     })
-                    .setNegativeButton("No", null)
+                    .setNegativeButton(getResources().getString(R.string.no), null)
                     .show();
 
         }
@@ -395,4 +436,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
