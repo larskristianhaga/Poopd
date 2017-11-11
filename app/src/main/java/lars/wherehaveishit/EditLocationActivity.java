@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -75,16 +79,13 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
                                                     .clickable(false)
                                                     .strokeWidth(7));
 
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(circleAroundMarker.getCenter(), getZoomLevel(circleAroundMarker)));
+
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(true);
         mMap.getUiSettings().setIndoorLevelPickerEnabled(true);
-        mMap.getUiSettings().setAllGesturesEnabled(false);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), (accuracy / 10 + 16)));
-
-        Log.i("Location", "Accuracy: " + accuracy);
-        Log.i("Location", "Zoom: " + (accuracy / 10 + 17));
 
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener()
         {
@@ -108,8 +109,27 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-        Toast.makeText(EditLocationActivity.this,"You can now adjust poop location within the circle",Toast.LENGTH_LONG).show();
+        Snackbar snack = Snackbar.make(findViewById(R.id.map), getApplicationContext().getString(R.string.adjust_poop_on_map), Snackbar.LENGTH_INDEFINITE);
+        View view = snack.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
+        snack.show();
 
+    }
+
+    private int getZoomLevel( Circle circleAroundMarker )
+    {
+
+        int zoomLevel = 11;
+
+        if (circleAroundMarker != null)
+        {
+            double radius = circleAroundMarker.getRadius() + circleAroundMarker.getRadius() / 2;
+            double scale = radius / 500;
+            zoomLevel = (int) (16 - Math.log(scale) / Math.log(2));
+        }
+        return zoomLevel;
     }
 
 
