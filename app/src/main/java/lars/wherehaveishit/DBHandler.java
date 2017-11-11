@@ -141,7 +141,6 @@ public class DBHandler extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_SHITNAME, change.getShitName());
-        values.put(KEY_DATE, change.getShitDate());
         values.put(KEY_CLEANNESS, change.getShitRatingCleanness());
         values.put(KEY_PRIVACY, change.getShitRatingPrivacy());
         values.put(KEY_OVERALL, change.getShitRatingOverall());
