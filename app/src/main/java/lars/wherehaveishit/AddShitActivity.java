@@ -66,7 +66,7 @@ public class AddShitActivity extends AppCompatActivity
                 else
                 {
                     // Displays a text saying that data was not saved properly, if dataSaved != true.
-                    Toast.makeText(AddShitActivity.this, "Data was not saved properly", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddShitActivity.this, getApplicationContext().getString(R.string.not_saved_properly), Toast.LENGTH_LONG).show();
 
                     return;
                 }
@@ -106,7 +106,7 @@ public class AddShitActivity extends AppCompatActivity
         // If there is not a value in name you cannot add the shit and it will prompt the user saying something went wrong when saving the data
         if (shitName.getText().length() == 0)
         {
-            Toast.makeText(this, "You need to enter a name", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getApplicationContext().getString(R.string.type_in_name), Toast.LENGTH_LONG).show();
             Log.i("returns", "name.getText().length() == 0");
             return dataSaved = false;
         }
@@ -143,8 +143,8 @@ public class AddShitActivity extends AppCompatActivity
 
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage("Are you sure you dont want to save your shit?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                .setMessage(getApplicationContext().getString(R.string.sure_you_want_to_disregard))
+                .setPositiveButton(getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
                 {
 
                     @Override
@@ -155,7 +155,7 @@ public class AddShitActivity extends AppCompatActivity
                     }
 
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(getApplicationContext().getString(R.string.no), null)
                 .show();
     }
 
@@ -206,7 +206,7 @@ public class AddShitActivity extends AppCompatActivity
                 locationLat = data.getStringExtra("LocationLatitude");
                 locationLon = data.getStringExtra("LocationLongitude");
 
-                Toast.makeText(AddShitActivity.this, "Location is adjusted", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddShitActivity.this, getApplicationContext().getString(R.string.location_adjusted), Toast.LENGTH_LONG).show();
 
                 locationIsAdjusted = true;
             }
