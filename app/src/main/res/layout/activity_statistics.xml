@@ -11,15 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_margin="10dp"
         android:text="@string/how_many_poops_total"
-        android:layout_margin="10dp"/>
+        android:textSize="@dimen/textSize"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/etxt_numberoftotalshits"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/howmanyshitsintotal"
-        android:layout_toEndOf="@+id/howmanyshitsintotal"/>
+        android:layout_toEndOf="@+id/howmanyshitsintotal"
+        android:textSize="@dimen/textSize"
+        android:textStyle="bold"/>
 
 
     <TextView
@@ -27,9 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="false"
-        android:layout_margin="15dp"
+        android:layout_alignParentEnd="true"
         android:gravity="center"
-        android:text="@string/have_any_feedback"/>
+        android:padding="15dp"
+        android:text="@string/have_any_feedback"
+        android:textSize="@dimen/textSize"/>
 
 </RelativeLayout>
