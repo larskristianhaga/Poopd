@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +8,6 @@
     tools:context=".DetailedActivity">
 
     <TextView
-        android:id="@+id/poopName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing"
@@ -23,10 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing"
         android:layout_weight="1"
-        android:enabled="false"/>
+        android:inputType="text"/>
 
     <TextView
-        android:id="@+id/poopRatingCleanness"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing"
@@ -46,7 +43,6 @@
 
 
     <TextView
-        android:id="@+id/poopRatingPrivacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing"
@@ -65,7 +61,6 @@
         android:stepSize="0.5"/>
 
     <TextView
-        android:id="@+id/poopRatingOverall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing"
@@ -84,7 +79,6 @@
         android:stepSize="0.5"/>
 
     <TextView
-        android:id="@+id/poopNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing"
@@ -97,8 +91,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing"
-        android:layout_weight="1"
-        android:enabled="false"/>
+        android:inputType="text"
+        android:layout_weight="1"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -118,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopDate"
-            android:layout_marginLeft="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/spacingMore"
             android:layout_toEndOf="@id/poopDate"/>
 
         <TextView
@@ -134,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopTime"
-            android:layout_marginLeft="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/spacingMore"
             android:layout_toEndOf="@id/poopTime"/>
 
         <TextView
@@ -150,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopLocationLat"
-            android:layout_marginLeft="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/spacingMore"
             android:layout_toEndOf="@id/poopLocationLat"/>
 
         <TextView
@@ -166,7 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopLocationLon"
-            android:layout_marginLeft="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/spacingMore"
             android:layout_toEndOf="@id/poopLocationLon"/>
 
     </RelativeLayout>
