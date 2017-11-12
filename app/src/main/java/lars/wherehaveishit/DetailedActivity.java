@@ -28,8 +28,8 @@ public class DetailedActivity extends AppCompatActivity
     TextView poopLocationLonLayout;
     String detailedPoopID = null;
     MenuItem editMenuIcon;
-    MenuItem doneMenuIcon;
     MenuItem deleteMenuIcon;
+    MenuItem doneMenuIcon;
     long markerTag;
     DBHandler db;
 
@@ -74,14 +74,11 @@ public class DetailedActivity extends AppCompatActivity
             detailedPoopID = String.valueOf(poop.get_ID());
         }
 
+        poopNameLayout.setEnabled(false);
         poopCleannessLayout.setEnabled(false);
         poopPrivacyLayout.setEnabled(false);
         poopOverallLayout.setEnabled(false);
-        poopNameLayout.setFocusable(false);
-        poopCleannessLayout.setFocusable(false);
-        poopPrivacyLayout.setFocusable(false);
-        poopOverallLayout.setFocusable(false);
-        poopNoteLayout.setFocusable(false);
+        poopNoteLayout.setEnabled(false);
 
     }
 
@@ -111,16 +108,16 @@ public class DetailedActivity extends AppCompatActivity
                 finish();
                 break;
             case R.id.editPoop:
+
                 poopNameLayout.setEnabled(true);
-                poopNoteLayout.setEnabled(true);
                 poopCleannessLayout.setEnabled(true);
                 poopPrivacyLayout.setEnabled(true);
                 poopOverallLayout.setEnabled(true);
-                poopNameLayout.setFocusable(true);
+                poopNoteLayout.setEnabled(true);
 
                 editMenuIcon.setVisible(false);
-                deleteMenuIcon.setVisible(false);
                 doneMenuIcon.setVisible(true);
+                deleteMenuIcon.setVisible(false);
 
                 Toast.makeText(DetailedActivity.this, "You can now edit your poop!", Toast.LENGTH_LONG).show();
                 break;
