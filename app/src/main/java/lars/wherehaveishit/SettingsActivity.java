@@ -8,12 +8,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 import android.view.MenuItem;
 
 public class SettingsActivity extends AppCompatPreferenceActivity
 {
-
-    private static final String TAG = SettingsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -64,12 +63,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 public boolean onPreferenceClick( Preference preference )
                 {
 
-
                     return true;
                 }
             });*/
 
-            Preference myPref = findPreference(getString(R.string.key_send_feedback));
+            Preference myPref = findPreference(getString(R.string.send_feedback));
             myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
             {
 
@@ -94,19 +92,22 @@ public class SettingsActivity extends AppCompatPreferenceActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public static void sendFeedback( Context context )
+    private static void sendFeedback( Context context )
     {
 
         String body = null;
+
         try
         {
             body = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-            body = "\n\n-----------------------------\nPlease don't remove this information\n Device OS: Android \n Device OS version: " +
-                    Build.VERSION.RELEASE + "\n App Version: " + body + "\n Device Brand: " + Build.BRAND +
-                    "\n Device Model: " + Build.MODEL + "\n Device Manufacturer: " + Build.MANUFACTURER;
         } catch (PackageManager.NameNotFoundException e)
         {
+            Log.e("NameNotFoundException", e.getMessage());
         }
+        body = "\n\n-----------------------------\nPlease don't remove this information\n Device OS: Android \n Device OS version: " +
+                Build.VERSION.RELEASE + "\n App Version: " + body + "\n Device Brand: " + Build.BRAND +
+                "\n Device Model: " + Build.MODEL + "\n Device Manufacturer: " + Build.MANUFACTURER;
+
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"LarsKHaga@gmail.com"});
