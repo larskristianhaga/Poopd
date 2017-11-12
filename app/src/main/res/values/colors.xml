@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="Poop_brown">#593001</color>
     <color name="primaryColor">#6d4c41</color>
-    <color name="primaryLightColor">#9c786c</color>
     <color name="primaryDarkColor">#40241a</color>
     <color name="secondaryColor">#41626d</color>
-    <color name="secondaryLightColor">#6e8f9b</color>
-    <color name="secondaryDarkColor">#153842</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#ffffff</color>
+    <color name="lightGreen">#00FF00</color>
+    <color name="black">#000000</color>
 </resources>
 
