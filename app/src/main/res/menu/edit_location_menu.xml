@@ -4,7 +4,7 @@
     <item
         android:id="@+id/adjustLocationDone"
         android:icon="@drawable/ic_done_24dp"
-        android:title="@string/done"
+        android:title="@string/save"
         app:showAsAction="always"/>
 
 </menu>
