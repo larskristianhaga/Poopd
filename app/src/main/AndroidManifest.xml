@@ -30,11 +30,13 @@
         </activity>
         <activity
             android:name=".AddShitActivity"
+            android:icon="@drawable/ic_add_24dp"
             android:label="@string/add_new_poop"
             android:parentActivityName=".MapsActivity">
         </activity>
         <activity
             android:name=".HowToUseActivity"
+            android:icon="@drawable/ic_help_24dp"
             android:label="@string/help"
             android:parentActivityName=".MapsActivity">
         </activity>
@@ -51,11 +53,13 @@
         </activity>
         <activity
             android:name=".EditLocationActivity"
+            android:icon="@drawable/ic_edit_location_24dp"
             android:label="@string/edit_poop_location"
             android:parentActivityName=".AddShitActivity">
         </activity>
         <activity
             android:name=".SettingsActivity"
+            android:icon="@drawable/ic_settings_24dp"
             android:label="@string/settings"
             android:parentActivityName=".MapsActivity">
             <meta-data
