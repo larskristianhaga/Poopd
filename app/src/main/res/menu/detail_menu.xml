@@ -1,7 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
         android:id="@+id/editPoop"
         android:icon="@drawable/ic_edit_24dp"
@@ -17,8 +16,8 @@
     <item
         android:id="@+id/editPoopDone"
         android:icon="@drawable/ic_done_24dp"
+        android:title="@string/save"
         android:visible="false"
         app:showAsAction="always"/>
-
 
 </menu>
