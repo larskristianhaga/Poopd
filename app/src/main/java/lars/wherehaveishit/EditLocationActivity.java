@@ -155,7 +155,7 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
 
             if (results[0] > circleAroundMarker.getRadius())
             {
-                Toast.makeText(getBaseContext(), "You cannot set the marker outside the circle", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), getApplicationContext().getString(R.string.marker_outside_sircle), Toast.LENGTH_LONG).show();
             }
             else
             {

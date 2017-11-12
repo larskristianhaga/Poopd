@@ -32,6 +32,8 @@ public class AddShitActivity extends AppCompatActivity
     MenuItem adjustMenuIcon;
     String locationLat;
     String locationLon;
+    static String savingFromMapIfBackLat;
+    static String savingFromMapIfBackLon;
     float locationFromMapAccuracy;
     boolean locationIsAdjusted = false;
 
@@ -83,6 +85,9 @@ public class AddShitActivity extends AppCompatActivity
             locationLon = bundle.getString("LocationLongitude");
             locationFromMapAccuracy = bundle.getFloat("LocationAccuracy");
 
+            savingFromMapIfBackLat = locationLat;
+            savingFromMapIfBackLon = locationLon;
+
         } catch (NullPointerException e)
         {
             Log.e("Location from bundle", "Location is null/or not reachable from bundle " + e.toString());
@@ -111,7 +116,6 @@ public class AddShitActivity extends AppCompatActivity
             return dataSaved = false;
         }
 
-
         // Getting todays date, month, year, hour and minute, Saves it to int values
         Calendar savingDate = Calendar.getInstance();
         int shitDate = savingDate.get(Calendar.DATE);
@@ -129,8 +133,17 @@ public class AddShitActivity extends AppCompatActivity
 
         Shit shit;
 
-        shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
-        Log.i("OriginalLocation", String.valueOf(shit));
+
+        if (locationLon == null || locationLat == null)
+        {
+            Log.i("LocationEmpty", "locationLon og locationLat is empty");
+            shit = new Shit(shitNameFin, shitDateFin, savingFromMapIfBackLon, savingFromMapIfBackLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+        }
+        else
+        {
+            shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+        }
+
         db.addShit(shit);
 
         return dataSaved = true;

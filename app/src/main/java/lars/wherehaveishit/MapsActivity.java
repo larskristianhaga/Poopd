@@ -326,7 +326,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 numberOfTotalShits++;
             } catch (NullPointerException | StringIndexOutOfBoundsException e)
             {
-                Log.e("createMaker", "Trying to add a maker with a value null" + e.toString());
+                Log.e("createMaker", e.toString());
             }
 
             mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
@@ -376,7 +376,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                       .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
                                       .title(shitName)
                                       .draggable(false)
-                                      .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating.substring(0, 4) + "\n" + getResources().getString(R.string.click_to_see_more)));
+                                      .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating.substring(0, 3) + "\n" + getResources().getString(R.string.click_to_see_more)));
 
     }
 

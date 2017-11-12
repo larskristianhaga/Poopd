@@ -64,6 +64,7 @@ public class DBHandler extends SQLiteOpenHelper
         values.put(KEY_OVERALL, shit.getShitRatingOverall());
         values.put(KEY_SHITNOTE, shit.getShitNote());
         db.insert(TABLE_SHITS, null, values);
+        Log.i("addShit", String.valueOf(values));
         db.close();
     }
 

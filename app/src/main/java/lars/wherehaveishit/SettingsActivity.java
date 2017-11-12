@@ -34,7 +34,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
         {
 
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_main);
+            addPreferencesFromResource(R.xml.settings_main);
 
 
             Preference versionName = findPreference("versionName");
