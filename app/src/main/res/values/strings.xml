@@ -53,5 +53,9 @@
     <string name="backup_to_cloud">Backup to Google cloud</string>
     <string name="save">Save</string>
     <string name="coming_soon">Coming soon</string>
+    <string name="not_saved_properly">Data was not saved properly</string>
+    <string name="type_in_name">You need to ender a name</string>
+    <string name="sure_you_want_to_disregard">Are you sure you don\'t want to save your poop?</string>
+    <string name="location_adjusted">Location is adjusted</string>
 
 </resources>
