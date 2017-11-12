@@ -7,7 +7,6 @@
               tools:context="lars.wherehaveishit.AddShitActivity">
 
     <TextView
-        android:id="@+id/txt_nameOfPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,7 +25,6 @@
         android:selectAllOnFocus="true"/>
 
     <TextView
-        android:id="@+id/txt_ratingBarCleanness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -44,7 +42,6 @@
         android:stepSize="0.5"/>
 
     <TextView
-        android:id="@+id/txt_ratingBarPrivacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -62,7 +59,6 @@
         android:stepSize="0.5"/>
 
     <TextView
-        android:id="@+id/txt_ratingBarOverall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -80,7 +76,6 @@
         android:stepSize="0.5"/>
 
     <TextView
-        android:id="@+id/txt_addShitNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -104,6 +99,6 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:layout_weight="1"
-        android:text="@string/add_poop"/>
+        android:text="@string/add_new_poop"/>
 
 </LinearLayout>
