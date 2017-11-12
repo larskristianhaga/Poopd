@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
     <PreferenceCategory android:title="@string/general">
 
 
@@ -9,7 +10,9 @@
 
         <SwitchPreference
             android:enabled="false"
+            android:icon="@drawable/ic_cloud_24dp"
             android:key="backup_to_cloud"
+            android:summary="@string/coming_soon"
             android:title="@string/backup_to_cloud"/>
 
     </PreferenceCategory>
@@ -49,8 +52,8 @@
             android:title="@string/see_app_information"/>
 
         <Preference
-            android:key="@string/key_send_feedback"
-            android:title="@string/title_send_feedback"/>
+            android:key="@string/send_feedback"
+            android:title="@string/send_feedback"/>
 
     </PreferenceCategory>
 </PreferenceScreen>
