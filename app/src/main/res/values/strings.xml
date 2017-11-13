@@ -58,4 +58,13 @@
     <string name="sure_you_want_to_disregard">Are you sure you don\'t want to save your poop?</string>
     <string name="location_adjusted">Location is adjusted</string>
     <string name="marker_outside_sircle">You can\'t set the marker outside the circle</string>
+    <string name="map_type_normal">Normal</string>
+    <string name="change_map_type">Map type</string>
+
+    <string-array name="maptype">
+        <item>Normal</item>
+        <item>Satellite</item>
+        <item>Terrain</item>
+        <item>Hybrid</item>
+    </string-array>
 </resources>
