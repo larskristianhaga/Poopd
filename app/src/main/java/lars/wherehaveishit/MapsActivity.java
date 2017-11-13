@@ -37,8 +37,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -48,12 +48,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 {
 
     static GoogleMap mMap;
-    static int mapTypeGet;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     FloatingActionButton btn_addPoop;
     int numberOfTotalShits = 0;
     DBHandler db;
     int mapType = 1;
+    List<Shit> allShitsInDB;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -167,18 +167,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         {
             return;
         }
-        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-        if (location != null)
-        {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
-
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(location.getLatitude(), location.getLongitude()))
-                    .zoom(16)
-                    .build();
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        }
-
 
         mMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener()
         {
@@ -222,6 +210,45 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(seeDetailedPoop);
             }
         });
+
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener()
+        {
+
+            @Override
+            public void onCameraMove( )
+            {
+                mMap.stopAnimation();
+            }
+        });
+
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback()
+        {
+
+            @Override
+            public void onMapLoaded( )
+            {
+
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+                for (Shit marker : allShitsInDB)
+                {
+                    double testLat = Double.parseDouble(marker.getShitLatitude());
+                    double testLon = Double.parseDouble(marker.getShitLongitude());
+
+
+                    LatLng test = new LatLng(testLat, testLon);
+                    Log.i("LatLon", "LatLon: " + test);
+                    builder.include(test);
+                }
+
+                LatLngBounds bounds = builder.build();
+                Log.i("bounds", String.valueOf(bounds));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
+
+            }
+        });
+
+
     }
 
     // Requests the location permission
@@ -310,6 +337,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Log.i("mapType", String.valueOf(mapType));
         }
 
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
         {
             if (mMap != null)
@@ -326,8 +354,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void readFileAndMarkOnMap( )
     {
 
+        allShitsInDB = db.findAllShits();
+
         numberOfTotalShits = 0;
-        final List<Shit> allShitsInDB = db.findAllShits();
 
         for (Shit shitInMap : allShitsInDB)
         {
@@ -336,7 +365,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             {
                 createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall()).setTag(shitInMap.get_ID());
                 numberOfTotalShits++;
-            } catch (NullPointerException | StringIndexOutOfBoundsException e)
+            } catch (NullPointerException e)
             {
                 Log.e("createMaker", e.toString());
             }
@@ -360,12 +389,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     TextView title = new TextView(getApplicationContext());
                     title.setTextColor(Color.BLACK);
-                    title.setGravity(Gravity.CENTER);
+                    title.setGravity(Gravity.CENTER_HORIZONTAL);
                     title.setTypeface(null, Typeface.BOLD);
                     title.setText(marker.getTitle());
 
                     TextView snippet = new TextView(getApplicationContext());
                     snippet.setTextColor(Color.GRAY);
+                    snippet.setGravity(Gravity.CENTER_HORIZONTAL);
                     snippet.setText(marker.getSnippet());
 
                     info.addView(title);
@@ -383,7 +413,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         double shitLongitudeFin = Double.parseDouble(shitLongitude);
         double shitLatitudeFin = Double.parseDouble(shitLatitude);
-        String avgRating = String.valueOf(((shitRatingCleanness + shitRatingPrivacy + shitRatingOverall) / 3)).substring(0,3);
+        String avgRating = String.valueOf(((shitRatingCleanness + shitRatingPrivacy + shitRatingOverall) / 3)).substring(0, 3);
         return mMap.addMarker(new MarkerOptions()
                                       .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
                                       .title(shitName)

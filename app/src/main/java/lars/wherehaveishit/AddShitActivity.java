@@ -69,8 +69,6 @@ public class AddShitActivity extends AppCompatActivity
                 {
                     // Displays a text saying that data was not saved properly, if dataSaved != true.
                     Toast.makeText(AddShitActivity.this, getApplicationContext().getString(R.string.not_saved_properly), Toast.LENGTH_LONG).show();
-
-                    return;
                 }
             }
         });
