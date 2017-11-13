@@ -79,7 +79,7 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
                                                     .clickable(false)
                                                     .strokeWidth(7));
 
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(circleAroundMarker.getCenter(), getZoomLevel(circleAroundMarker)));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(circleAroundMarker.getCenter(), getZoomLevel(circleAroundMarker)));
 
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
