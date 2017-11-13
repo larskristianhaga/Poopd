@@ -211,16 +211,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener()
-        {
-
-            @Override
-            public void onCameraMove( )
-            {
-                mMap.stopAnimation();
-            }
-        });
-
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback()
         {
 
