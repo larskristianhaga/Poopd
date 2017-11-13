@@ -4,6 +4,13 @@
     <PreferenceCategory android:title="@string/general">
 
 
+        <ListPreference
+            android:defaultValue="@string/map_type_normal"
+            android:entries="@array/maptype"
+            android:entryValues="@array/maptype"
+            android:key="maptype"
+            android:title="@string/change_map_type"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/backup">

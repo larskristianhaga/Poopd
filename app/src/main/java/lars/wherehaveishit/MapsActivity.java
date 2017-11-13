@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -12,6 +13,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -46,10 +48,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 {
 
     static GoogleMap mMap;
+    static int mapTypeGet;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     FloatingActionButton btn_addPoop;
     int numberOfTotalShits = 0;
     DBHandler db;
+    int mapType = 1;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -126,8 +130,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     {
 
         mMap = googleMap;
-        // Sets the map type
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mapType = preferences.getInt("mapType", 1);
+
+        mMap.setMapType(mapType);
 
         // Enables controls on the Map
         mMap.getUiSettings().setCompassEnabled(false);
@@ -171,6 +178,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
+
 
         mMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener()
         {
@@ -296,6 +304,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.clear();
             readFileAndMarkOnMap();
             Log.i("readFileAndMarkOnMap", "readFileAndMarkOnMap");
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            mapType = preferences.getInt("mapType", 1);
+            mMap.setMapType(mapType);
+            Log.i("mapType", String.valueOf(mapType));
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
@@ -371,12 +383,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         double shitLongitudeFin = Double.parseDouble(shitLongitude);
         double shitLatitudeFin = Double.parseDouble(shitLatitude);
-        String avgRating = String.valueOf(((shitRatingCleanness + shitRatingPrivacy + shitRatingOverall) / 3));
+        String avgRating = String.valueOf(((shitRatingCleanness + shitRatingPrivacy + shitRatingOverall) / 3)).substring(0,3);
         return mMap.addMarker(new MarkerOptions()
                                       .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
                                       .title(shitName)
                                       .draggable(false)
-                                      .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating.substring(0, 3) + "\n" + getResources().getString(R.string.click_to_see_more)));
+                                      .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
 
     }
 
@@ -436,5 +448,4 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

@@ -2,22 +2,30 @@ package lars.wherehaveishit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 
 public class SettingsActivity extends AppCompatPreferenceActivity
 {
 
+    static int mapTypeInt;
+
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mapTypeInt = preferences.getInt("mapType", 1);
+
+        Log.i("test", String.valueOf(mapTypeInt));
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -39,6 +47,28 @@ public class SettingsActivity extends AppCompatPreferenceActivity
 
             Preference versionName = findPreference("versionName");
             versionName.setSummary(BuildConfig.VERSION_NAME);
+
+            final Preference mapType = findPreference("maptype");
+            mapType.setSummary(getMapTypeString(mapTypeInt));
+            mapType.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
+            {
+
+                @Override
+                public boolean onPreferenceChange( Preference preference, Object newValue )
+                {
+
+                    mapType.setSummary((CharSequence) newValue);
+                    Log.i("testing", String.valueOf(preference));
+                    mapTypeInt = setMapTypeInt(newValue);
+                    MapsActivity.mMap.setMapType(mapTypeInt);
+
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("mapType", mapTypeInt);
+                    editor.apply();
+                    return true;
+                }
+            });
 
             Preference appInfo = findPreference("appInfo");
             appInfo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
@@ -79,6 +109,52 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 }
             });
         }
+    }
+
+    public static int setMapTypeInt( Object i )
+    {
+
+        int mapTypeString = 0;
+
+        switch (i.toString())
+        {
+            case "Normal":
+                mapTypeString = 1;
+                break;
+            case "Satellite":
+                mapTypeString = 2;
+                break;
+            case "Terrain":
+                mapTypeString = 3;
+                break;
+            case "Hybrid":
+                mapTypeString = 4;
+                break;
+        }
+        return mapTypeString;
+    }
+
+    public static String getMapTypeString( int i )
+    {
+
+        String mapTypeString = null;
+
+        switch (i)
+        {
+            case 1:
+                mapTypeString = "Normal";
+                break;
+            case 2:
+                mapTypeString = "Satellite";
+                break;
+            case 3:
+                mapTypeString = "Terrain";
+                break;
+            case 4:
+                mapTypeString = "Hybrid";
+                break;
+        }
+        return mapTypeString;
     }
 
     @Override
