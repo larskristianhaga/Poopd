@@ -17,8 +17,8 @@
     <string name="no_poop">None :(</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="location_latitude">Poop latitude:</string>
-    <string name="location_longitude">Poop longitude:</string>
+    <string name="location_latitude">Latitude:</string>
+    <string name="location_longitude">Longitude:</string>
     <string name="poop_details">Details</string>
     <string name="poop_date">Poop date:</string>
     <string name="poop_time">Poop time:</string>
@@ -60,6 +60,19 @@
     <string name="marker_outside_sircle">You can\'t set the marker outside the circle</string>
     <string name="map_type_normal">Normal</string>
     <string name="change_map_type">Map type</string>
+    <string name="add_custom_poop">Add custom poop</string>
+    <string name="see_all_poops">See all poops</string>
+    <string name="all_poops">All poops</string>
+    <string name="add_date">Date:</string>
+    <string name="add_date_btn">Add date</string>
+    <string name="select_location">Select location</string>
+    <string name="add_time_btn">Add time</string>
+    <string name="add_loction_btn">Add location</string>
+    <string name="none">None</string>
+    <string name="type_in_date">Type in date</string>
+    <string name="type_in_time">Type in time</string>
+    <string name="type_in_lat">Type in lat</string>
+    <string name="type_in_lon">Type in lon</string>
 
     <string-array name="maptype">
         <item>Normal</item>
@@ -67,4 +80,5 @@
         <item>Terrain</item>
         <item>Hybrid</item>
     </string-array>
+    <string name="title_activity_custom_marker_map">Map</string>
 </resources>
