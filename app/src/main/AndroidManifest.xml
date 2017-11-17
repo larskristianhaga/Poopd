@@ -49,7 +49,7 @@
         <activity
             android:name=".DetailedActivity"
             android:label="@string/poop_details"
-            android:parentActivityName=".MapsActivity">
+            android:parentActivityName=".ListPoopsActivity">
         </activity>
         <activity
             android:name=".EditLocationActivity"
@@ -66,10 +66,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="lars.wherehaveishit.MapsActivity"/>
         </activity>
+        <activity
+            android:name=".CustomPoopActivity"
+            android:icon="@drawable/ic_add_24dp"
+            android:label="@string/add_custom_poop"
+            android:parentActivityName=".MapsActivity">
+        </activity>
+        <activity
+            android:name=".ListPoopsActivity"
+            android:icon="@drawable/ic_list_24dp"
+            android:label="@string/all_poops"
+            android:parentActivityName=".MapsActivity">
+        </activity>
 
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIpkfMaBwh5Cl0-m3_ANzoHgkOv6lAD7mDt-jhCQ"/>
+
+        <activity
+            android:name=".CustomMarkerMapActivity"
+            android:label="@string/title_activity_custom_marker_map">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="lars.wherehaveishit.CustomPoopActivity"/>
+        </activity>
     </application>
 
 </manifest>
