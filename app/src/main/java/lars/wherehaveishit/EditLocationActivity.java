@@ -138,8 +138,8 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
     {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.edit_location_menu, menu);
-        MenuItem adjustMenuIcon = menu.findItem(R.id.adjustLocationDone);
+        inflater.inflate(R.menu.done_menu, menu);
+        MenuItem adjustMenuIcon = menu.findItem(R.id.done);
 
         return true;
     }
@@ -148,7 +148,7 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
     public boolean onOptionsItemSelected( MenuItem item )
     {
 
-        if (item.getItemId() == R.id.adjustLocationDone)
+        if (item.getItemId() == R.id.done)
         {
             float[] results = new float[1];
             Location.distanceBetween(poopMarker.getPosition().latitude, poopMarker.getPosition().longitude, circleAroundMarker.getCenter().latitude, circleAroundMarker.getCenter().longitude, results);
