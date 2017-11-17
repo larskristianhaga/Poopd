@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -27,7 +25,6 @@ public class AddShitActivity extends AppCompatActivity
     RatingBar shitRatingCleanness;
     RatingBar shitRatingPrivary;
     RatingBar shitRatingOverall;
-    Button saveShit;
     DBHandler db;
     MenuItem adjustMenuIcon;
     String locationLat;
@@ -50,29 +47,7 @@ public class AddShitActivity extends AppCompatActivity
         shitRatingPrivary = (RatingBar) findViewById(R.id.ratingBarPrivacy);
         shitRatingOverall = (RatingBar) findViewById(R.id.ratingBarOverall);
         shitNote = (EditText) findViewById(R.id.edit_shitNote);
-        saveShit = (Button) findViewById(R.id.doneShitting);
         db = new DBHandler(this);
-
-        saveShit.setOnClickListener(new View.OnClickListener()
-        {
-
-            @Override
-            public void onClick( View v )
-            {
-
-                if (savingData())
-                {
-                    finish();
-
-                }
-                else
-                {
-                    // Displays a text saying that data was not saved properly, if dataSaved != true.
-                    Toast.makeText(AddShitActivity.this, getApplicationContext().getString(R.string.not_saved_properly), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
 
         try
         {
@@ -135,11 +110,11 @@ public class AddShitActivity extends AppCompatActivity
         if (locationLon == null || locationLat == null)
         {
             Log.i("LocationEmpty", "locationLon og locationLat is empty");
-            shit = new Shit(shitNameFin, shitDateFin, savingFromMapIfBackLon, savingFromMapIfBackLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+            shit = new Shit(shitNameFin, shitDateFin, savingFromMapIfBackLon, savingFromMapIfBackLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin, false);
         }
         else
         {
-            shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+            shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin, false);
         }
 
         db.addShit(shit);
@@ -185,22 +160,34 @@ public class AddShitActivity extends AppCompatActivity
     public boolean onOptionsItemSelected( MenuItem item )
     {
 
-        if (item.getItemId() == R.id.editLocation)
+        switch (item.getItemId())
         {
-            // Handles the menu press
-            Log.i("Menu", "editLocation pressed");
+            case R.id.editLocation:
+                // Handles the menu press
+                Log.i("Menu", "editLocation pressed");
 
 
-            Intent adjustLocation = new Intent(AddShitActivity.this, EditLocationActivity.class);
-            adjustLocation.putExtra("LocationLatitude", locationLat);
-            adjustLocation.putExtra("LocationLongitude", locationLon);
-            adjustLocation.putExtra("LocationAccuracy", locationFromMapAccuracy);
-            Log.i("Location", "Lat: " + locationLat + " Lon: " + locationLon);
-            startActivityForResult(adjustLocation, 555);
-        }
-        else
-        {
-            return super.onOptionsItemSelected(item);
+                Intent adjustLocation = new Intent(AddShitActivity.this, EditLocationActivity.class);
+                adjustLocation.putExtra("LocationLatitude", locationLat);
+                adjustLocation.putExtra("LocationLongitude", locationLon);
+                adjustLocation.putExtra("LocationAccuracy", locationFromMapAccuracy);
+                Log.i("Location", "Lat: " + locationLat + " Lon: " + locationLon);
+                startActivityForResult(adjustLocation, 555);
+                break;
+            case R.id.done:
+                if (savingData())
+                {
+                    finish();
+
+                }
+                else
+                {
+                    // Displays a text saying that data was not saved properly, if dataSaved != true.
+                    Toast.makeText(AddShitActivity.this, getApplicationContext().getString(R.string.not_saved_properly), Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
         return true;
     }

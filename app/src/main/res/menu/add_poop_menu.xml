@@ -8,4 +8,10 @@
         android:title="@string/edit_location"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/done"
+        android:icon="@drawable/ic_done_24dp"
+        android:title="@string/save"
+        app:showAsAction="always"/>
+
 </menu>
