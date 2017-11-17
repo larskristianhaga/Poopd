@@ -23,6 +23,7 @@ public class DBHandler extends SQLiteOpenHelper
     static String KEY_PRIVACY = "ShitRatingPrivacy";
     static String KEY_OVERALL = "ShitRatingOverall";
     static String KEY_SHITNOTE = "ShitNote";
+    static boolean KEY_CUSTOMPOOP = false;
     static int DATABASE_VERSION = 3;
     static String DATABASE_NAME = "ShitsInApp";
 
