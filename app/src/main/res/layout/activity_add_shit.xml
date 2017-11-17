@@ -9,33 +9,37 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/spacingMore"
+        android:layout_marginTop="@dimen/spacing"
         android:layout_weight="1"
-        android:text="@string/name_of_place"/>
+        android:text="@string/name_of_place"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/edit_shitName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing"
+        android:layout_marginEnd="@dimen/spacingMore"
+        android:layout_marginStart="@dimen/spacingMore"
         android:layout_weight="1"
-        android:ems="15"
-        android:inputType="text"
-        android:selectAllOnFocus="true"/>
+        android:inputType="text"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacingMore"
+        android:layout_marginTop="@dimen/spacing"
         android:layout_weight="1"
-        android:text="@string/rating_of_place_cleanness"/>
+        android:text="@string/rating_of_place_cleanness"
+        android:textStyle="bold"/>
 
     <RatingBar
         android:id="@+id/ratingBarCleanness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing"
         android:layout_weight="1"
         android:numStars="5"
         android:rating="0"
@@ -44,15 +48,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacingMore"
+        android:layout_marginTop="@dimen/spacing"
         android:layout_weight="1"
-        android:text="@string/rating_of_place_privacy"/>
+        android:text="@string/rating_of_place_privacy"
+        android:textStyle="bold"/>
 
     <RatingBar
         android:id="@+id/ratingBarPrivacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing"
         android:layout_weight="1"
         android:numStars="5"
         android:rating="0"
@@ -61,15 +68,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacingMore"
+        android:layout_marginTop="@dimen/spacing"
         android:layout_weight="1"
-        android:text="@string/rating_of_place_overall"/>
+        android:text="@string/rating_of_place_overall"
+        android:textStyle="bold"/>
 
     <RatingBar
         android:id="@+id/ratingBarOverall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing"
         android:layout_weight="1"
         android:numStars="5"
         android:rating="0"
@@ -78,27 +88,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/spacingMore"
+        android:layout_marginTop="@dimen/spacing"
         android:layout_weight="1"
-        android:text="@string/add_poop_note"/>
+        android:text="@string/add_poop_note"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/edit_shitNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:ems="15"
-        android:inputType="text"
-        android:selectAllOnFocus="true"/>
-
-    <Button
-        android:id="@+id/doneShitting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="@dimen/spacing"
+        android:layout_marginEnd="@dimen/spacingMore"
+        android:layout_marginStart="@dimen/spacingMore"
         android:layout_weight="1"
-        android:text="@string/add_new_poop"/>
+        android:inputType="text"/>
+
 
 </LinearLayout>
