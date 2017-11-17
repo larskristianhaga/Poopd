@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="lars.wherehaveishit.CustomPoopActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_weight="1"
+            android:text="@string/name_of_place"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editPoopName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacingMore"
+            android:layout_marginEnd="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_weight="1"
+            android:inputType="text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_weight="1"
+            android:text="@string/rating_of_place_cleanness"
+            android:textStyle="bold"/>
+
+        <RatingBar
+            android:id="@+id/editPoopCleanness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing"
+            android:layout_weight="1"
+            android:numStars="5"
+            android:stepSize="0.5"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_weight="1"
+            android:text="@string/rating_of_place_privacy"
+            android:textStyle="bold"/>
+
+        <RatingBar
+            android:id="@+id/editPoopPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing"
+            android:layout_weight="1"
+            android:numStars="5"
+            android:stepSize="0.5"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_weight="1"
+            android:text="@string/rating_of_place_overall"
+            android:textStyle="bold"/>
+
+        <RatingBar
+            android:id="@+id/editPoopOverall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing"
+            android:layout_weight="1"
+            android:numStars="5"
+            android:stepSize="0.5"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_weight="1"
+            android:text="@string/add_poop_note"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/editPoopNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacingMore"
+            android:layout_marginEnd="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_weight="1"
+            android:inputType="text"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/poopDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginTop="@dimen/spacingMore"
+                android:text="@string/poop_date"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textPoopDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/poopDate"
+                android:layout_marginEnd="@dimen/spacingMore"
+                android:text="@string/none"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_toEndOf="@id/poopDate"/>
+
+            <Button
+                android:id="@+id/addDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textPoopDate"
+                android:layout_marginEnd="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:text="@string/add_date_btn"/>
+
+            <TextView
+                android:id="@+id/poopTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addDate"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginTop="@dimen/spacingMore"
+                android:text="@string/poop_time"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textPoopTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/poopTime"
+                android:layout_marginEnd="@dimen/spacingMore"
+                android:text="@string/none"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_toEndOf="@id/poopDate"/>
+
+            <Button
+                android:id="@+id/addTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textPoopTime"
+                android:layout_marginEnd="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:text="@string/add_time_btn"/>
+
+            <TextView
+                android:id="@+id/location_latitude_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addTime"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginTop="@dimen/spacingMore"
+                android:text="@string/location_latitude"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textPoopLocationLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/location_latitude_static"
+                android:layout_marginEnd="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_toEndOf="@id/poopDate"
+                android:text="@string/none"/>
+
+            <TextView
+                android:id="@+id/location_longitude_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/location_latitude_static"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:text="@string/location_longitude"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textPoopLocationLongitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/location_longitude_static"
+                android:layout_marginEnd="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_toEndOf="@id/poopDate"
+                android:text="@string/none"/>
+
+            <Button
+                android:id="@+id/addLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textPoopLocationLongitude"
+                android:layout_marginEnd="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/spacingMore"
+                android:text="@string/add_loction_btn"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
