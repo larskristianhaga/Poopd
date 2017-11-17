@@ -12,8 +12,9 @@ public class Shit
     double ShitRatingPrivacy;
     double ShitRatingOverall;
     String ShitNote;
+    boolean ShitCustom;
 
-    public Shit( String shitName, String shitDate, String currentLocationLonFin, String currentLocationLatFin, double shitRatingCleanness, double shitRatingPrivary, double shitRatingOverall, String shitNote )
+    public Shit( String shitName, String shitDate, String currentLocationLonFin, String currentLocationLatFin, double shitRatingCleanness, double shitRatingPrivary, double shitRatingOverall, String shitNote, boolean ShitCustom )
     {
 
         this.ShitName = shitName;
@@ -24,6 +25,7 @@ public class Shit
         this.ShitRatingPrivacy = shitRatingPrivary;
         this.ShitRatingOverall = shitRatingOverall;
         this.ShitNote = shitNote;
+        this.ShitCustom = ShitCustom;
     }
 
     public Shit( )
@@ -141,5 +143,16 @@ public class Shit
         this.ShitNote = ShitNote;
     }
 
+    public boolean getShitCustom( )
+    {
+
+        return ShitCustom;
+    }
+
+    public void setShitCustom( boolean ShitCustom )
+    {
+
+        this.ShitCustom = ShitCustom;
+    }
 
 }
