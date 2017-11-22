@@ -60,7 +60,7 @@
     <string name="marker_outside_sircle">Du kan ikke sette markøren utenfor sikelen</string>
     <string name="map_type_normal">Normal</string>
     <string name="change_map_type">Kart type</string>
-    <string name="add_custom_poop">Legg til tilpasset toalett</string>
+    <string name="add_custom_poop">Legg til tilpasset sted</string>
     <string name="see_all_poops">Se alle steder</string>
     <string name="all_poops">Alle steder</string>
     <string name="add_date">Dato:</string>
