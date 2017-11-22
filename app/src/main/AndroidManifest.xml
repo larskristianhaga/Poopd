@@ -18,7 +18,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
-
         <activity
             android:name=".MapsActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -78,18 +77,15 @@
             android:label="@string/all_poops"
             android:parentActivityName=".MapsActivity">
         </activity>
-
+        <activity
+            android:name=".CustomMarkerMapActivity"
+            android:icon="@drawable/ic_edit_location_24dp"
+            android:label="@string/title_activity_custom_marker_map"
+            android:parentActivityName=".CustomPoopActivity">
+        </activity>
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIpkfMaBwh5Cl0-m3_ANzoHgkOv6lAD7mDt-jhCQ"/>
-
-        <activity
-            android:name=".CustomMarkerMapActivity"
-            android:label="@string/title_activity_custom_marker_map">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="lars.wherehaveishit.CustomPoopActivity"/>
-        </activity>
     </application>
 
 </manifest>
