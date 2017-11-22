@@ -5,7 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="statistics">Statistics</string>
     <string name="settings">Settings</string>
-    <string name="how_many_poops_total">How many poops you have logged:</string>
+    <string name="how_many_poops_total">How many places you have logged:</string>
     <string name="how_to_use_informal">You can use this app to save places toy have poopd on to a map, so you can see where you have taken a poop. You can also add a name, cleanness rating, privacy rating, overall rating and a note to every poop. To add a poop use the button in the middle lower part of the screen. If the button is not there you need to enable location services in the application settings page, og you can go to settings and press \"App info\" to go directly there."\n\n"Happy pooping!</string>
     <string name="about_application">This app is a part time project by a software engineer student at HiOA. The project is open-source and the source code is viewable on my Github page.</string>
     <string name="have_any_feedback">Click here to send feedback</string>
@@ -13,17 +13,17 @@
     <string name="rating_of_place_overall">Overall rating:</string>
     <string name="rating_of_place_cleanness">Cleanness rating:</string>
     <string name="add_poop_note">Note:</string>
-    <string name="add_new_poop">Add new poop</string>
+    <string name="add_new_poop">Add new place</string>
     <string name="no_poop">None :(</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="location_latitude">Latitude:</string>
     <string name="location_longitude">Longitude:</string>
     <string name="poop_details">Details</string>
-    <string name="poop_date">Poop date:</string>
-    <string name="poop_time">Poop time:</string>
+    <string name="poop_date">Date:</string>
+    <string name="poop_time">Time:</string>
     <string name="edit_location">Adjust location</string>
-    <string name="edit_poop_location">Adjust poop location</string>
+    <string name="edit_poop_location">Adjust place location</string>
     <string name="help">Help</string>
     <string name="pref_header_about">About</string>
     <string name="send_feedback">Send Feedback</string>
@@ -38,10 +38,10 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="sure_you_want_to_exit">Are you sure you want to exit the application?</string>
-    <string name="no_longer_able_to_add_poop">You will no longer be able to add new poops :(</string>
+    <string name="no_longer_able_to_add_poop">You will no longer be able to add new places :(</string>
     <string name="need_location">The app need to know your location, or some functionality will be disabled</string>
-    <string name="poop_deleted">Poop deleted</string>
-    <string name="sure_you_want_to_delete">Are you sure you want to delete this poop?</string>
+    <string name="poop_deleted">Place deleted</string>
+    <string name="sure_you_want_to_delete">Are you sure you want to delete this place?</string>
     <string name="general">General</string>
     <string name="adjust_poop_on_map">Press and hold on the marker to adjust the location within the sircle</string>
     <string name="see_app_information">See app info</string>
@@ -55,25 +55,23 @@
     <string name="coming_soon">Coming soon</string>
     <string name="not_saved_properly">Data was not saved properly</string>
     <string name="type_in_name">You type in a name</string>
-    <string name="sure_you_want_to_disregard">Are you sure you don\'t want to save your poop?</string>
+    <string name="sure_you_want_to_disregard">Are you sure you don\'t want to save your place?</string>
     <string name="location_adjusted">Location is adjusted</string>
     <string name="marker_outside_sircle">You can\'t set the marker outside the circle</string>
     <string name="map_type_normal">Normal</string>
     <string name="change_map_type">Map type</string>
-    <string name="add_custom_poop">Add custom poop</string>
-    <string name="see_all_poops">See all poops</string>
-    <string name="all_poops">All poops</string>
+    <string name="add_custom_poop">Add custom place</string>
+    <string name="see_all_poops">See all places</string>
+    <string name="all_poops">All places</string>
     <string name="add_date">Date:</string>
     <string name="add_date_btn">Add date</string>
     <string name="select_location">Select location</string>
     <string name="add_time_btn">Add time</string>
     <string name="add_loction_btn">Add location</string>
     <string name="none">None</string>
-    <string name="type_in_date">Type in date</string>
-    <string name="type_in_time">Type in time</string>
-    <string name="type_in_lat">Type in lat</string>
-    <string name="type_in_lon">Type in lon</string>
-
+    <string name="type_in_date">Need date</string>
+    <string name="type_in_time">Need time</string>
+    <string name="type_in_loc">Need location</string>
     <string-array name="maptype">
         <item>Normal</item>
         <item>Satellite</item>
@@ -81,4 +79,8 @@
         <item>Hybrid</item>
     </string-array>
     <string name="title_activity_custom_marker_map">Map</string>
+    <string name="adjust_poop">Adjust place</string>
+    <string name="custom_marker">Your custom marker</string>
+    <string name="place_custom_marker_on_map">Click to set a marker on the map</string>
+    <string name="cannot_have_more_than_one_marker">You cannot have more than one marker</string>
 </resources>
