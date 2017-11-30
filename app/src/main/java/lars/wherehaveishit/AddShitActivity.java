@@ -18,7 +18,6 @@ import java.util.Calendar;
 public class AddShitActivity extends AppCompatActivity
 {
 
-    // Used to determine if the data is saved properly
     private boolean dataSaved = false;
     EditText shitName;
     EditText shitNote;
@@ -110,11 +109,11 @@ public class AddShitActivity extends AppCompatActivity
         if (locationLon == null || locationLat == null)
         {
             Log.i("LocationEmpty", "locationLon og locationLat is empty");
-            shit = new Shit(shitNameFin, shitDateFin, savingFromMapIfBackLon, savingFromMapIfBackLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin, false);
+            shit = new Shit(shitNameFin, shitDateFin, savingFromMapIfBackLon, savingFromMapIfBackLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
         }
         else
         {
-            shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin, false);
+            shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
         }
 
         db.addShit(shit);
