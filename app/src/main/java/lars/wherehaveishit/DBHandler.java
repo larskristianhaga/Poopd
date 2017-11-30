@@ -3,6 +3,7 @@ package lars.wherehaveishit;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -23,7 +24,6 @@ public class DBHandler extends SQLiteOpenHelper
     static String KEY_PRIVACY = "ShitRatingPrivacy";
     static String KEY_OVERALL = "ShitRatingOverall";
     static String KEY_SHITNOTE = "ShitNote";
-    static boolean KEY_CUSTOMPOOP = false;
     static int DATABASE_VERSION = 3;
     static String DATABASE_NAME = "ShitsInApp";
 
@@ -152,5 +152,14 @@ public class DBHandler extends SQLiteOpenHelper
         db.close();
 
         return changedPoop;
+    }
+
+    public long getLineCount( )
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        long cnt = DatabaseUtils.queryNumEntries(db, TABLE_SHITS);
+        db.close();
+        return cnt;
     }
 }
