@@ -67,7 +67,7 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
         LatLng poopLocation = new LatLng(latitude, longitude);
         poopMarker = mMap.addMarker(new MarkerOptions()
                                             .position(poopLocation)
-                                            .title("Adjust your poop")
+                                            .title(getApplicationContext().getString(R.string.adjust_poop))
                                             .flat(false)
                                             .draggable(true));
         Log.i("MarkerLoc", String.valueOf(poopMarker.getPosition()));
