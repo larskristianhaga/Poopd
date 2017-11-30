@@ -225,13 +225,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     for (Shit marker : allShitsInDB)
                     {
-                        double testLat = parseDouble(marker.getShitLatitude());
-                        double testLon = parseDouble(marker.getShitLongitude());
+                        double DBLat = parseDouble(marker.getShitLatitude());
+                        double DBLon = parseDouble(marker.getShitLongitude());
 
 
-                        LatLng test = new LatLng(testLat, testLon);
-                        Log.i("LatLon", "LatLon: " + test);
-                        builder.include(test);
+                        LatLng mergeLatLng = new LatLng(DBLat, DBLon);
+                        Log.i("LatLon", "LatLon: " + mergeLatLng);
+                        builder.include(mergeLatLng);
                     }
 
                     LatLngBounds bounds = builder.build();
@@ -240,6 +240,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 } catch (Exception e)
                 {
                     Log.e("Exception", e.getMessage());
+                    Log.e("ZoomBounds", "Could not zoom to bounds");
                 }
 
             }
