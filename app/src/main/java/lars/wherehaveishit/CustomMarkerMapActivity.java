@@ -1,19 +1,32 @@
 package lars.wherehaveishit;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class CustomMarkerMapActivity extends FragmentActivity implements OnMapReadyCallback
+public class CustomMarkerMapActivity extends AppCompatActivity implements OnMapReadyCallback
 {
 
     private GoogleMap mMap;
+    boolean customMarkerAdded = false;
+    double customMarkerLocationLat;
+    double customMarkerLocationLon;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -24,18 +37,79 @@ public class CustomMarkerMapActivity extends FragmentActivity implements OnMapRe
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        Snackbar snack = Snackbar.make(findViewById(R.id.map), getApplicationContext().getString(R.string.place_custom_marker_on_map), Snackbar.LENGTH_INDEFINITE);
+        View view = snack.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
+        snack.show();
     }
 
     @Override
-    public void onMapReady( GoogleMap googleMap )
+    public void onMapReady( final GoogleMap googleMap )
     {
 
         mMap = googleMap;
 
-        // TODO: Make the user able to hold and drag a marker on the map to set the cordinates
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener()
+        {
+
+            @Override
+            public void onMapClick( LatLng latLng )
+            {
+
+                if (!customMarkerAdded)
+                {
+                    googleMap.addMarker(new MarkerOptions()
+                                                .position(latLng)
+                                                .title(getApplicationContext().getString(R.string.custom_marker))
+                                                //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                                                .draggable(true));
+
+                    customMarkerLocationLat = latLng.latitude;
+                    customMarkerLocationLon = latLng.longitude;
+
+                    customMarkerAdded = true;
+                }
+                Toast.makeText(CustomMarkerMapActivity.this, getApplicationContext().getString(R.string.cannot_have_more_than_one_marker), Toast.LENGTH_LONG).show();
+            }
 
 
+        });
+
+        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener()
+        {
+
+            @Override
+            public void onMarkerDragStart( Marker marker )
+            {
+
+            }
+
+            @Override
+            public void onMarkerDrag( Marker marker )
+            {
+
+            }
+
+            @Override
+            public void onMarkerDragEnd( Marker marker )
+            {
+
+                customMarkerLocationLat = marker.getPosition().latitude;
+                customMarkerLocationLon = marker.getPosition().longitude;
+            }
+        });
+
+        mMap.getUiSettings().setCompassEnabled(false);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(true);
+        mMap.getUiSettings().setIndoorLevelPickerEnabled(true);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu )
@@ -43,7 +117,7 @@ public class CustomMarkerMapActivity extends FragmentActivity implements OnMapRe
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.done_menu, menu);
-        MenuItem done = menu.findItem(R.id.done);
+        MenuItem adjustMenuIcon = menu.findItem(R.id.done);
 
         return true;
     }
@@ -55,7 +129,16 @@ public class CustomMarkerMapActivity extends FragmentActivity implements OnMapRe
         if (item.getItemId() == R.id.done)
         {
 
-                finish();
+            Bundle bundle = new Bundle();
+
+            bundle.putString("CustomLocationLatitude", String.valueOf(customMarkerLocationLat));
+            bundle.putString("CustomLocationLongitude", String.valueOf(customMarkerLocationLon));
+            Log.i("CustomMarker", customMarkerLocationLat + " " + customMarkerLocationLon);
+
+            Intent goBackToAddPoop = new Intent();
+            goBackToAddPoop.putExtras(bundle);
+            setResult(RESULT_OK, goBackToAddPoop);
+            finish();
 
         }
         else
@@ -64,4 +147,5 @@ public class CustomMarkerMapActivity extends FragmentActivity implements OnMapRe
         }
         return true;
     }
+
 }
