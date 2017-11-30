@@ -14,7 +14,6 @@
     <string name="rating_of_place_cleanness">Renhet vurdering:</string>
     <string name="add_poop_note">Notat:</string>
     <string name="add_new_poop">Legg til nytt sted</string>
-    <string name="no_poop">Ingen :(</string>
     <string name="edit">Endre</string>
     <string name="delete">Slett</string>
     <string name="location_latitude">Breddegrad:</string>
@@ -63,9 +62,7 @@
     <string name="add_custom_poop">Legg til tilpasset sted</string>
     <string name="see_all_poops">Se alle steder</string>
     <string name="all_poops">Alle steder</string>
-    <string name="add_date">Dato:</string>
     <string name="add_date_btn">Legg til dato</string>
-    <string name="select_location">Velg plassering</string>
     <string name="add_time_btn">Legg til tid</string>
     <string name="add_loction_btn">Velg plassering</string>
     <string name="none">Ingen</string>
@@ -83,4 +80,6 @@
     <string name="custom_marker">Din tilpassede markør</string>
     <string name="place_custom_marker_on_map">Trykk for å sette en markør på kartet</string>
     <string name="cannot_have_more_than_one_marker">Du kan ikke legge til mer enn en markør</string>
+    <string name="avg_rating_of_poops">Gjennomsnittlig vurdering:</string>
+    <string name="most_shits_in_coutry">Landet med flest steder:</string>
 </resources>

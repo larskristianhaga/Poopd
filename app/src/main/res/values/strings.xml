@@ -14,7 +14,6 @@
     <string name="rating_of_place_cleanness">Cleanness rating:</string>
     <string name="add_poop_note">Note:</string>
     <string name="add_new_poop">Add new place</string>
-    <string name="no_poop">None :(</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="location_latitude">Latitude:</string>
@@ -63,9 +62,7 @@
     <string name="add_custom_poop">Add custom place</string>
     <string name="see_all_poops">See all places</string>
     <string name="all_poops">All places</string>
-    <string name="add_date">Date:</string>
     <string name="add_date_btn">Add date</string>
-    <string name="select_location">Select location</string>
     <string name="add_time_btn">Add time</string>
     <string name="add_loction_btn">Add location</string>
     <string name="none">None</string>
@@ -83,4 +80,6 @@
     <string name="custom_marker">Your custom marker</string>
     <string name="place_custom_marker_on_map">Click to set a marker on the map</string>
     <string name="cannot_have_more_than_one_marker">You cannot have more than one marker</string>
+    <string name="avg_rating_of_poops">Average rating of places:</string>
+    <string name="most_shits_in_coutry">Country with the most places:</string>
 </resources>
