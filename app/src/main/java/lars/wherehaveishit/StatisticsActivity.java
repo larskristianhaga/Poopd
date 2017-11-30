@@ -44,7 +44,7 @@ public class StatisticsActivity extends AppCompatActivity
         allShitsInDB = db.findAllShits();
 
 
-        long numberOfPlaces = db.getProfilesCount();
+        long numberOfPlaces = db.getLineCount();
         totalNumberOfShits.setText(String.valueOf(numberOfPlaces));
 
         for (Shit shitInMap : allShitsInDB)
