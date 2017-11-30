@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -17,6 +18,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
 {
 
     static int mapTypeInt;
+    static boolean backupEnabled;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -85,17 +87,18 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 }
             });
 
-            /*Preference connectToGoogle = findPreference("connectToGoogle");
-            connectToGoogle.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            final SwitchPreference backupToGoogleCloud = (SwitchPreference) findPreference("backup_to_cloud");
+            backupToGoogleCloud.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
 
                 @Override
-                public boolean onPreferenceClick( Preference preference )
+                public boolean onPreferenceChange( Preference preference, Object newValue )
                 {
-
+                    backupEnabled = (boolean) newValue;
                     return true;
                 }
-            });*/
+            });
+
 
             Preference myPref = findPreference(getString(R.string.send_feedback));
             myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()

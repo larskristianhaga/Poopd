@@ -43,6 +43,7 @@ public class CustomMarkerMapActivity extends AppCompatActivity implements OnMapR
         View view = snack.getView();
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
         params.gravity = Gravity.TOP;
+        params.gravity = Gravity.CENTER_HORIZONTAL;
         view.setLayoutParams(params);
         snack.show();
     }
@@ -73,7 +74,10 @@ public class CustomMarkerMapActivity extends AppCompatActivity implements OnMapR
 
                     customMarkerAdded = true;
                 }
-                Toast.makeText(CustomMarkerMapActivity.this, getApplicationContext().getString(R.string.cannot_have_more_than_one_marker), Toast.LENGTH_LONG).show();
+                else
+                {
+                    Toast.makeText(CustomMarkerMapActivity.this, getApplicationContext().getString(R.string.cannot_have_more_than_one_marker), Toast.LENGTH_LONG).show();
+                }
             }
 
 

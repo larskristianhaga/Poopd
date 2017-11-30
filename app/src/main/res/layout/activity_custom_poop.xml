@@ -129,9 +129,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/poopDate"
                 android:layout_marginEnd="@dimen/spacingMore"
-                android:text="@string/none"
                 android:layout_marginStart="@dimen/spacingMore"
-                android:layout_toEndOf="@id/poopDate"/>
+                android:layout_toEndOf="@id/poopDate"
+                android:text="@string/none"/>
 
             <Button
                 android:id="@+id/addDate"
@@ -158,9 +158,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/poopTime"
                 android:layout_marginEnd="@dimen/spacingMore"
-                android:text="@string/none"
                 android:layout_marginStart="@dimen/spacingMore"
-                android:layout_toEndOf="@id/poopDate"/>
+                android:layout_toEndOf="@id/poopDate"
+                android:text="@string/none"/>
 
             <Button
                 android:id="@+id/addTime"
@@ -188,7 +188,7 @@
                 android:layout_alignBaseline="@id/location_latitude_static"
                 android:layout_marginEnd="@dimen/spacingMore"
                 android:layout_marginStart="@dimen/spacingMore"
-                android:layout_toEndOf="@id/poopDate"
+                android:layout_toEndOf="@id/location_latitude_static"
                 android:text="@string/none"/>
 
             <TextView
@@ -207,7 +207,7 @@
                 android:layout_alignBaseline="@id/location_longitude_static"
                 android:layout_marginEnd="@dimen/spacingMore"
                 android:layout_marginStart="@dimen/spacingMore"
-                android:layout_toEndOf="@id/poopDate"
+                android:layout_toEndOf="@id/location_longitude_static"
                 android:text="@string/none"/>
 
             <Button

@@ -16,9 +16,10 @@
     <PreferenceCategory android:title="@string/backup">
 
         <SwitchPreference
-            android:enabled="false"
             android:icon="@drawable/ic_cloud_24dp"
             android:key="backup_to_cloud"
+            android:defaultValue="false"
+            android:enabled="false"
             android:summary="@string/coming_soon"
             android:title="@string/backup_to_cloud"/>
 

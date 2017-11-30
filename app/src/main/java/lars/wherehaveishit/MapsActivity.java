@@ -204,6 +204,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onInfoWindowClick( Marker marker )
             {
 
+                Log.i("markerTag", String.valueOf(marker.toString()));
                 Log.i("markerTag", String.valueOf(marker.getTag()));
 
                 Intent seeDetailedPoop = new Intent(MapsActivity.this, DetailedActivity.class);
@@ -359,7 +360,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             // Try catching here because if someone gets a Nullpointer as location as manages to save it, it beaks the app and you have to delete the entire database.
             try
             {
-                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall());
+                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall()).setTag(shitInMap.get_ID());
             } catch (NullPointerException e)
             {
                 Log.e("createMakerError", e.toString());
