@@ -143,7 +143,11 @@ public class StatisticsActivity extends AppCompatActivity
                 maxEntry = entry;
             }
         }
-        return maxEntry.getKey();
+        if (maxEntry != null)
+        {
+            return maxEntry.getKey();
+        }
+        return getApplicationContext().getString(R.string.none);
     }
 }
 
