@@ -44,16 +44,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import static java.lang.Double.*;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
 
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     FloatingActionButton btn_addPoop;
-    int numberOfTotalShits = 0;
     DBHandler db;
     int mapType = 1;
     List<Shit> allShitsInDB;
+
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -176,7 +178,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             {
 
                 new AlertDialog.Builder(MapsActivity.this)
-                        //.setIcon(android.R.drawable.ic_dialog_alert)
                         .setMessage(getResources().getString(R.string.sure_you_want_to_delete))
                         .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener()
                         {
@@ -218,22 +219,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onMapLoaded( )
             {
 
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-
-                for (Shit marker : allShitsInDB)
+                try
                 {
-                    double testLat = Double.parseDouble(marker.getShitLatitude());
-                    double testLon = Double.parseDouble(marker.getShitLongitude());
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+                    for (Shit marker : allShitsInDB)
+                    {
+                        double testLat = parseDouble(marker.getShitLatitude());
+                        double testLon = parseDouble(marker.getShitLongitude());
 
 
-                    LatLng test = new LatLng(testLat, testLon);
-                    Log.i("LatLon", "LatLon: " + test);
-                    builder.include(test);
+                        LatLng test = new LatLng(testLat, testLon);
+                        Log.i("LatLon", "LatLon: " + test);
+                        builder.include(test);
+                    }
+
+                    LatLngBounds bounds = builder.build();
+                    Log.i("bounds", String.valueOf(bounds));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
+                } catch (Exception e)
+                {
+                    Log.e("Exception", e.getMessage());
                 }
-
-                LatLngBounds bounds = builder.build();
-                Log.i("bounds", String.valueOf(bounds));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
 
             }
         });
@@ -346,18 +353,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         allShitsInDB = db.findAllShits();
 
-        numberOfTotalShits = 0;
-
         for (Shit shitInMap : allShitsInDB)
         {
             // Try catching here because if someone gets a Nullpointer as location as manages to save it, it beaks the app and you have to delete the entire database.
             try
             {
-                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall()).setTag(shitInMap.get_ID());
-                numberOfTotalShits++;
+                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall());
             } catch (NullPointerException e)
             {
-                Log.e("createMaker", e.toString());
+                Log.e("createMakerError", e.toString());
+                Log.e("createMarkerNullPointer", "Deletes shit with name: " + shitInMap.getShitName());
+                // Deletes the poop it cannot show on the map
+                db.deleteAPoop(shitInMap.get_ID());
+
             }
 
             mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
@@ -394,6 +402,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     return info;
                 }
             });
+
         }
 
     }
@@ -401,15 +410,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Marker createMarker( String shitName, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy, double shitRatingOverall )
     {
 
-        double shitLongitudeFin = Double.parseDouble(shitLongitude);
-        double shitLatitudeFin = Double.parseDouble(shitLatitude);
+        double shitLongitudeFin = parseDouble(shitLongitude);
+        double shitLatitudeFin = parseDouble(shitLatitude);
         String avgRating = String.valueOf(((shitRatingCleanness + shitRatingPrivacy + shitRatingOverall) / 3)).substring(0, 3);
+
         return mMap.addMarker(new MarkerOptions()
                                       .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
                                       .title(shitName)
                                       .draggable(false)
                                       .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
-
     }
 
 
@@ -443,7 +452,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     public boolean onNavigationItemSelected( MenuItem item )
     {
 
@@ -455,13 +463,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case R.id.statsistics:
                 Intent seeStatistics = new Intent(this, StatisticsActivity.class);
-                seeStatistics.putExtra("TotalNumberOfShits", numberOfTotalShits);
                 startActivity(seeStatistics);
                 break;
             case R.id.settings:
                 Intent seeSettings = new Intent(this, SettingsActivity.class);
                 startActivity(seeSettings);
                 break;
+            case R.id.custompoop:
+                Intent addCustomPoop = new Intent(this, CustomPoopActivity.class);
+                startActivity(addCustomPoop);
+                break;
+            case R.id.listpoops:
+                Intent seeAllPoops = new Intent(this, ListPoopsActivity.class);
+                startActivity(seeAllPoops);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
