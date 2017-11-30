@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -95,8 +96,8 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
             public void onClick( View v )
             {
 
-                Intent setCustomLocation = new Intent(CustomPoopActivity.this,CustomMarkerMapActivity.class);
-                startActivity(setCustomLocation);
+                Intent setCustomLocation = new Intent(CustomPoopActivity.this, CustomMarkerMapActivity.class);
+                startActivityForResult(setCustomLocation, 555);
             }
         });
 
@@ -135,28 +136,24 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
             {
                 Toast.makeText(this, getApplicationContext().getString(R.string.type_in_name), Toast.LENGTH_LONG).show();
             }
-            else if (customPoopDate.getText().length() == 0 || customPoopDate.getText() != getApplicationContext().getString(R.string.none))
+            else if (customPoopDate.getText().toString().equals(getApplicationContext().getString(R.string.none)))
             {
                 Toast.makeText(this, getApplicationContext().getString(R.string.type_in_date), Toast.LENGTH_LONG).show();
             }
-            else if (customPoopTime.getText().length() == 0 || customPoopTime.getText() != getApplicationContext().getString(R.string.none))
+            else if (customPoopTime.getText().toString().equals(getApplicationContext().getString(R.string.none)))
             {
                 Toast.makeText(this, getApplicationContext().getString(R.string.type_in_time), Toast.LENGTH_LONG).show();
             }
-            else if (customPoopLocationLat.getText().length() == 0 || customPoopLocationLat.getText() != getApplicationContext().getString(R.string.none))
+            else if (customPoopLocationLat.getText().equals(getApplicationContext().getString(R.string.none)) || customPoopLocationLon.getText().equals(getApplicationContext().getString(R.string.none)))
             {
-                Toast.makeText(this, getApplicationContext().getString(R.string.type_in_lat), Toast.LENGTH_LONG).show();
-            }
-            else if (customPoopLocationLon.getText().length() == 0 || customPoopLocationLon.getText() != getApplicationContext().getString(R.string.none))
-            {
-                Toast.makeText(this, getApplicationContext().getString(R.string.type_in_lon), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getApplicationContext().getString(R.string.type_in_loc), Toast.LENGTH_LONG).show();
             }
             else
             {
                 Shit shit;
-                String customPoopDateAndTime = customPoopDate + " , " + customPoopTime;
+                String customPoopDateAndTime = customPoopDate.getText().toString() + " , " + customPoopTime.getText().toString();
 
-                shit = new Shit(customPoopName.getText().toString(), customPoopDateAndTime, customPoopLocationLon.getText().toString(), customPoopLocationLat.getText().toString(), customPoopRatingCleanness.getRating(), customPoopRatingPrivacy.getRating(), customPoopRatingOverall.getRating(), customPoopNote.getText().toString(), true);
+                shit = new Shit(customPoopName.getText().toString(), customPoopDateAndTime, customPoopLocationLon.getText().toString(), customPoopLocationLat.getText().toString(), customPoopRatingCleanness.getRating(), customPoopRatingPrivacy.getRating(), customPoopRatingOverall.getRating(), customPoopNote.getText().toString());
 
                 db.addShit(shit);
                 finish();
@@ -182,5 +179,27 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     {
 
         customPoopTime.setText(hourOfDay + ":" + minute);
+    }
+
+    @Override
+    protected void onActivityResult( int requestCode, int resultCode, Intent data )
+    {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 555)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                Log.i("resultCode", "RESULT_OK");
+
+                customPoopLocationLat.setText(data.getStringExtra("CustomLocationLatitude"));
+                customPoopLocationLon.setText(data.getStringExtra("CustomLocationLongitude"));
+
+            }
+            if (resultCode == RESULT_CANCELED)
+            {
+                Log.i("resultCode", "RESULT_CANCELED");
+            }
+        }
     }
 }
