@@ -1,18 +1,15 @@
 package lars.wherehaveishit;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -71,6 +68,10 @@ public class StatisticsActivity extends AppCompatActivity
                     e.printStackTrace();
                 }
             }
+            else
+            {
+                Toast.makeText(StatisticsActivity.this, getApplicationContext().getString(R.string.no_network_available), Toast.LENGTH_LONG).show();
+            }
         }
         avgRatingOfShits.setText(String.valueOf(avgPoopRating / numberOfPlaces).substring(0, 3));
         mostShitCountry.setText(getShitiestCountry());
@@ -85,25 +86,7 @@ public class StatisticsActivity extends AppCompatActivity
             public void onClick( View v )
             {
 
-                String body = null;
-
-                try
-                {
-                    body = getApplicationContext().getPackageManager().getPackageInfo(getApplicationContext().getPackageName(), 0).versionName;
-                } catch (PackageManager.NameNotFoundException e)
-                {
-                    Log.e("NameNotFoundException", e.getMessage());
-                }
-                body = "\n\n-----------------------------\nPlease don't remove this information\n Device OS: Android \n Device OS version: " +
-                        Build.VERSION.RELEASE + "\n App Version: " + body + "\n Device Brand: " + Build.BRAND +
-                        "\n Device Model: " + Build.MODEL + "\n Device Manufacturer: " + Build.MANUFACTURER;
-
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("message/rfc822");
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"LarsKHaga@gmail.com"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback about Poopd!");
-                intent.putExtra(Intent.EXTRA_TEXT, body);
-                getApplicationContext().startActivity(Intent.createChooser(intent, getApplicationContext().getString(R.string.choose_email_client)));
+                SettingsActivity.sendFeedback(StatisticsActivity.this);
             }
         });
 

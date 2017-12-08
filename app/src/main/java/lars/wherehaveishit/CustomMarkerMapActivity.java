@@ -11,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -61,23 +60,18 @@ public class CustomMarkerMapActivity extends AppCompatActivity implements OnMapR
             public void onMapClick( LatLng latLng )
             {
 
-                if (!customMarkerAdded)
-                {
-                    googleMap.addMarker(new MarkerOptions()
-                                                .position(latLng)
-                                                .title(getApplicationContext().getString(R.string.custom_marker))
-                                                //.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                                                .draggable(true));
+                googleMap.clear();
 
-                    customMarkerLocationLat = latLng.latitude;
-                    customMarkerLocationLon = latLng.longitude;
+                googleMap.addMarker(new MarkerOptions()
+                                            .position(latLng)
+                                            .title(getApplicationContext().getString(R.string.custom_marker))
+                                            .draggable(true));
 
-                    customMarkerAdded = true;
-                }
-                else
-                {
-                    Toast.makeText(CustomMarkerMapActivity.this, getApplicationContext().getString(R.string.cannot_have_more_than_one_marker), Toast.LENGTH_LONG).show();
-                }
+                customMarkerLocationLat = latLng.latitude;
+                customMarkerLocationLon = latLng.longitude;
+
+                customMarkerAdded = true;
+
             }
 
 
