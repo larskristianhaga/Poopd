@@ -27,7 +27,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         mapTypeInt = preferences.getInt("mapType", 1);
 
-        Log.i("test", String.valueOf(mapTypeInt));
+        Log.i("MapType", String.valueOf(mapTypeInt));
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -94,6 +94,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 @Override
                 public boolean onPreferenceChange( Preference preference, Object newValue )
                 {
+
                     backupEnabled = (boolean) newValue;
                     return true;
                 }
@@ -130,7 +131,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
             case "Terrain":
                 mapTypeString = 3;
                 break;
-            case "Hybrid":
+            case "Hybrid33":
                 mapTypeString = 4;
                 break;
         }
@@ -154,7 +155,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 mapTypeString = "Terrain";
                 break;
             case 4:
-                mapTypeString = "Hybrid";
+                mapTypeString = "Hybrid33";
                 break;
         }
         return mapTypeString;
@@ -171,26 +172,25 @@ public class SettingsActivity extends AppCompatPreferenceActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private static void sendFeedback( Context context )
+    protected static void sendFeedback( Context context )
     {
 
-        String body = null;
+        String appVersion = null;
 
         try
         {
-            body = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+            appVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e)
         {
             Log.e("NameNotFoundException", e.getMessage());
         }
-        body = "\n\n-----------------------------\nPlease don't remove this information\n Device OS: Android \n Device OS version: " +
-                Build.VERSION.RELEASE + "\n App Version: " + body + "\n Device Brand: " + Build.BRAND +
-                "\n Device Model: " + Build.MODEL + "\n Device Manufacturer: " + Build.MANUFACTURER;
+
+        String body = "App version: " + appVersion + "," + "OS version: " + Build.VERSION.RELEASE + "," + "Device brand: " + Build.BRAND + "," + "Device model: " + Build.MODEL + "," + "Device manufacturer: " + Build.MANUFACTURER;
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"LarsKHaga@gmail.com"});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback about Poopd!");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{context.getString(R.string.dev_mail)});
+        intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.feedback_about_application));
         intent.putExtra(Intent.EXTRA_TEXT, body);
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.choose_email_client)));
     }
