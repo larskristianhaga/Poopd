@@ -140,6 +140,7 @@
                 android:layout_below="@id/textPoopDate"
                 android:layout_marginEnd="@dimen/spacingMore"
                 android:layout_marginStart="@dimen/spacingMore"
+                android:background="@color/secondaryLightColor"
                 android:text="@string/add_date_btn"/>
 
             <TextView
@@ -169,6 +170,7 @@
                 android:layout_below="@id/textPoopTime"
                 android:layout_marginEnd="@dimen/spacingMore"
                 android:layout_marginStart="@dimen/spacingMore"
+                android:background="@color/secondaryLightColor"
                 android:text="@string/add_time_btn"/>
 
             <TextView
@@ -217,6 +219,7 @@
                 android:layout_below="@id/textPoopLocationLongitude"
                 android:layout_marginEnd="@dimen/spacingMore"
                 android:layout_marginStart="@dimen/spacingMore"
+                android:background="@color/secondaryLightColor"
                 android:text="@string/add_loction_btn"/>
 
         </RelativeLayout>
