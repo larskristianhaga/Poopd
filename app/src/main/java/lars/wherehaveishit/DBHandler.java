@@ -24,7 +24,8 @@ public class DBHandler extends SQLiteOpenHelper
     static String KEY_PRIVACY = "ShitRatingPrivacy";
     static String KEY_OVERALL = "ShitRatingOverall";
     static String KEY_SHITNOTE = "ShitNote";
-    static int DATABASE_VERSION = 3;
+    static String KEY_SHITCUSTOM = "ShitCustom";
+    static int DATABASE_VERSION = 4;
     static String DATABASE_NAME = "ShitsInApp";
 
 
@@ -38,7 +39,7 @@ public class DBHandler extends SQLiteOpenHelper
     public void onCreate( SQLiteDatabase studentDB )
     {
 
-        String MAKE_TABLE = "CREATE TABLE " + TABLE_SHITS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_SHITNAME + " TEXT," + KEY_DATE + " TEXT," + KEY_LONGITUDE + " TEXT," + KEY_LATITUDE + " TEXT," + KEY_CLEANNESS + " TEXT," + KEY_PRIVACY + " TEXT," + KEY_OVERALL + " TEXT," + KEY_SHITNOTE + " TEXT" + ")";
+        String MAKE_TABLE = "CREATE TABLE " + TABLE_SHITS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_SHITNAME + " TEXT," + KEY_DATE + " TEXT," + KEY_LONGITUDE + " TEXT," + KEY_LATITUDE + " TEXT," + KEY_CLEANNESS + " TEXT," + KEY_PRIVACY + " TEXT," + KEY_OVERALL + " TEXT," + KEY_SHITNOTE + " TEXT," + KEY_SHITCUSTOM + " TEXT" + ")";
         Log.d("SQL", MAKE_TABLE);
         studentDB.execSQL(MAKE_TABLE);
     }
@@ -64,6 +65,7 @@ public class DBHandler extends SQLiteOpenHelper
         values.put(KEY_PRIVACY, shit.getShitRatingPrivacy());
         values.put(KEY_OVERALL, shit.getShitRatingOverall());
         values.put(KEY_SHITNOTE, shit.getShitNote());
+        values.put(KEY_SHITCUSTOM, shit.getShitCustom());
         db.insert(TABLE_SHITS, null, values);
         Log.i("addShit", String.valueOf(values));
         db.close();
@@ -90,6 +92,7 @@ public class DBHandler extends SQLiteOpenHelper
                 shit.setShitRatingPrivacy(cursor.getDouble(6));
                 shit.setShitRatingOverall(cursor.getDouble(7));
                 shit.setShitNote(cursor.getString(8));
+                shit.setShitCustom(cursor.getString(9));
                 shitsArrayList.add(shit);
             } while (cursor.moveToNext());
             cursor.close();
