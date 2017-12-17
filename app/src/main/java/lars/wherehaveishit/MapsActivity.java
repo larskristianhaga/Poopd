@@ -37,6 +37,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -44,7 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-import static java.lang.Double.*;
+import static java.lang.Double.parseDouble;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
@@ -360,10 +361,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             // Try catching here because if someone gets a Nullpointer as location as manages to save it, it beaks the app and you have to delete the entire database.
             try
             {
-                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall()).setTag(shitInMap.get_ID());
+                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitCustom()).setTag(shitInMap.get_ID());
             } catch (NullPointerException e)
             {
-                Log.e("createMakerError", e.toString());
+                Log.e("createMarkerError", e.toString());
                 Log.e("createMarkerNullPointer", "Deletes shit with name: " + shitInMap.getShitName());
                 // Deletes the poop it cannot show on the map
                 db.deleteAPoop(shitInMap.get_ID());
@@ -409,18 +410,32 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private Marker createMarker( String shitName, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy, double shitRatingOverall )
+    private Marker createMarker( String shitName, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy, double shitRatingOverall, String shitCustom )
     {
 
         double shitLongitudeFin = parseDouble(shitLongitude);
         double shitLatitudeFin = parseDouble(shitLatitude);
         String avgRating = String.valueOf(((shitRatingCleanness + shitRatingPrivacy + shitRatingOverall) / 3)).substring(0, 3);
 
-        return mMap.addMarker(new MarkerOptions()
-                                      .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
-                                      .title(shitName)
-                                      .draggable(false)
-                                      .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
+        Log.i("shitCustom", String.valueOf(shitCustom));
+        if (shitCustom.equals("No"))
+        {
+            return mMap.addMarker(new MarkerOptions()
+                                          .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
+                                          .title(shitName)
+                                          .draggable(false)
+                                          .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
+        }
+        else
+        {
+            return mMap.addMarker(new MarkerOptions()
+                                          .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
+                                          .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                          .title(shitName)
+                                          .draggable(false)
+                                          .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
+        }
+
     }
 
 
