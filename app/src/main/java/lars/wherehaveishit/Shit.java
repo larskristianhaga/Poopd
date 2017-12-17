@@ -14,7 +14,7 @@ public class Shit
     String ShitNote;
     String ShitCustom;
 
-    public Shit( String shitName, String shitDate, String currentLocationLonFin, String currentLocationLatFin, double shitRatingCleanness, double shitRatingPrivary, double shitRatingOverall, String shitNote )
+    public Shit( String shitName, String shitDate, String currentLocationLonFin, String currentLocationLatFin, double shitRatingCleanness, double shitRatingPrivary, double shitRatingOverall, String shitNote, String shitCustom )
     {
 
         this.ShitName = shitName;
@@ -25,6 +25,7 @@ public class Shit
         this.ShitRatingPrivacy = shitRatingPrivary;
         this.ShitRatingOverall = shitRatingOverall;
         this.ShitNote = shitNote;
+        this.ShitCustom = shitCustom;
     }
 
     public Shit( )
@@ -140,6 +141,18 @@ public class Shit
     {
 
         this.ShitNote = ShitNote;
+    }
+
+    public String getShitCustom( )
+    {
+
+        return ShitCustom;
+    }
+
+    public void setShitCustom( String shitCustom )
+    {
+
+        this.ShitCustom = shitCustom;
     }
 
 }
