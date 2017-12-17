@@ -38,6 +38,7 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     int day;
     int hour;
     int minute;
+    String shitCustom = "Yes";
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -153,7 +154,7 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
                 Shit shit;
                 String customPoopDateAndTime = customPoopDate.getText().toString() + " , " + customPoopTime.getText().toString();
 
-                shit = new Shit(customPoopName.getText().toString(), customPoopDateAndTime, customPoopLocationLon.getText().toString(), customPoopLocationLat.getText().toString(), customPoopRatingCleanness.getRating(), customPoopRatingPrivacy.getRating(), customPoopRatingOverall.getRating(), customPoopNote.getText().toString());
+                shit = new Shit(customPoopName.getText().toString(), customPoopDateAndTime, customPoopLocationLon.getText().toString(), customPoopLocationLat.getText().toString(), customPoopRatingCleanness.getRating(), customPoopRatingPrivacy.getRating(), customPoopRatingOverall.getRating(), customPoopNote.getText().toString(), shitCustom);
 
                 db.addShit(shit);
                 finish();
