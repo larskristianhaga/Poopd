@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -64,6 +65,7 @@ public class CustomMarkerMapActivity extends AppCompatActivity implements OnMapR
 
                 googleMap.addMarker(new MarkerOptions()
                                             .position(latLng)
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                                             .title(getApplicationContext().getString(R.string.custom_marker))
                                             .draggable(true));
 
