@@ -32,6 +32,7 @@ public class AddShitActivity extends AppCompatActivity
     static String savingFromMapIfBackLon;
     float locationFromMapAccuracy;
     boolean locationIsAdjusted = false;
+    String shitCustom = "No";
 
 
     @Override
@@ -109,14 +110,15 @@ public class AddShitActivity extends AppCompatActivity
         if (locationLon == null || locationLat == null)
         {
             Log.i("LocationEmpty", "locationLon og locationLat is empty");
-            shit = new Shit(shitNameFin, shitDateFin, savingFromMapIfBackLon, savingFromMapIfBackLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+            shit = new Shit(shitNameFin, shitDateFin, savingFromMapIfBackLon, savingFromMapIfBackLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin, shitCustom);
         }
         else
         {
-            shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin);
+            shit = new Shit(shitNameFin, shitDateFin, locationLon, locationLat, shitRatingCleannessFin, shitRatingPrivacyFin, shitRatingOverallFin, shitNoteFin, shitCustom);
         }
 
         db.addShit(shit);
+        Log.i("AddingShit", String.valueOf(shit));
 
         return dataSaved = true;
     }
