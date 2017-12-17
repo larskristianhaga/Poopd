@@ -82,18 +82,8 @@
     <string name="cannot_have_more_than_one_marker">You cannot have more than one marker</string>
     <string name="avg_rating_of_poops">Average rating of places:</string>
     <string name="most_shits_in_coutry">Country with the most places:</string>
-    <string name="marker_color_red">Red</string>
-    <string name="change_marker_color">Change marker color</string>
     <string name="feedback_about_application">Feedback about Poopd!</string>
     <string name="dev_mail">LarsKHaga@gmail.com</string>
     <string name="no_network_available">Cannot reach server to see country</string>
-    <string-array name="markercolor">
-        <item>Red</item>
-        <item>Orange</item>
-        <item>Yellow</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>Indigo</item>
-        <item>Violet</item>
-    </string-array>
+    <string name="no_places">You have not added any places</string>
 </resources>

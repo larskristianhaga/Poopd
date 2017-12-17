@@ -82,4 +82,8 @@
     <string name="cannot_have_more_than_one_marker">Du kan ikke legge til mer enn en markør</string>
     <string name="avg_rating_of_poops">Gjennomsnittlig vurdering:</string>
     <string name="most_shits_in_coutry">Landet med flest steder:</string>
+    <string name="feedback_about_application">Tilbakemelding om Poopd!</string>
+    <string name="dev_mail">LarsKHaga@gmail.com</string>
+    <string name="no_network_available">Kan ikke nå server for å se land</string>
+    <string name="no_places">Du har ikke lagt til noen steder</string>
 </resources>
