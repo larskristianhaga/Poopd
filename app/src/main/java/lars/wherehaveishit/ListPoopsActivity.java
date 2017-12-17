@@ -3,11 +3,14 @@ package lars.wherehaveishit;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -48,6 +51,18 @@ public class ListPoopsActivity extends AppCompatActivity
             allShitInList.add(i, shitInfo.getShitName());
             ++i;
         }
+
+        if (i == 0)
+        {
+            Snackbar snack = Snackbar.make(listAllPoops, getApplicationContext().getString(R.string.no_places), Snackbar.LENGTH_INDEFINITE);
+            View view = snack.getView();
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+            params.gravity = Gravity.TOP;
+            params.gravity = Gravity.CENTER_HORIZONTAL;
+            view.setLayoutParams(params);
+            snack.show();
+        }
+
         adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, allShitInList);
         listAllPoops.setAdapter(adapter);
 
