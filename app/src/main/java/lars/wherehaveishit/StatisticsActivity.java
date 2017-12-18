@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,15 @@ public class StatisticsActivity extends AppCompatActivity
 
 
         long numberOfPlaces = db.getLineCount();
-        totalNumberOfShits.setText(String.valueOf(numberOfPlaces));
+        if (numberOfPlaces != 0)
+        {
+            totalNumberOfShits.setText(String.valueOf(numberOfPlaces));
+        }
+        else
+        {
+            totalNumberOfShits.setText(getApplicationContext().getString(R.string.none));
+        }
+
 
         for (Shit shitInMap : allShitsInDB)
         {
@@ -73,7 +82,18 @@ public class StatisticsActivity extends AppCompatActivity
                 Toast.makeText(StatisticsActivity.this, getApplicationContext().getString(R.string.no_network_available), Toast.LENGTH_LONG).show();
             }
         }
-        avgRatingOfShits.setText(String.valueOf(avgPoopRating / numberOfPlaces).substring(0, 3));
+
+        Log.i("avgPoopRating", String.valueOf(avgPoopRating));
+
+        if (avgPoopRating != 0.0 || numberOfPlaces != 0)
+        {
+            avgRatingOfShits.setText(String.valueOf(avgPoopRating / numberOfPlaces).substring(0, 3));
+        }
+        else
+        {
+            avgRatingOfShits.setText(getApplicationContext().getString(R.string.none));
+        }
+
         mostShitCountry.setText(getShitiestCountry());
 
 
