@@ -42,7 +42,7 @@ public class ListPoopsActivity extends AppCompatActivity
         final ListView listAllPoops = (ListView) findViewById(R.id.pooplistview);
         listAllPoops.invalidateViews();
 
-        final List<Shit> allShitsInDB = db.findAllShits();
+        final List<Shit> allShitsInDB = db.findAllShitsDESC();
         final ArrayList<String> allShitInList = new ArrayList<>(allShitsInDB.size());
 
         int i = 0;
@@ -61,6 +61,7 @@ public class ListPoopsActivity extends AppCompatActivity
             params.gravity = Gravity.CENTER_HORIZONTAL;
             view.setLayoutParams(params);
             snack.show();
+            return;
         }
 
         adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, allShitInList);

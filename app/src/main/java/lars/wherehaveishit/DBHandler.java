@@ -102,6 +102,37 @@ public class DBHandler extends SQLiteOpenHelper
         return shitsArrayList;
     }
 
+    public List<Shit> findAllShitsDESC( )
+    {
+
+        List<Shit> shitsArrayList = new ArrayList<Shit>();
+        String selectQuery = "SELECT * FROM " + TABLE_SHITS + " ORDER BY " + KEY_SHITNAME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                Shit shit = new Shit();
+                shit.set_ID(cursor.getLong(0));
+                shit.setShitName(cursor.getString(1));
+                shit.setShitDate(cursor.getString(2));
+                shit.setShitLongitude(cursor.getString(3));
+                shit.setShitLatitude(cursor.getString(4));
+                shit.setShitRatingCleanness(cursor.getDouble(5));
+                shit.setShitRatingPrivacy(cursor.getDouble(6));
+                shit.setShitRatingOverall(cursor.getDouble(7));
+                shit.setShitNote(cursor.getString(8));
+                shit.setShitCustom(cursor.getString(9));
+                shitsArrayList.add(shit);
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+        }
+        Log.i("shitsArrayList", String.valueOf(shitsArrayList));
+        return shitsArrayList;
+    }
+
     public List<Shit> findAPoop( long poopID )
     {
 
