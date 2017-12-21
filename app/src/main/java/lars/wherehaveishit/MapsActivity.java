@@ -355,7 +355,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void readFileAndMarkOnMap( )
     {
 
-        allShitsInDB = db.findAllShits();
+        allShitsInDB = db.findAllShits(false);
 
         for (Shit shitInMap : allShitsInDB)
         {

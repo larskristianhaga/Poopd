@@ -42,7 +42,7 @@ public class ListPoopsActivity extends AppCompatActivity
         final ListView listAllPoops = (ListView) findViewById(R.id.pooplistview);
         listAllPoops.invalidateViews();
 
-        final List<Shit> allShitsInDB = db.findAllShitsDESC();
+        final List<Shit> allShitsInDB = db.findAllShits(true);
         final ArrayList<String> allShitInList = new ArrayList<>(allShitsInDB.size());
 
         int i = 0;
