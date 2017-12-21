@@ -79,11 +79,12 @@
     <string name="adjust_poop">Adjust place</string>
     <string name="custom_marker">Your custom marker</string>
     <string name="place_custom_marker_on_map">Click to set a marker on the map</string>
-    <string name="cannot_have_more_than_one_marker">You cannot have more than one marker</string>
     <string name="avg_rating_of_poops">Average rating of places:</string>
     <string name="most_shits_in_coutry">Country with the most places:</string>
     <string name="feedback_about_application">Feedback about Poopd!</string>
     <string name="dev_mail">LarsKHaga@gmail.com</string>
     <string name="no_network_available">Cannot reach server to see country</string>
     <string name="no_places">You have not added any places</string>
+    <string name="place_deleted">Place deleted</string>
+    <string name="now_edit_place">You can now edit your place!</string>
 </resources>
