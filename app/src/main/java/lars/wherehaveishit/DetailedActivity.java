@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -32,6 +36,7 @@ public class DetailedActivity extends AppCompatActivity
     MenuItem doneMenuIcon;
     long markerTag;
     DBHandler db;
+    boolean editMode = false;
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -80,6 +85,27 @@ public class DetailedActivity extends AppCompatActivity
         poopOverallLayout.setEnabled(false);
         poopNoteLayout.setEnabled(false);
 
+        final View view = findViewById(R.id.detailed_activity_linearlayout);
+        view.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick( View v )
+            {
+
+                if (!editMode)
+                {
+                    Animation animation = new AlphaAnimation(1, 0);
+                    animation.setDuration(20);
+                    animation.setInterpolator(new LinearInterpolator());
+                    animation.setRepeatCount(2);
+                    animation.setRepeatMode(Animation.REVERSE);
+
+                    View editButtonMode = findViewById(R.id.editPoop);
+                    editButtonMode.startAnimation(animation);
+                }
+            }
+        });
     }
 
 
@@ -104,7 +130,7 @@ public class DetailedActivity extends AppCompatActivity
         {
             case R.id.deletePoop:
                 db.deleteAPoop(markerTag);
-                Toast.makeText(DetailedActivity.this, "Poop deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailedActivity.this, getApplicationContext().getString(R.string.place_deleted), Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.editPoop:
@@ -119,7 +145,8 @@ public class DetailedActivity extends AppCompatActivity
                 doneMenuIcon.setVisible(true);
                 deleteMenuIcon.setVisible(false);
 
-                Toast.makeText(DetailedActivity.this, "You can now edit your poop!", Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailedActivity.this, getApplicationContext().getString(R.string.now_edit_place), Toast.LENGTH_LONG).show();
+                editMode = true;
                 break;
             case R.id.editPoopDone:
                 updatePoop();
