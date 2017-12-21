@@ -100,8 +100,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 } catch (NullPointerException e)
                 {
-                    Log.e("Location", "Location is null/or not reachable: " + e.toString());
-                    Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.no_location), Toast.LENGTH_SHORT).show();
+                    Toast cannotDetectLoc = Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.no_location), Toast.LENGTH_LONG);
+                    cannotDetectLoc.setGravity(Gravity.CENTER,0,0);
+                    cannotDetectLoc.show();
                     return;
                 }
             }
