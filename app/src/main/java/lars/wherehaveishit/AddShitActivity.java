@@ -18,7 +18,6 @@ import java.util.Calendar;
 public class AddShitActivity extends AppCompatActivity
 {
 
-    private boolean dataSaved = false;
     EditText shitName;
     EditText shitNote;
     RatingBar shitRatingCleanness;
@@ -68,16 +67,6 @@ public class AddShitActivity extends AppCompatActivity
 
     }
 
-    protected void onResume( )
-    {
-
-        super.onResume();
-        // Automaticly sets the variable to false
-        dataSaved = false;
-
-    }
-
-
     private boolean savingData( )
     {
 
@@ -86,7 +75,7 @@ public class AddShitActivity extends AppCompatActivity
         {
             Toast.makeText(this, getApplicationContext().getString(R.string.type_in_name), Toast.LENGTH_LONG).show();
             Log.i("returns", "name.getText().length() == 0");
-            return dataSaved = false;
+            return false;
         }
 
         // Getting todays date, month, year, hour and minute, Saves it to int values
@@ -106,7 +95,6 @@ public class AddShitActivity extends AppCompatActivity
 
         Shit shit;
 
-
         if (locationLon == null || locationLat == null)
         {
             Log.i("LocationEmpty", "locationLon og locationLat is empty");
@@ -120,7 +108,7 @@ public class AddShitActivity extends AppCompatActivity
         db.addShit(shit);
         Log.i("AddingShit", String.valueOf(shit));
 
-        return dataSaved = true;
+        return true;
     }
 
     // Prompt the users and ask if the don't want to save their shit
