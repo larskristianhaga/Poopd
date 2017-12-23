@@ -71,15 +71,11 @@ public class DBHandler extends SQLiteOpenHelper
         db.close();
     }
 
-    public List<Shit> findAllShits( boolean sorted )
+    public List<Shit> findAllShits( )
     {
 
         List<Shit> shitsArrayList = new ArrayList<Shit>();
         String selectQuery = "SELECT * FROM " + TABLE_SHITS;
-        if (sorted)
-        {
-            selectQuery = selectQuery + " ORDER BY " + KEY_SHITNAME;
-        }
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst())
