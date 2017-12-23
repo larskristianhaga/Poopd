@@ -77,13 +77,18 @@ public class DetailedActivity extends AppCompatActivity
             poopDateLayout.setText(poop.getShitDate().split(",")[0].trim());
             poopTimeLayout.setText(poop.getShitDate().split(",")[1].trim());
             detailedPoopID = String.valueOf(poop.get_ID());
+
         }
 
         poopNameLayout.setEnabled(false);
+        poopNameLayout.setFocusableInTouchMode(false);
+        poopNameLayout.setFocusable(false);
         poopCleannessLayout.setEnabled(false);
         poopPrivacyLayout.setEnabled(false);
         poopOverallLayout.setEnabled(false);
         poopNoteLayout.setEnabled(false);
+        poopNoteLayout.setFocusableInTouchMode(false);
+        poopNoteLayout.setFocusable(false);
 
         final View view = findViewById(R.id.detailed_activity_linearlayout);
         view.setOnClickListener(new View.OnClickListener()
@@ -96,7 +101,7 @@ public class DetailedActivity extends AppCompatActivity
                 if (!editMode)
                 {
                     Animation animation = new AlphaAnimation(1, 0);
-                    animation.setDuration(20);
+                    animation.setDuration(150);
                     animation.setInterpolator(new LinearInterpolator());
                     animation.setRepeatCount(2);
                     animation.setRepeatMode(Animation.REVERSE);
@@ -136,10 +141,14 @@ public class DetailedActivity extends AppCompatActivity
             case R.id.editPoop:
 
                 poopNameLayout.setEnabled(true);
+                poopNameLayout.setFocusableInTouchMode(true);
+                poopNameLayout.setFocusable(true);
                 poopCleannessLayout.setEnabled(true);
                 poopPrivacyLayout.setEnabled(true);
                 poopOverallLayout.setEnabled(true);
                 poopNoteLayout.setEnabled(true);
+                poopNoteLayout.setFocusableInTouchMode(true);
+                poopNoteLayout.setFocusable(true);
 
                 editMenuIcon.setVisible(false);
                 doneMenuIcon.setVisible(true);
