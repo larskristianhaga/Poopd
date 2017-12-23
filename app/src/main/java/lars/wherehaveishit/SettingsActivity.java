@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -87,6 +86,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 }
             });
 
+            /*
             final SwitchPreference backupToGoogleCloud = (SwitchPreference) findPreference("backup_to_cloud");
             backupToGoogleCloud.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
@@ -99,7 +99,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                     return true;
                 }
             });
-
+            */
 
             Preference myPref = findPreference(getString(R.string.send_feedback));
             myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
