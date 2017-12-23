@@ -39,7 +39,7 @@ public class StatisticsActivity extends AppCompatActivity
         TextView avgRatingOfShits = (TextView) findViewById(R.id.etxt_ageratingofshits);
         TextView mostShitCountry = (TextView) findViewById(R.id.etxt_mostshitsincountry);
 
-        allShitsInDB = db.findAllShits(false);
+        allShitsInDB = db.findAllShits();
 
 
         long numberOfPlaces = db.getLineCount();
