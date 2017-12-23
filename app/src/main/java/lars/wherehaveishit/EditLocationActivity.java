@@ -47,13 +47,16 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
 
         Intent markerFromMapsActivity = getIntent();
         Bundle bundle = markerFromMapsActivity.getExtras();
-        latitude = Double.parseDouble(bundle.getString("LocationLatitude"));
-        longitude = Double.parseDouble(bundle.getString("LocationLongitude"));
-        accuracy = bundle.getFloat("LocationAccuracy");
-
-        Log.i("Latitude: ", String.valueOf(latitude));
-        Log.i("Longitude: ", String.valueOf(longitude));
-        Log.i("Accuracy: ", String.valueOf(accuracy));
+        try
+        {
+            latitude = Double.parseDouble(bundle.getString("LocationLatitude"));
+            longitude = Double.parseDouble(bundle.getString("LocationLongitude"));
+            accuracy = bundle.getFloat("LocationAccuracy");
+        } catch (NullPointerException e)
+        {
+            finish();
+            Log.i("NullPointerException",e.getMessage());
+        }
 
 
     }
