@@ -1,16 +1,13 @@
 package lars.wherehaveishit;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -62,17 +59,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate( Bundle savedInstanceState )
     {
 
-        db = new DBHandler(this);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        db = new DBHandler(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
+
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
         btn_addPoop.setOnClickListener(new View.OnClickListener()
         {
 
@@ -92,19 +89,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     currentLocationLonFin = String.valueOf(getCurrentLocation.getLongitude());
                     currentLocationAccuracy = getCurrentLocation.getAccuracy();
 
-                    Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
-                    addShit.putExtra("LocationLatitude", currentLocationLatFin);
-                    addShit.putExtra("LocationLongitude", currentLocationLonFin);
-                    addShit.putExtra("LocationAccuracy", currentLocationAccuracy);
-                    startActivity(addShit);
-
                 } catch (NullPointerException e)
                 {
                     Toast cannotDetectLoc = Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.no_location), Toast.LENGTH_LONG);
-                    cannotDetectLoc.setGravity(Gravity.CENTER,0,0);
+                    cannotDetectLoc.setGravity(Gravity.CENTER, 0, 0);
                     cannotDetectLoc.show();
+
                     return;
                 }
+
+                Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
+                addShit.putExtra("LocationLatitude", currentLocationLatFin);
+                addShit.putExtra("LocationLongitude", currentLocationLonFin);
+                addShit.putExtra("LocationAccuracy", currentLocationAccuracy);
+                startActivity(addShit);
             }
         });
 
@@ -164,13 +162,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             readFileAndMarkOnMap();
 
         }
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
             return;
         }
+
 
         mMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener()
         {
@@ -206,9 +203,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onInfoWindowClick( Marker marker )
             {
 
-                Log.i("markerTag", String.valueOf(marker.toString()));
-                Log.i("markerTag", String.valueOf(marker.getTag()));
-
                 Intent seeDetailedPoop = new Intent(MapsActivity.this, DetailedActivity.class);
                 seeDetailedPoop.putExtra("markerTag", (Long) marker.getTag());
                 startActivity(seeDetailedPoop);
@@ -233,7 +227,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
                         LatLng mergeLatLng = new LatLng(DBLat, DBLon);
-                        Log.i("LatLon", "LatLon: " + mergeLatLng);
                         builder.include(mergeLatLng);
                     }
 
@@ -245,11 +238,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Log.e("Exception", e.getMessage());
                     Log.e("ZoomBounds", "Could not zoom to bounds");
                 }
-
             }
         });
-
-
     }
 
     // Requests the location permission
@@ -258,7 +248,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
-            //Toast.makeText(this, "The application will need your location to allow you to track your shits, else will some of the functionality will be disabled", Toast.LENGTH_LONG).show();
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
             {
 
@@ -304,9 +293,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
                 else
                 {
-                    // permission denied, shit!
+                    // Permission denied, shit!
                     // Disabling the functionality that depends on this permission.
-
                     // Makes the button invisible, now only MapsActivity is accessible.
                     btn_addPoop.setVisibility(View.INVISIBLE);
 
@@ -319,7 +307,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    // Code that will run if the user minimize the app and opens it again
     @Override
     public void onResume( )
     {
@@ -332,6 +319,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mMap.clear();
             readFileAndMarkOnMap();
             Log.i("readFileAndMarkOnMap", "readFileAndMarkOnMap");
+
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             mapType = preferences.getInt("mapType", 1);
             mMap.setMapType(mapType);
@@ -346,8 +334,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.setMyLocationEnabled(true);
             }
             btn_addPoop.setVisibility(View.VISIBLE);
-
-
         }
     }
 
@@ -355,7 +341,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void readFileAndMarkOnMap( )
     {
 
-        allShitsInDB = db.findAllShits(false);
+        allShitsInDB = db.findAllShits();
 
         for (Shit shitInMap : allShitsInDB)
         {
@@ -418,24 +404,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         double shitLatitudeFin = parseDouble(shitLatitude);
         String avgRating = String.valueOf(((shitRatingCleanness + shitRatingPrivacy + shitRatingOverall) / 3)).substring(0, 3);
 
-        Log.i("shitCustom", String.valueOf(shitCustom));
-        if (shitCustom.equals("No"))
+        MarkerOptions marker = (new MarkerOptions()
+                .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
+                .title(shitName)
+                .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
+
+        if (shitCustom.equals("Yes"))
         {
-            return mMap.addMarker(new MarkerOptions()
-                                          .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
-                                          .title(shitName)
-                                          .draggable(false)
-                                          .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
+            marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         }
-        else
-        {
-            return mMap.addMarker(new MarkerOptions()
-                                          .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
-                                          .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                                          .title(shitName)
-                                          .draggable(false)
-                                          .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
-        }
+
+        return mMap.addMarker(marker);
 
     }
 
@@ -494,6 +473,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.listpoops:
                 Intent seeAllPoops = new Intent(this, ListPoopsActivity.class);
                 startActivity(seeAllPoops);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
