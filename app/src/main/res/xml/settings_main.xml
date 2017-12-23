@@ -13,6 +13,7 @@
 
     </PreferenceCategory>
 
+    <!--
     <PreferenceCategory android:title="@string/backup">
 
         <SwitchPreference
@@ -24,6 +25,7 @@
             android:title="@string/backup_to_cloud"/>
 
     </PreferenceCategory>
+    -->
 
     <PreferenceCategory android:title="@string/pref_header_about">
 
