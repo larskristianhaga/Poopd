@@ -69,7 +69,7 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
             public void onClick( View v )
             {
 
-                getTime();
+                getDate();
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CustomPoopActivity.this, CustomPoopActivity.this, year, month, day);
 
                 datePickerDialog.show();
@@ -107,12 +107,18 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     private void getTime( )
     {
 
-        final Calendar c = Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
+        hour = c.get(Calendar.HOUR_OF_DAY);
+        minute = c.get(Calendar.MINUTE);
+    }
+
+    private void getDate( )
+    {
+
+        Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DATE);
-        hour = c.get(Calendar.HOUR_OF_DAY);
-        minute = c.get(Calendar.MINUTE);
     }
 
     @Override
@@ -171,7 +177,8 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     public void onDateSet( DatePicker view, int year, int month, int dayOfMonth )
     {
 
-        customPoopDate.setText(dayOfMonth + "/" + (month + 1) + "-" + year);
+        String setDate = dayOfMonth + "/" + (month + 1) + "-" + year;
+        customPoopDate.setText(setDate);
 
     }
 
@@ -179,7 +186,8 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     public void onTimeSet( TimePicker view, int hourOfDay, int minute )
     {
 
-        customPoopTime.setText(hourOfDay + ":" + minute);
+        String setTime = hourOfDay + ":" + minute;
+        customPoopTime.setText(setTime);
     }
 
     @Override
