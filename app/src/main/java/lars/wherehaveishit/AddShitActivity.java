@@ -25,11 +25,11 @@ public class AddShitActivity extends AppCompatActivity
     RatingBar shitRatingOverall;
     DBHandler db;
     MenuItem adjustMenuIcon;
-    String locationLat;
-    String locationLon;
+    static String locationLat;
+    static String locationLon;
     static String savingFromMapIfBackLat;
     static String savingFromMapIfBackLon;
-    float locationFromMapAccuracy;
+    static float locationFromMapAccuracy;
     boolean locationIsAdjusted = false;
     String shitCustom = "No";
 

@@ -29,10 +29,10 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
 {
 
     private GoogleMap mMap;
-    double latitude;
-    double longitude;
-    float accuracy;
-    Circle circleAroundMarker;
+    static double latitude;
+    static double longitude;
+    static float accuracy;
+    static Circle circleAroundMarker;
     Marker poopMarker;
 
     @Override
@@ -47,16 +47,18 @@ public class EditLocationActivity extends AppCompatActivity implements OnMapRead
 
         Intent markerFromMapsActivity = getIntent();
         Bundle bundle = markerFromMapsActivity.getExtras();
-        try
-        {
+        //try
+        //{
             latitude = Double.parseDouble(bundle.getString("LocationLatitude"));
             longitude = Double.parseDouble(bundle.getString("LocationLongitude"));
             accuracy = bundle.getFloat("LocationAccuracy");
-        } catch (NullPointerException e)
+        /*} catch (NullPointerException e)
         {
-            finish();
-            Log.i("NullPointerException",e.getMessage());
-        }
+            //finish();
+            Log.i("NullPointerExceptioni",e.getMessage());
+            Toast.makeText(getBaseContext(), getApplicationContext().getString(R.string.coming_soon), Toast.LENGTH_LONG).show();
+
+        }*/
 
 
     }
