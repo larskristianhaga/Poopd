@@ -65,7 +65,32 @@ public class AddShitActivity extends AppCompatActivity
             Log.e("Location from bundle", "Location is null/or not reachable from bundle " + e.toString());
         }
 
+        shitRatingCleanness.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
+        {
+
+            @Override
+            public void onRatingChanged( RatingBar ratingBar, float rating, boolean fromUser )
+            {
+
+                shitRatingOverall.setRating((shitRatingPrivary.getRating() + rating) / 2);
+
+            }
+        });
+
+        shitRatingPrivary.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
+        {
+
+            @Override
+            public void onRatingChanged( RatingBar ratingBar, float rating, boolean fromUser )
+            {
+
+                shitRatingOverall.setRating((rating + shitRatingCleanness.getRating()) / 2);
+
+            }
+        });
+
     }
+
 
     private boolean savingData( )
     {
