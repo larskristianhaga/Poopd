@@ -25,4 +25,24 @@
         app:fabSize="normal"
         app:srcCompat="@android:drawable/ic_menu_add"/>
 
+    <ImageView
+        android:id="@+id/noInternett"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btn_addShit"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/normal_layout"
+        app:srcCompat="@drawable/ic_no_internett_24dp"
+        android:contentDescription="@string/device_has_no_internett"/>
+
+    <ImageView
+        android:id="@+id/noGPS"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btn_addShit"
+        android:layout_marginTop="@dimen/normal_layout"
+        app:srcCompat="@drawable/ic_gps_off_24dp"
+        android:contentDescription="@string/device_dosent_have_gps_turned_on"/>
+
 </RelativeLayout>

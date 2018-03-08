@@ -60,7 +60,7 @@
     <string name="map_type_normal">Normal</string>
     <string name="change_map_type">Map type</string>
     <string name="add_custom_poop">Add custom place</string>
-    <string name="see_all_poops">See all places</string>
+    <string name="see_all_poops">List all places</string>
     <string name="all_poops">All places</string>
     <string name="add_date_btn">Add date</string>
     <string name="add_time_btn">Add time</string>
@@ -87,4 +87,8 @@
     <string name="no_places">You have not added any places</string>
     <string name="place_deleted">Place deleted</string>
     <string name="now_edit_place">You can now edit your place!</string>
+    <string name="device_has_no_internett">Device has no internett</string>
+    <string name="device_dosent_have_gps_turned_on">Device dosent have GPS turned on</string>
+    <string name="not_logged_in">Not logged in</string>
+    <string name="logged_in">Logged in as</string>
 </resources>

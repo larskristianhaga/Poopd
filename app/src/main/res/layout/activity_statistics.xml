@@ -13,7 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_margin="10dp"
         android:text="@string/how_many_poops_total"
-        android:textSize="@dimen/textSize"
+        android:textSize="@dimen/normal_text"
         android:textStyle="bold"/>
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/howmanyshitsintotal"
         android:layout_toEndOf="@+id/howmanyshitsintotal"
-        android:textSize="@dimen/textSize"
+        android:textSize="@dimen/normal_text"
         android:textStyle="bold"/>
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_margin="10dp"
         android:layout_below="@id/howmanyshitsintotal"
         android:text="@string/avg_rating_of_poops"
-        android:textSize="@dimen/textSize"
+        android:textSize="@dimen/normal_text"
         android:textStyle="bold"/>
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/avgratingofshits"
         android:layout_toEndOf="@+id/avgratingofshits"
-        android:textSize="@dimen/textSize"
+        android:textSize="@dimen/normal_text"
         android:textStyle="bold"/>
 
     <TextView
@@ -53,7 +53,7 @@
         android:layout_margin="10dp"
         android:layout_below="@id/avgratingofshits"
         android:text="@string/most_shits_in_coutry"
-        android:textSize="@dimen/textSize"
+        android:textSize="@dimen/normal_text"
         android:textStyle="bold"/>
 
     <TextView
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/mostshitsincoutry"
         android:layout_toEndOf="@+id/mostshitsincoutry"
-        android:textSize="@dimen/textSize"
+        android:textSize="@dimen/normal_text"
         android:textStyle="bold"/>
 
     <TextView
@@ -74,6 +74,6 @@
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/have_any_feedback"
-        android:textSize="@dimen/textSize"/>
+        android:textSize="@dimen/normal_text"/>
 
 </RelativeLayout>

@@ -1,5 +1,10 @@
 <resources>
-    <dimen name="spacing">2.5dp</dimen>
-    <dimen name="spacingMore">10dp</dimen>
-    <dimen name="textSize">16sp</dimen>
+    <dimen name="tiny_layout">2.5dp</dimen>
+    <dimen name="small_layout">10dp</dimen>
+    <dimen name="normal_layout">15dp</dimen>
+    <dimen name="big_layout">20dp</dimen>
+
+    <dimen name="small_text">10sp</dimen>
+    <dimen name="normal_text">15sp</dimen>
+    <dimen name="big_text">20sp</dimen>
 </resources>

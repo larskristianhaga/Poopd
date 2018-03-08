@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:padding="20dp"
         android:text="@string/how_to_use_informal"
-        android:textSize="@dimen/textSize"
+        android:textSize="@dimen/normal_text"
         android:textStyle="bold"/>
 
     <TextView
@@ -23,6 +23,6 @@
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/have_any_feedback"
-        android:textSize="@dimen/textSize"/>
+        android:textSize="@dimen/normal_text"/>
 
 </RelativeLayout>

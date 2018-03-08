@@ -60,7 +60,7 @@
     <string name="map_type_normal">Normal</string>
     <string name="change_map_type">Kart type</string>
     <string name="add_custom_poop">Legg til tilpasset sted</string>
-    <string name="see_all_poops">Se alle steder</string>
+    <string name="see_all_poops">List alle steder</string>
     <string name="all_poops">Alle steder</string>
     <string name="add_date_btn">Legg til dato</string>
     <string name="add_time_btn">Legg til tid</string>
@@ -87,4 +87,6 @@
     <string name="no_places">Du har ikke lagt til noen steder</string>
     <string name="place_deleted">Sted slettet</string>
     <string name="now_edit_place">Du kan nå endre stedet!</string>
+    <string name="device_has_no_internett">Device has no internett</string>
+    <string name="device_dosent_have_gps_turned_on">Device dosent have GPS turned on</string>
 </resources>

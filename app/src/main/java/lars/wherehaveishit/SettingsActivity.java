@@ -91,7 +91,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity
             backupToGoogleCloud.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
 
-                @Override
+        z        @Override
                 public boolean onPreferenceChange( Preference preference, Object newValue )
                 {
 

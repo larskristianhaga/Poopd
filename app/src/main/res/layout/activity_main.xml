@@ -18,7 +18,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/activity_main_drawer"
-        app:itemTextColor="@color/primaryColor"/>
+        app:headerLayout="@layout/nav_header_main"
+        app:itemTextColor="@color/primaryColor"
+        app:menu="@menu/activity_main_drawer">
+
+        <include layout="@layout/navigation_footer"/>
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

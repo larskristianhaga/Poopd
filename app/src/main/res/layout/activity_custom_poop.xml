@@ -16,8 +16,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingMore"
-            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
+            android:layout_marginTop="@dimen/small_layout"
             android:layout_weight="1"
             android:text="@string/name_of_place"
             android:textStyle="bold"/>
@@ -26,17 +26,17 @@
             android:id="@+id/editPoopName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacingMore"
-            android:layout_marginEnd="@dimen/spacingMore"
-            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginBottom="@dimen/small_layout"
+            android:layout_marginEnd="@dimen/small_layout"
+            android:layout_marginStart="@dimen/small_layout"
             android:layout_weight="1"
             android:inputType="text"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingMore"
-            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
+            android:layout_marginTop="@dimen/small_layout"
             android:layout_weight="1"
             android:text="@string/rating_of_place_cleanness"
             android:textStyle="bold"/>
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing"
+            android:layout_margin="@dimen/tiny_layout"
             android:layout_weight="1"
             android:numStars="5"
             android:stepSize="0.5"/>
@@ -55,8 +55,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingMore"
-            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
+            android:layout_marginTop="@dimen/small_layout"
             android:layout_weight="1"
             android:text="@string/rating_of_place_privacy"
             android:textStyle="bold"/>
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing"
+            android:layout_margin="@dimen/tiny_layout"
             android:layout_weight="1"
             android:numStars="5"
             android:stepSize="0.5"/>
@@ -74,8 +74,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingMore"
-            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
+            android:layout_marginTop="@dimen/small_layout"
             android:layout_weight="1"
             android:text="@string/rating_of_place_overall"
             android:textStyle="bold"/>
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing"
+            android:layout_margin="@dimen/tiny_layout"
             android:layout_weight="1"
             android:numStars="5"
             android:stepSize="0.5"/>
@@ -93,8 +93,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacingMore"
-            android:layout_marginTop="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
+            android:layout_marginTop="@dimen/small_layout"
             android:layout_weight="1"
             android:text="@string/add_poop_note"
             android:textStyle="bold"/>
@@ -103,9 +103,9 @@
             android:id="@+id/editPoopNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacingMore"
-            android:layout_marginEnd="@dimen/spacingMore"
-            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginBottom="@dimen/small_layout"
+            android:layout_marginEnd="@dimen/small_layout"
+            android:layout_marginStart="@dimen/small_layout"
             android:layout_weight="1"
             android:inputType="text"/>
 
@@ -118,8 +118,8 @@
                 android:id="@+id/poopDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacingMore"
-                android:layout_marginTop="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/small_layout"
+                android:layout_marginTop="@dimen/small_layout"
                 android:text="@string/poop_date"
                 android:textStyle="bold"/>
 
@@ -128,8 +128,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/poopDate"
-                android:layout_marginEnd="@dimen/spacingMore"
-                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginEnd="@dimen/small_layout"
+                android:layout_marginStart="@dimen/small_layout"
                 android:layout_toEndOf="@id/poopDate"
                 android:text="@string/none"/>
 
@@ -138,8 +138,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textPoopDate"
-                android:layout_marginEnd="@dimen/spacingMore"
-                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginEnd="@dimen/small_layout"
+                android:layout_marginStart="@dimen/small_layout"
                 android:background="@color/secondaryLightColor"
                 android:text="@string/add_date_btn"/>
 
@@ -148,8 +148,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/addDate"
-                android:layout_marginStart="@dimen/spacingMore"
-                android:layout_marginTop="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/small_layout"
+                android:layout_marginTop="@dimen/small_layout"
                 android:text="@string/poop_time"
                 android:textStyle="bold"/>
 
@@ -158,8 +158,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/poopTime"
-                android:layout_marginEnd="@dimen/spacingMore"
-                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginEnd="@dimen/small_layout"
+                android:layout_marginStart="@dimen/small_layout"
                 android:layout_toEndOf="@id/poopDate"
                 android:text="@string/none"/>
 
@@ -168,8 +168,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textPoopTime"
-                android:layout_marginEnd="@dimen/spacingMore"
-                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginEnd="@dimen/small_layout"
+                android:layout_marginStart="@dimen/small_layout"
                 android:background="@color/secondaryLightColor"
                 android:text="@string/add_time_btn"/>
 
@@ -178,8 +178,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/addTime"
-                android:layout_marginStart="@dimen/spacingMore"
-                android:layout_marginTop="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/small_layout"
+                android:layout_marginTop="@dimen/small_layout"
                 android:text="@string/location_latitude"
                 android:textStyle="bold"/>
 
@@ -188,8 +188,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/location_latitude_static"
-                android:layout_marginEnd="@dimen/spacingMore"
-                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginEnd="@dimen/small_layout"
+                android:layout_marginStart="@dimen/small_layout"
                 android:layout_toEndOf="@id/location_latitude_static"
                 android:text="@string/none"/>
 
@@ -198,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/location_latitude_static"
-                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginStart="@dimen/small_layout"
                 android:text="@string/location_longitude"
                 android:textStyle="bold"/>
 
@@ -207,8 +207,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/location_longitude_static"
-                android:layout_marginEnd="@dimen/spacingMore"
-                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginEnd="@dimen/small_layout"
+                android:layout_marginStart="@dimen/small_layout"
                 android:layout_toEndOf="@id/location_longitude_static"
                 android:text="@string/none"/>
 
@@ -217,8 +217,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textPoopLocationLongitude"
-                android:layout_marginEnd="@dimen/spacingMore"
-                android:layout_marginStart="@dimen/spacingMore"
+                android:layout_marginEnd="@dimen/small_layout"
+                android:layout_marginStart="@dimen/small_layout"
                 android:background="@color/secondaryLightColor"
                 android:text="@string/add_loction_btn"/>
 

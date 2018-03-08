@@ -1,6 +1,8 @@
 package lars.wherehaveishit;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,6 +30,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +44,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -47,12 +54,18 @@ import static java.lang.Double.parseDouble;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
 
+
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     FloatingActionButton btn_addPoop;
+    ImageView noInternett;
+    ImageView noGPS;
     DBHandler db;
     int mapType = 1;
     List<Shit> allShitsInDB;
+    boolean mapTouched = false;
+    private FirebaseAuth mAuth;
+    TextView loggedInText;
 
 
     @Override
@@ -66,6 +79,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
+        noGPS = (ImageView) findViewById(R.id.noGPS);
+        noInternett = (ImageView) findViewById(R.id.noInternett);
+        loggedInText = (TextView) findViewById(R.id.txt_logged_in);
+
+
+        if (!isNetworkAvailable())
+        {
+            Log.i("!NetworkAvaliable", "No");
+            noInternett.setVisibility(View.VISIBLE);
+        }
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -94,6 +117,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Toast cannotDetectLoc = Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.no_location), Toast.LENGTH_LONG);
                     cannotDetectLoc.setGravity(Gravity.CENTER, 0, 0);
                     cannotDetectLoc.show();
+                    noGPS.setVisibility(View.VISIBLE);
+
 
                     return;
                 }
@@ -124,6 +149,37 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mAuth = FirebaseAuth.getInstance();
+
+    }
+
+    public void createAccount(String email, String passwd)
+    {
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onStart( )
+    {
+
+        super.onStart();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
+        if (currentUser != null)
+        {
+            loggedInText.setText(getResources().getString(R.string.logged_in) + ": " + currentUser);
+        }
+    }
+
+    private boolean isNetworkAvailable( )
+    {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 
@@ -209,6 +265,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback()
         {
 
@@ -216,28 +273,43 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onMapLoaded( )
             {
 
-                try
+                if (!mapTouched)
                 {
-                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-                    for (Shit marker : allShitsInDB)
+                    try
                     {
-                        double DBLat = parseDouble(marker.getShitLatitude());
-                        double DBLon = parseDouble(marker.getShitLongitude());
+                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
+                        for (Shit marker : allShitsInDB)
+                        {
+                            double DBLat = parseDouble(marker.getShitLatitude());
+                            double DBLon = parseDouble(marker.getShitLongitude());
 
-                        LatLng mergeLatLng = new LatLng(DBLat, DBLon);
-                        builder.include(mergeLatLng);
+                            LatLng mergeLatLng = new LatLng(DBLat, DBLon);
+                            builder.include(mergeLatLng);
+                        }
+
+                        LatLngBounds bounds = builder.build();
+                        Log.i("bounds", String.valueOf(bounds));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
+                    } catch (Exception e)
+                    {
+                        Log.e("Exception", e.getMessage());
+                        Log.e("ZoomBounds", "Could not zoom to bounds");
                     }
-
-                    LatLngBounds bounds = builder.build();
-                    Log.i("bounds", String.valueOf(bounds));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
-                } catch (Exception e)
-                {
-                    Log.e("Exception", e.getMessage());
-                    Log.e("ZoomBounds", "Could not zoom to bounds");
                 }
+            }
+        });
+
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener()
+        {
+
+            @Override
+            public void onMapClick( LatLng latLng )
+            {
+
+                mMap.stopAnimation();
             }
         });
     }
@@ -297,6 +369,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     // Disabling the functionality that depends on this permission.
                     // Makes the button invisible, now only MapsActivity is accessible.
                     btn_addPoop.setVisibility(View.INVISIBLE);
+                    noGPS.setVisibility(View.VISIBLE);
 
                     // Prompts a text explaining that some functionality will be disabled
                     Toast.makeText(this, getResources().getString(R.string.no_longer_able_to_add_poop), Toast.LENGTH_LONG).show();

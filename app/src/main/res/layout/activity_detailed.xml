@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/name_of_place"
         android:textStyle="bold"/>
@@ -20,14 +20,14 @@
         android:id="@+id/editPoopName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:inputType="text"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/rating_of_place_cleanness"
         android:textStyle="bold"/>
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:numStars="5"
         android:stepSize="0.5"/>
@@ -46,7 +46,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/rating_of_place_privacy"
         android:textStyle="bold"/>
@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:numStars="5"
         android:stepSize="0.5"/>
@@ -64,7 +64,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/rating_of_place_overall"
         android:textStyle="bold"/>
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:numStars="5"
         android:stepSize="0.5"/>
@@ -82,7 +82,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/add_poop_note"
         android:textStyle="bold"/>
@@ -91,14 +91,14 @@
         android:id="@+id/editPoopNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:inputType="text"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1">
 
         <TextView
@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopDate"
-            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
             android:layout_toEndOf="@id/poopDate"/>
 
         <TextView
@@ -129,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopTime"
-            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
             android:layout_toEndOf="@id/poopTime"/>
 
         <TextView
@@ -145,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopLocationLat"
-            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
             android:layout_toEndOf="@id/poopLocationLat"/>
 
         <TextView
@@ -161,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/poopLocationLon"
-            android:layout_marginStart="@dimen/spacingMore"
+            android:layout_marginStart="@dimen/small_layout"
             android:layout_toEndOf="@id/poopLocationLon"/>
 
     </RelativeLayout>

@@ -9,8 +9,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacingMore"
-        android:layout_marginTop="@dimen/spacing"
+        android:layout_marginStart="@dimen/small_layout"
+        android:layout_marginTop="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/name_of_place"
         android:textStyle="bold"/>
@@ -19,17 +19,17 @@
         android:id="@+id/edit_shitName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing"
-        android:layout_marginEnd="@dimen/spacingMore"
-        android:layout_marginStart="@dimen/spacingMore"
+        android:layout_marginBottom="@dimen/tiny_layout"
+        android:layout_marginEnd="@dimen/small_layout"
+        android:layout_marginStart="@dimen/small_layout"
         android:layout_weight="1"
         android:inputType="text"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacingMore"
-        android:layout_marginTop="@dimen/spacing"
+        android:layout_marginStart="@dimen/small_layout"
+        android:layout_marginTop="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/rating_of_place_cleanness"
         android:textStyle="bold"/>
@@ -47,8 +47,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacingMore"
-        android:layout_marginTop="@dimen/spacing"
+        android:layout_marginStart="@dimen/small_layout"
+        android:layout_marginTop="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/rating_of_place_privacy"
         android:textStyle="bold"/>
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:isIndicator="false"
         android:numStars="5"
@@ -68,8 +68,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacingMore"
-        android:layout_marginTop="@dimen/spacing"
+        android:layout_marginStart="@dimen/small_layout"
+        android:layout_marginTop="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/rating_of_place_overall"
         android:textStyle="bold"/>
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_margin="@dimen/spacing"
+        android:layout_margin="@dimen/tiny_layout"
         android:layout_weight="1"
         android:numStars="5"
         android:rating="0"
@@ -88,8 +88,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacingMore"
-        android:layout_marginTop="@dimen/spacing"
+        android:layout_marginStart="@dimen/small_layout"
+        android:layout_marginTop="@dimen/tiny_layout"
         android:layout_weight="1"
         android:text="@string/add_poop_note"
         android:textStyle="bold"/>
@@ -98,9 +98,9 @@
         android:id="@+id/edit_shitNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing"
-        android:layout_marginEnd="@dimen/spacingMore"
-        android:layout_marginStart="@dimen/spacingMore"
+        android:layout_marginBottom="@dimen/tiny_layout"
+        android:layout_marginEnd="@dimen/small_layout"
+        android:layout_marginStart="@dimen/small_layout"
         android:layout_weight="1"
         android:inputType="text"/>
 
