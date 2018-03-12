@@ -91,4 +91,5 @@
     <string name="device_dosent_have_gps_turned_on">Device dosent have GPS turned on</string>
     <string name="not_logged_in">Not logged in</string>
     <string name="logged_in">Logged in as</string>
+    <string name="log_in">Log in</string>
 </resources>

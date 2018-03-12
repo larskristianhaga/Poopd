@@ -67,7 +67,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FirebaseAuth mAuth;
     TextView loggedInText;
 
-
     @Override
     protected void onCreate( Bundle savedInstanceState )
     {
@@ -153,6 +152,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
     public void createAccount(String email, String passwd)
     {
 
@@ -168,7 +168,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
-        if (currentUser != null)
+        if(currentUser != null)
         {
             loggedInText.setText(getResources().getString(R.string.logged_in) + ": " + currentUser);
         }
