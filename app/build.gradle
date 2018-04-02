@@ -6,9 +6,8 @@ android {
     defaultConfig {
         applicationId "lars.wherehaveishit"
         minSdkVersion 21
-        //noinspection OldTargetApi
         targetSdkVersion 25
-        versionCode 16
+        versionCode 17
         versionName "I had a"
         testInstrumentationRunner "android.support.test.runner.An2droidJUnitRunner"
     }
