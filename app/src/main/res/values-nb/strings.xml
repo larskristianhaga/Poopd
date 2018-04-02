@@ -87,6 +87,9 @@
     <string name="no_places">Du har ikke lagt til noen steder</string>
     <string name="place_deleted">Sted slettet</string>
     <string name="now_edit_place">Du kan nå endre stedet!</string>
-    <string name="device_has_no_internett">Device has no internett</string>
-    <string name="device_dosent_have_gps_turned_on">Device dosent have GPS turned on</string>
+    <string name="device_has_no_internett">Enheten har ikke internett</string>
+    <string name="device_dosent_have_gps_turned_on">Enheten har ikke GPS slått på</string>
+    <string name="not_logged_in">Ikke logget inn</string>
+    <string name="logged_in">Logget inn som</string>
+    <string name="log_in">Log in</string>
 </resources>
