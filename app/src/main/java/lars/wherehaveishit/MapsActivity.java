@@ -59,7 +59,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     ImageView noInternett;
     ImageView noGPS;
     DBHandler db;
-    //int mapType = 1;
     public static int mapTypeValue;
     List<Shit> allShitsInDB;
     boolean mapTouched = false;
@@ -270,6 +269,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
 
+
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback()
         {
 
@@ -432,13 +432,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             }
 
+
             mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
             {
 
                 @Override
                 public View getInfoWindow( Marker marker )
                 {
-
                     return null;
                 }
 
