@@ -37,7 +37,7 @@ public class StatisticsActivity extends AppCompatActivity
 
         TextView totalNumberOfShits = (TextView) findViewById(R.id.etxt_numberoftotalshits);
         TextView avgRatingOfShits = (TextView) findViewById(R.id.etxt_ageratingofshits);
-        TextView mostShitCountry = (TextView) findViewById(R.id.etxt_mostshitsincountry);
+        final TextView mostShitCountry = (TextView) findViewById(R.id.etxt_mostshitsincountry);
 
         allShitsInDB = db.findAllShits();
 
@@ -94,7 +94,17 @@ public class StatisticsActivity extends AppCompatActivity
             avgRatingOfShits.setText(getApplicationContext().getString(R.string.none));
         }
 
-        mostShitCountry.setText(getShitiestCountry());
+
+        Thread thread = new Thread(new Runnable()
+        {
+            @Override
+            public void run( )
+            {
+                mostShitCountry.setText(getShitiestCountry());
+            }
+        });
+
+        thread.start();
 
 
         TextView sendFeedbackToDev = (TextView) findViewById(R.id.mailFeedbackToDeveloper);
