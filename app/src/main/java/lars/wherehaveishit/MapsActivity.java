@@ -268,6 +268,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener()
+        {
+            @Override
+            public void onCameraMove( )
+            {
+                if(!mapTouched)
+                {
+                    mapTouched = true;
+                }
+            }
+        });
 
 
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback()
@@ -431,7 +442,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 db.deleteAPoop(shitInMap.get_ID());
 
             }
-
 
             mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
             {
