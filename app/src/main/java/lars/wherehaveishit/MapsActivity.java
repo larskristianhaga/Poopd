@@ -53,15 +53,14 @@ import static java.lang.Double.parseDouble;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
-
-
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     FloatingActionButton btn_addPoop;
     ImageView noInternett;
     ImageView noGPS;
     DBHandler db;
-    int mapType = 1;
+    //int mapType = 1;
+    public static int mapTypeValue;
     List<Shit> allShitsInDB;
     boolean mapTouched = false;
     private FirebaseAuth mAuth;
@@ -182,6 +181,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    private void setMapType( )
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mapTypeValue = preferences.getInt("mapType", 1);
+
+        mMap.setMapType(mapTypeValue);
+    }
+
 
     @Override
     public void onMapReady( GoogleMap googleMap )
@@ -189,10 +196,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mMap = googleMap;
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mapType = preferences.getInt("mapType", 1);
-
-        mMap.setMapType(mapType);
+        setMapType();
 
         // Enables controls on the Map
         mMap.getUiSettings().setCompassEnabled(false);
@@ -393,10 +397,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             readFileAndMarkOnMap();
             Log.i("readFileAndMarkOnMap", "readFileAndMarkOnMap");
 
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            mapType = preferences.getInt("mapType", 1);
-            mMap.setMapType(mapType);
-            Log.i("mapType", String.valueOf(mapType));
+            setMapType();
         }
 
 

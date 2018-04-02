@@ -13,11 +13,17 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
+import static lars.wherehaveishit.MapsActivity.mapTypeValue;
+
 public class SettingsActivity extends AppCompatPreferenceActivity
 {
 
     static int mapTypeInt;
     static boolean backupEnabled;
+    static BiMap<String, Integer> MapType = HashBiMap.create();
 
     @Override
     protected void onCreate( Bundle savedInstanceState )
@@ -32,6 +38,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity
 
         // load settings fragment
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mapTypeValue = sharedPreferences.getInt("mapType", 1);
+        Log.i("Develop", "MapType: " + mapTypeValue);
+
+        String[] differentMapTypes = getResources().getStringArray(R.array.maptype);
+
+        MapType.put(differentMapTypes[0], 1);
+        MapType.put(differentMapTypes[1], 2);
+        MapType.put(differentMapTypes[2], 3);
+        MapType.put(differentMapTypes[3], 4);
 
     }
 
@@ -50,23 +67,23 @@ public class SettingsActivity extends AppCompatPreferenceActivity
             versionName.setSummary(BuildConfig.VERSION_NAME);
 
             final Preference mapType = findPreference("maptype");
-            mapType.setSummary(getMapTypeString(mapTypeInt));
+            mapType.setSummary(MapType.inverse().get(mapTypeValue));
+            Log.i("Develop", "summary: " + MapType.inverse().get(mapTypeValue));
+
             mapType.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
-
                 @Override
                 public boolean onPreferenceChange( Preference preference, Object newValue )
                 {
+                    mapType.setSummary(newValue.toString());
+                    Log.i("Develop", String.valueOf(MapType.get(newValue)));
+                    MapsActivity.mMap.setMapType(mapTypeValue);
 
-                    mapType.setSummary((CharSequence) newValue);
-                    Log.i("testing", String.valueOf(preference));
-                    mapTypeInt = setMapTypeInt(newValue);
-                    MapsActivity.mMap.setMapType(mapTypeInt);
-
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("mapType", mapTypeInt);
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("mapType", MapType.get(newValue));
                     editor.apply();
+
                     return true;
                 }
             });
@@ -113,52 +130,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity
                 }
             });
         }
-    }
-
-    public static int setMapTypeInt( Object i )
-    {
-
-        int mapTypeString = 0;
-
-        switch (i.toString())
-        {
-            case "Normal":
-                mapTypeString = 1;
-                break;
-            case "Satellite":
-                mapTypeString = 2;
-                break;
-            case "Terrain":
-                mapTypeString = 3;
-                break;
-            case "Hybrid33":
-                mapTypeString = 4;
-                break;
-        }
-        return mapTypeString;
-    }
-
-    public static String getMapTypeString( int i )
-    {
-
-        String mapTypeString = null;
-
-        switch (i)
-        {
-            case 1:
-                mapTypeString = "Normal";
-                break;
-            case 2:
-                mapTypeString = "Satellite";
-                break;
-            case 3:
-                mapTypeString = "Terrain";
-                break;
-            case 4:
-                mapTypeString = "Hybrid33";
-                break;
-        }
-        return mapTypeString;
     }
 
     @Override
