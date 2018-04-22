@@ -7,7 +7,7 @@
     <string name="settings">Instillinger</string>
     <string name="how_many_poops_total">Hvor mange steder du har logget:</string>
     <string name="how_to_use_informal">You can use this app to save places toy have poopd on to a map, so you can see where you have taken a poop. You can also add a name, cleanness rating, privacy rating, overall rating and a note to every poop. To add a poop use the button in the middle lower part of the screen. If the button is not there you need to enable location services in the application settings page, og you can go to settings and press \"App info\" to go directly there."\n\n"Happy pooping!</string>
-    <string name="about_application">Denne appen er et deltidsprosjekt av en dataingeniør student ved HiOA. Prosjektet er open-source og kildekoden ligger åpen på Github.</string>
+    <string name="about_application">Denne appen er et deltidsprosjekt av en dataingeniør student ved OsloMet. Prosjektet er open-source og kildekoden ligger åpen på Github.</string>
     <string name="have_any_feedback">Klikk her for å sende tilbakemelding</string>
     <string name="rating_of_place_privacy">Privathet vurdering:</string>
     <string name="rating_of_place_overall">Alt i alt vurdering:</string>
