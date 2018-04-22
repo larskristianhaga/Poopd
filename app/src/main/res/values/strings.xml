@@ -6,8 +6,8 @@
     <string name="statistics">Statistics</string>
     <string name="settings">Settings</string>
     <string name="how_many_poops_total">How many places you have logged:</string>
-    <string name="how_to_use_informal">You can use this app to save places toy have poopd on to a map, so you can see where you have taken a poop. You can also add a name, cleanness rating, privacy rating, overall rating and a note to every poop. To add a poop use the button in the middle lower part of the screen. If the button is not there you need to enable location services in the application settings page, og you can go to settings and press \"App info\" to go directly there."\n\n"Happy pooping!</string>
-    <string name="about_application">This app is a part time project by a software engineer student at HiOA. The project is open-source and the source code is viewable on my Github page.</string>
+    <string name="how_to_use_informal">You can use this app to save places you have poopd on to a map, so you can see where you have taken a poop. You can also add a name, cleanness rating, privacy rating, overall rating and a note to every poop. To add a poop use the button in the middle lower part of the screen. If the button is not there you need to enable location services in the application settings page, or you can go to settings and press \"App info\" to go directly there."\n\n"Happy pooping!</string>
+    <string name="about_application">This app is a part time project by a software engineer student at OsloMet. The project is open-source and the source code is available on my Github page.</string>
     <string name="have_any_feedback">Click here to send feedback</string>
     <string name="rating_of_place_privacy">Privacy rating:</string>
     <string name="rating_of_place_overall">Overall rating:</string>
