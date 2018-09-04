@@ -20,8 +20,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class CustomPoopActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener
-{
+public class CustomPoopActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     DBHandler db;
     EditText customPoopName;
@@ -40,9 +39,10 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     int minute;
     String shitCustom = "Yes";
 
+
+
     @Override
-    protected void onCreate( Bundle savedInstanceState )
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         db = new DBHandler(this);
 
@@ -62,12 +62,10 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
         Button addTime = (Button) findViewById(R.id.addTime);
         Button addLocation = (Button) findViewById(R.id.addLocation);
 
-        addDate.setOnClickListener(new View.OnClickListener()
-        {
+        addDate.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick( View v )
-            {
+            public void onClick(View v) {
 
                 getDate();
                 DatePickerDialog datePickerDialog = new DatePickerDialog(CustomPoopActivity.this, CustomPoopActivity.this, year, month, day);
@@ -76,12 +74,10 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
-        addTime.setOnClickListener(new View.OnClickListener()
-        {
+        addTime.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick( View v )
-            {
+            public void onClick(View v) {
 
                 getTime();
                 TimePickerDialog timePickerDialog = new TimePickerDialog(CustomPoopActivity.this, CustomPoopActivity.this, hour, minute, true);
@@ -90,30 +86,27 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
-        addLocation.setOnClickListener(new View.OnClickListener()
-        {
+        addLocation.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick( View v )
-            {
+            public void onClick(View v) {
 
                 Intent setCustomLocation = new Intent(CustomPoopActivity.this, CustomMarkerMapActivity.class);
                 startActivityForResult(setCustomLocation, 555);
             }
         });
 
+        Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.scroll_custom_poop), Toast.LENGTH_LONG).show();
     }
 
-    private void getTime( )
-    {
+    private void getTime() {
 
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
     }
 
-    private void getDate( )
-    {
+    private void getDate() {
 
         Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
@@ -122,8 +115,7 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     }
 
     @Override
-    public boolean onCreateOptionsMenu( Menu menu )
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.done_menu, menu);
@@ -133,49 +125,38 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     }
 
     @Override
-    public boolean onOptionsItemSelected( MenuItem item )
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.done)
-        {
+        if (item.getItemId() == R.id.done) {
 
-            if (customPoopName.getText().length() == 0)
-            {
+            if (customPoopName.getText().length() == 0) {
                 Toast.makeText(this, getApplicationContext().getString(R.string.type_in_name), Toast.LENGTH_LONG).show();
-            }
-            else if (customPoopDate.getText().toString().equals(getApplicationContext().getString(R.string.none)))
-            {
+            } else if (customPoopDate.getText().toString().equals(getApplicationContext().getString(R.string.none))) {
                 Toast.makeText(this, getApplicationContext().getString(R.string.type_in_date), Toast.LENGTH_LONG).show();
-            }
-            else if (customPoopTime.getText().toString().equals(getApplicationContext().getString(R.string.none)))
-            {
+            } else if (customPoopTime.getText().toString().equals(getApplicationContext().getString(R.string.none))) {
                 Toast.makeText(this, getApplicationContext().getString(R.string.type_in_time), Toast.LENGTH_LONG).show();
-            }
-            else if (customPoopLocationLat.getText().equals(getApplicationContext().getString(R.string.none)) || customPoopLocationLon.getText().equals(getApplicationContext().getString(R.string.none)))
-            {
+            } else if (customPoopLocationLat.getText().equals(getApplicationContext().getString(R.string.none)) || customPoopLocationLon.getText()
+                    .equals(getApplicationContext().getString(R.string.none))) {
                 Toast.makeText(this, getApplicationContext().getString(R.string.type_in_loc), Toast.LENGTH_LONG).show();
-            }
-            else
-            {
+            } else {
                 Shit shit;
                 String customPoopDateAndTime = customPoopDate.getText().toString() + " , " + customPoopTime.getText().toString();
 
-                shit = new Shit(customPoopName.getText().toString(), customPoopDateAndTime, customPoopLocationLon.getText().toString(), customPoopLocationLat.getText().toString(), customPoopRatingCleanness.getRating(), customPoopRatingPrivacy.getRating(), customPoopRatingOverall.getRating(), customPoopNote.getText().toString(), shitCustom);
+                shit = new Shit(customPoopName.getText().toString(), customPoopDateAndTime, customPoopLocationLon.getText().toString(),
+                        customPoopLocationLat.getText().toString(), customPoopRatingCleanness.getRating(), customPoopRatingPrivacy.getRating(),
+                        customPoopRatingOverall.getRating(), customPoopNote.getText().toString(), shitCustom);
 
                 db.addShit(shit);
                 finish();
             }
-        }
-        else
-        {
+        } else {
             return super.onOptionsItemSelected(item);
         }
         return true;
     }
 
     @Override
-    public void onDateSet( DatePicker view, int year, int month, int dayOfMonth )
-    {
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         String setDate = dayOfMonth + "/" + (month + 1) + "-" + year;
         customPoopDate.setText(setDate);
@@ -183,30 +164,25 @@ public class CustomPoopActivity extends AppCompatActivity implements DatePickerD
     }
 
     @Override
-    public void onTimeSet( TimePicker view, int hourOfDay, int minute )
-    {
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
         String setTime = hourOfDay + ":" + minute;
         customPoopTime.setText(setTime);
     }
 
     @Override
-    protected void onActivityResult( int requestCode, int resultCode, Intent data )
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 555)
-        {
-            if (resultCode == RESULT_OK)
-            {
+        if (requestCode == 555) {
+            if (resultCode == RESULT_OK) {
                 Log.i("resultCode", "RESULT_OK");
 
                 customPoopLocationLat.setText(data.getStringExtra("CustomLocationLatitude"));
                 customPoopLocationLon.setText(data.getStringExtra("CustomLocationLongitude"));
 
             }
-            if (resultCode == RESULT_CANCELED)
-            {
+            if (resultCode == RESULT_CANCELED) {
                 Log.i("resultCode", "RESULT_CANCELED");
             }
         }
