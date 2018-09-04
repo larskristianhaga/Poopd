@@ -92,4 +92,5 @@
     <string name="not_logged_in">Not logged in</string>
     <string name="logged_in">Logged in as</string>
     <string name="log_in">Log in</string>
+    <string name="scroll_custom_poop">Scroll down to add location</string>
 </resources>
