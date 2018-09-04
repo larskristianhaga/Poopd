@@ -280,6 +280,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+                Log.i("ZOOM", "pressed");
+
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(),17));
+                Log.i("ZOOM", String.valueOf(marker.getPosition()));
+                marker.showInfoWindow();
+                return false;
+
+            }
+        });
+
 
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback()
         {
