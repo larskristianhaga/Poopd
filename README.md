@@ -1,6 +1,10 @@
 # Poopd!
 A android app that allows you to map where you have taken a poop!
 
+Improvements
+- [ ] Update database
+- [ ] Improve performance
+
 Google Play: https://play.google.com/store/apps/details?id=lars.wherehaveishit
 
 Privacy policy:
