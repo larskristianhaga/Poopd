@@ -1,69 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/general">
+  <PreferenceCategory android:title="@string/general">
+
+    <Preference
+      android:selectable="true"
+      android:title="@string/privacy_policy_header"
+      android:summary="@string/privacy_policy"/>
+
+    <ListPreference
+      android:defaultValue="@string/map_type_normal"
+      android:entries="@array/maptype"
+      android:entryValues="@array/maptype"
+      android:key="maptype"
+      android:title="@string/change_map_type"/>
 
 
-        <ListPreference
-            android:defaultValue="@string/map_type_normal"
-            android:entries="@array/maptype"
-            android:entryValues="@array/maptype"
-            android:key="maptype"
-            android:title="@string/change_map_type"/>
+  </PreferenceCategory>
 
-    </PreferenceCategory>
+  <!--
+  <PreferenceCategory android:title="@string/backup">
 
-    <!--
-    <PreferenceCategory android:title="@string/backup">
+      <SwitchPreference
+          android:icon="@drawable/ic_cloud_24dp"
+          android:key="backup_to_cloud"
+          android:defaultValue="false"
+          android:enabled="false"
+          android:summary="@string/coming_soon"
+          android:title="@string/backup_to_cloud"/>
 
-        <SwitchPreference
-            android:icon="@drawable/ic_cloud_24dp"
-            android:key="backup_to_cloud"
-            android:defaultValue="false"
-            android:enabled="false"
-            android:summary="@string/coming_soon"
-            android:title="@string/backup_to_cloud"/>
+  </PreferenceCategory>
+  -->
 
-    </PreferenceCategory>
-    -->
+  <PreferenceCategory android:title="@string/pref_header_about">
 
-    <PreferenceCategory android:title="@string/pref_header_about">
+    <Preference
+      android:selectable="false"
+      android:summary="@string/about_application"/>
 
-        <Preference
-            android:selectable="false"
-            android:summary="@string/about_application"/>
+  </PreferenceCategory>
 
-    </PreferenceCategory>
+  <PreferenceCategory android:title="@string/other">
 
-    <PreferenceCategory android:title="@string/other">
+    <Preference
+      android:key="versionName"
+      android:title="@string/title_version"/>
 
-        <Preference
-            android:key="versionName"
-            android:title="@string/title_version"/>
+    <Preference
+      android:summary="@string/see_on_google_play_summary"
+      android:title="@string/see_on_google_play">
+      <intent
+        android:action="android.intent.action.VIEW"
+        android:data="@string/url_google_play"/>
+    </Preference>
 
-        <Preference
-            android:summary="@string/see_on_google_play_summary"
-            android:title="@string/see_on_google_play">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="@string/url_google_play"/>
-        </Preference>
+    <Preference
+      android:summary="@string/see_source_code"
+      android:title="@string/source_code">
+      <intent
+        android:action="android.intent.action.VIEW"
+        android:data="@string/url_github"/>
+    </Preference>
 
-        <Preference
-            android:summary="@string/see_source_code"
-            android:title="@string/source_code">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="@string/url_github"/>
-        </Preference>
+    <Preference
+      android:key="appInfo"
+      android:title="@string/see_app_information"/>
 
-        <Preference
-            android:key="appInfo"
-            android:title="@string/see_app_information"/>
+    <Preference
+      android:key="@string/send_feedback"
+      android:title="@string/send_feedback"/>
 
-        <Preference
-            android:key="@string/send_feedback"
-            android:title="@string/send_feedback"/>
-
-    </PreferenceCategory>
+  </PreferenceCategory>
 </PreferenceScreen>
