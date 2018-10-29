@@ -8,8 +8,8 @@ android {
     defaultConfig {
         applicationId "lars.wherehaveishit"
         minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 18
+        targetSdkVersion 28
+        versionCode 20
         versionName "I had a ca"
         testInstrumentationRunner "android.support.test.runner.An2droidJUnitRunner"
     }
