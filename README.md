@@ -21,4 +21,4 @@ Improvements in the future
 * Application uses location for allowing user to add markers on their location in real time.
 
 ## License
-This project is licensed under the terms of the MIT license. See the LICENSE file.
+This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file.
