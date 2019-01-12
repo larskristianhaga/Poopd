@@ -15,6 +15,21 @@ Improvements in the future
   src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
 </a>
 
+## Screenshots? Screenshots!
+
+<img src="https://lh3.googleusercontent.com/KZWgjI6IVxorgD6UzbifrmJTEmSe2fRl0GGm91XQ_kO8X0oNbsjZON4x6O23zNZNHDc=w2467-h1009-rw"
+height="500"
+alt="Application screenshot"
+/>
+<img src="https://lh3.googleusercontent.com/rhkZeKTm8ePuVUZfQn2XmEInDXEA3qVzUwWChrGltCsHBIi1JGCRcmF7WXJUWrjr3zs=w2467-h1009-rw"
+height="500"
+alt="Application screenshot"
+/>
+<img src="https://lh3.googleusercontent.com/hsjtYmP-OUk5NpO3LctaJK1alE8rmz4IcGP0-g_W3rFpYm19Nbltcx_PGyrAxp_zA-Gh=w2467-h1009-rw"
+height="500"
+alt="Application screenshot"
+/>
+
 ## Privacy policy:
 * Application is 100% open-source.
 * The application does not collect any data about the user, all data is stored on device. And can be deleted by the user whenever they want to.
