@@ -1,5 +1,21 @@
 package lars.wherehaveishit;
 
+import static java.lang.Double.parseDouble;
+
+import java.util.List;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -35,22 +51,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.List;
-
-import static java.lang.Double.parseDouble;
-
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
 {
     static GoogleMap mMap;
@@ -74,18 +74,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         db = new DBHandler(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        btn_addPoop = (FloatingActionButton) findViewById(R.id.btn_addShit);
-        noGPS = (ImageView) findViewById(R.id.noGPS);
-        noInternett = (ImageView) findViewById(R.id.noInternett);
-        loggedInText = (TextView) findViewById(R.id.txt_logged_in);
-
-
-        if (!isNetworkAvailable())
-        {
-            Log.i("!NetworkAvaliable", "No");
-            noInternett.setVisibility(View.VISIBLE);
-        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        btn_addPoop = findViewById(R.id.btn_addShit);
+        noGPS = findViewById(R.id.noGPS);
+        noInternett = findViewById(R.id.noInternett);
+        loggedInText = findViewById(R.id.txt_logged_in);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -137,13 +130,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         mAuth = FirebaseAuth.getInstance();
@@ -412,8 +405,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onResume( )
     {
-
         super.onResume();
+
+        if (!isNetworkAvailable())
+        {
+            Log.i("!NetworkAvaliable", "No");
+            noInternett.setVisibility(View.VISIBLE);
+        }
 
         // Reads file and marks on the map if mMap is not null
         if (mMap != null)
@@ -522,7 +520,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onBackPressed( )
     {
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START))
         {
             drawer.closeDrawer(GravityCompat.START);
@@ -574,7 +572,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
