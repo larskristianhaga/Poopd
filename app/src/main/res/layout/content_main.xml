@@ -28,20 +28,19 @@
     android:id="@+id/noInternett"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/normal_layout"
-    android:layout_alignStart="@+id/btn_addShit"
+    android:layout_marginTop="45dp"
+    android:layout_marginStart="@dimen/normal_layout"
     android:contentDescription="@string/device_has_no_internett"
-    android:visibility="invisible"
-    app:srcCompat="@drawable/ic_no_internett_24dp"/>
+    android:visibility="invisible" app:srcCompat="@drawable/ic_no_internett_24dp"/>
 
   <ImageView
     android:id="@+id/noGPS"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/normal_layout"
-    android:layout_alignEnd="@+id/btn_addShit"
+    android:layout_marginStart="@dimen/normal_layout"
+    android:layout_below="@id/noInternett"
     android:contentDescription="@string/device_dosent_have_gps_turned_on"
-    android:visibility="invisible"
-    app:srcCompat="@drawable/ic_gps_off_24dp"/>
+    android:visibility="invisible" app:srcCompat="@drawable/ic_gps_off_24dp"/>
 
 </RelativeLayout>
