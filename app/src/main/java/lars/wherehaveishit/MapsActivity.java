@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -51,23 +52,30 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener
-{
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+
     static GoogleMap mMap;
+
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     FloatingActionButton btn_addPoop;
     ImageView noInternet;
+
     ImageView noGPS;
+
     DBHandler db;
+
     public static int mapTypeValue;
+
     List<Shit> allShitsInDB;
+
     boolean mapTouched = false;
+
     private FirebaseAuth mAuth;
+
     TextView loggedInText;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState )
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -83,47 +91,41 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        btn_addPoop.setOnClickListener(new View.OnClickListener()
-        {
+        btn_addPoop.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick( View view )
-            {
+            public void onClick(View view) {
 
                 String currentLocationLonFin;
                 String currentLocationLatFin;
                 float currentLocationAccuracy;
 
-                try
-                {
+                try {
                     Location getCurrentLocation = MapsActivity.mMap.getMyLocation();
 
                     currentLocationLatFin = String.valueOf(getCurrentLocation.getLatitude());
                     currentLocationLonFin = String.valueOf(getCurrentLocation.getLongitude());
                     currentLocationAccuracy = getCurrentLocation.getAccuracy();
 
-                } catch (NullPointerException e)
-                {
-                    Toast cannotDetectLoc = Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.no_location), Toast.LENGTH_LONG);
+                    Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
+                    addShit.putExtra("LocationLatitude", currentLocationLatFin);
+                    addShit.putExtra("LocationLongitude", currentLocationLonFin);
+                    addShit.putExtra("LocationAccuracy", currentLocationAccuracy);
+                    startActivity(addShit);
+
+                } catch (NullPointerException e) {
+                    Toast cannotDetectLoc = Toast
+                            .makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.no_location),
+                                    Toast.LENGTH_LONG);
                     cannotDetectLoc.setGravity(Gravity.CENTER, 0, 0);
                     cannotDetectLoc.show();
                     noGPS.setVisibility(View.VISIBLE);
-
-
-                    return;
                 }
-
-                Intent addShit = new Intent(MapsActivity.this, AddShitActivity.class);
-                addShit.putExtra("LocationLatitude", currentLocationLatFin);
-                addShit.putExtra("LocationLongitude", currentLocationLonFin);
-                addShit.putExtra("LocationAccuracy", currentLocationAccuracy);
-                startActivity(addShit);
             }
         });
 
         // Checks the SDK of the phone its running on
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
 
@@ -144,37 +146,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-    public void createAccount(String email, String passwd)
-    {
+    public void createAccount(String email, String passwd) {
 
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onStart( )
-    {
+    public void onStart() {
 
         super.onStart();
 
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
-        if(currentUser != null)
-        {
-            loggedInText.setText(getResources().getString(R.string.logged_in) + ": " + currentUser);
+        // UpdateUI (currentUser);
+        if (currentUser != null) {
+            loggedInText.setText(getResources().getString(R.string.logged_in) + currentUser);
         }
     }
 
-    private boolean isNetworkAvailable( )
-    {
+    private void setMapType() {
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    private void setMapType( )
-    {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         mapTypeValue = preferences.getInt("mapType", 1);
 
@@ -183,11 +174,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     @Override
-    public void onMapReady( GoogleMap googleMap )
-    {
+    public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
 
+        // Sets the correct map type the user has specified, else chooses the normal maptype
         setMapType();
 
         // Enables controls on the Map
@@ -197,45 +188,34 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.getUiSettings().setMapToolbarEnabled(false);
 
         // Checks the SDK build version, and decides from that what it will continue doing.
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            //User has previously accepted this permission
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // User has previously accepted this permission
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 // Enables your position in the map
                 mMap.setMyLocationEnabled(true);
                 readFileAndMarkOnMap();
             }
-        }
-        else
-        {
-            //Not in api-23 and above, no need to prompt
+        } else {
+            // Not in API-23 and above, no need to prompt
             mMap.setMyLocationEnabled(true);
             readFileAndMarkOnMap();
-
         }
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
 
-
-        mMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener()
-        {
+        mMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {
 
             @Override
-            public void onInfoWindowLongClick( final Marker marker )
-            {
+            public void onInfoWindowLongClick(final Marker marker) {
 
                 new AlertDialog.Builder(MapsActivity.this)
                         .setMessage(getResources().getString(R.string.sure_you_want_to_delete))
-                        .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener()
-                        {
+                        .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
 
                             @Override
-                            public void onClick( DialogInterface dialog, int which )
-                            {
+                            public void onClick(DialogInterface dialog, int which) {
 
                                 db.deleteAPoop((Long) marker.getTag());
                                 Toast.makeText(MapsActivity.this, getResources().getString(R.string.poop_deleted), Toast.LENGTH_SHORT).show();
@@ -248,12 +228,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
-        {
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
             @Override
-            public void onInfoWindowClick( Marker marker )
-            {
+            public void onInfoWindowClick(Marker marker) {
 
                 Intent seeDetailedPoop = new Intent(MapsActivity.this, DetailedActivity.class);
                 seeDetailedPoop.putExtra("markerTag", (Long) marker.getTag());
@@ -261,25 +239,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener()
-        {
+        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+
             @Override
-            public void onCameraMove( )
-            {
-                if(!mapTouched)
-                {
+            public void onCameraMove() {
+
+                if (!mapTouched) {
                     mapTouched = true;
                 }
             }
         });
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
             @Override
             public boolean onMarkerClick(Marker marker) {
 
                 Log.i("ZOOM", "pressed");
 
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(),17));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 17));
                 Log.i("ZOOM", String.valueOf(marker.getPosition()));
                 marker.showInfoWindow();
                 return false;
@@ -287,23 +265,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback()
-        {
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
 
             @Override
-            public void onMapLoaded( )
-            {
+            public void onMapLoaded() {
 
-                if (!mapTouched)
-                {
+                if (!mapTouched) {
 
-                    try
-                    {
+                    try {
                         LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-                        for (Shit marker : allShitsInDB)
-                        {
+                        for (Shit marker : allShitsInDB) {
                             double DBLat = parseDouble(marker.getShitLatitude());
                             double DBLon = parseDouble(marker.getShitLongitude());
 
@@ -314,8 +286,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         LatLngBounds bounds = builder.build();
                         Log.i("bounds", String.valueOf(bounds));
                         mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200));
-                    } catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         Log.e("Exception", e.getMessage());
                         Log.e("ZoomBounds", "Could not zoom to bounds");
                     }
@@ -323,13 +294,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener()
-        {
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
-            public void onMapClick( LatLng latLng )
-            {
+            public void onMapClick(LatLng latLng) {
 
                 mMap.stopAnimation();
             }
@@ -337,56 +305,44 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     // Requests the location permission
-    private boolean checkLocationPermission( )
-    {
+    private boolean checkLocationPermission() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
-            {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an expanation to the user, this thread waiting for the user's response! After the user sees the explanation, try again to request the permission.
                 Toast.makeText(this, getResources().getString(R.string.need_location), Toast.LENGTH_LONG).show();
 
                 // Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
-            }
-            else
-            {
+                ActivityCompat
+                        .requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+            } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+                ActivityCompat
+                        .requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
             }
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
 
 
     @Override
-    public void onRequestPermissionsResult( int requestCode, @NonNull String permissions[], @NonNull int[] grantResults )
-    {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        switch (requestCode)
-        {
-            case MY_PERMISSIONS_REQUEST_FINE_LOCATION:
-            {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     // Permission was granted, WHOOOP!
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-                    {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         // Enables your position in the map
                         mMap.setMyLocationEnabled(true);
 
                     }
-                }
-                else
-                {
+                } else {
                     // Permission denied, shit!
                     // Disabling the functionality that depends on this permission.
                     // Makes the button invisible, now only MapsActivity is accessible.
@@ -403,19 +359,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
-    public void onResume( )
-    {
+    public void onResume() {
+
         super.onResume();
 
-        if (!isNetworkAvailable())
-        {
-            Log.i("!NetworkAvaliable", "No");
+        if (!isNetworkAvailable()) {
+            Log.i("!NetworkAvailable", "No");
             noInternet.setVisibility(View.VISIBLE);
         }
 
+        // Checks if GPS is enabled or not and shows icon
+        if (!isGPSAvailable()) {
+            Log.i("!isGPSAvailable", "No");
+            noGPS.setVisibility(View.VISIBLE);
+        }
+
         // Reads file and marks on the map if mMap is not null
-        if (mMap != null)
-        {
+        if (mMap != null) {
             mMap.clear();
             readFileAndMarkOnMap();
             Log.i("readFileAndMarkOnMap", "readFileAndMarkOnMap");
@@ -423,50 +383,64 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             setMapType();
         }
 
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
-            if (mMap != null)
-            {
+        // Hides the add poop button if location permission has not been granted
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (mMap != null) {
                 mMap.setMyLocationEnabled(true);
             }
             btn_addPoop.setVisibility(View.VISIBLE);
         }
     }
 
+    private boolean isNetworkAvailable() {
 
-    public void readFileAndMarkOnMap( )
-    {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
+    private boolean isGPSAvailable() {
+
+        boolean GPSAvailable = false;
+        LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+
+        try {
+            GPSAvailable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception e) {
+            // GPSAvailable is already false
+        }
+
+        return GPSAvailable;
+    }
+
+    public void readFileAndMarkOnMap() {
 
         allShitsInDB = db.findAllShits();
 
-        for (Shit shitInMap : allShitsInDB)
-        {
-            // Try catching here because if someone gets a Nullpointer as location as manages to save it, it beaks the app and you have to delete the entire database.
-            try
-            {
-                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(), shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitCustom()).setTag(shitInMap.get_ID());
-            } catch (NullPointerException e)
-            {
+        for (Shit shitInMap : allShitsInDB) {
+            // Try catching here because if someone gets a NullPointer as location as manages to save it, it beaks the app and you have to delete the entire database.
+            try {
+                createMarker(shitInMap.getShitName(), shitInMap.getShitLongitude(), shitInMap.getShitLatitude(), shitInMap.getShitRatingCleanness(),
+                        shitInMap.getShitRatingPrivacy(), shitInMap.getShitRatingOverall(), shitInMap.getShitCustom()).setTag(shitInMap.get_ID());
+            } catch (NullPointerException e) {
                 Log.e("createMarkerError", e.toString());
                 Log.e("createMarkerNullPointer", "Deletes shit with name: " + shitInMap.getShitName());
                 // Deletes the poop it cannot show on the map
                 db.deleteAPoop(shitInMap.get_ID());
-
             }
 
-            mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter()
-            {
+            mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
                 @Override
-                public View getInfoWindow( Marker marker )
-                {
+                public View getInfoWindow(Marker marker) {
+
                     return null;
                 }
 
                 @Override
-                public View getInfoContents( Marker marker )
-                {
+                public View getInfoContents(Marker marker) {
 
                     LinearLayout info = new LinearLayout(getApplicationContext());
                     info.setOrientation(LinearLayout.VERTICAL);
@@ -493,8 +467,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private Marker createMarker( String shitName, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy, double shitRatingOverall, String shitCustom )
-    {
+    private Marker createMarker(String shitName, String shitLongitude, String shitLatitude, double shitRatingCleanness, double shitRatingPrivacy,
+            double shitRatingOverall, String shitCustom) {
 
         double shitLongitudeFin = parseDouble(shitLongitude);
         double shitLatitudeFin = parseDouble(shitLatitude);
@@ -503,10 +477,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         MarkerOptions marker = (new MarkerOptions()
                 .position(new LatLng(shitLatitudeFin, shitLongitudeFin))
                 .title(shitName)
-                .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources().getString(R.string.click_to_see_more)));
+                .snippet(getResources().getString(R.string.avg_rating) + " " + avgRating + "\n" + getResources()
+                        .getString(R.string.click_to_see_more)));
 
-        if (shitCustom.equals("Yes"))
-        {
+        if (shitCustom.equals("Yes")) {
             marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         }
 
@@ -517,24 +491,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // Prompt the users and ask if the really want to exit the application.
     @Override
-    public void onBackPressed( )
-    {
+    public void onBackPressed() {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START))
-        {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else
-        {
+        } else {
             new AlertDialog.Builder(this)
                     .setMessage(getResources().getString(R.string.sure_you_want_to_exit))
-                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener()
-                    {
+                    .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
 
                         @Override
-                        public void onClick( DialogInterface dialog, int which )
-                        {
+                        public void onClick(DialogInterface dialog, int which) {
 
                             finish();
                         }
@@ -545,11 +513,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    public boolean onNavigationItemSelected( MenuItem item )
-    {
+    public boolean onNavigationItemSelected(MenuItem item) {
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.howtouse:
                 Intent seeHowToUse = new Intent(this, HowToUseActivity.class);
                 startActivity(seeHowToUse);
