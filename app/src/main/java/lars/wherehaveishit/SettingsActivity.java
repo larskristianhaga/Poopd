@@ -1,5 +1,10 @@
 package lars.wherehaveishit;
 
+import static lars.wherehaveishit.MapsActivity.mapTypeValue;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,11 +17,6 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
-
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-
-import static lars.wherehaveishit.MapsActivity.mapTypeValue;
 
 public class SettingsActivity extends AppCompatPreferenceActivity
 {
@@ -105,13 +105,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity
 
             /*
             final SwitchPreference backupToGoogleCloud = (SwitchPreference) findPreference("backup_to_cloud");
-            backupToGoogleCloud.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
-            {
-
-        z        @Override
-                public boolean onPreferenceChange( Preference preference, Object newValue )
-                {
-
+            backupToGoogleCloud.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange( Preference preference, Object newValue ) {
                     backupEnabled = (boolean) newValue;
                     return true;
                 }
