@@ -90,7 +90,7 @@
   <string name="device_has_no_internett">Enheten har ikke internett</string>
   <string name="device_dosent_have_gps_turned_on">Enheten har ikke GPS slått på</string>
   <string name="not_logged_in">Ikke logget inn</string>
-  <string name="logged_in">Logget inn som</string>
+  <string name="logged_in">Logget inn som: </string>
   <string name="log_in">Log in</string>
   <string name="scroll_custom_poop">Bla nedover for å legge til mer informasjon</string>
   <string name="privacy_policy">Application is 100% open-source.\n

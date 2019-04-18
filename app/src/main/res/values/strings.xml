@@ -90,7 +90,7 @@
     <string name="device_has_no_internett">Device has no internett</string>
     <string name="device_dosent_have_gps_turned_on">Device dosent have GPS turned on</string>
     <string name="not_logged_in">Not logged in</string>
-    <string name="logged_in">Logged in as</string>
+    <string name="logged_in">Logged in as: </string>
     <string name="log_in">Log in</string>
     <string name="scroll_custom_poop">Scroll down to add location</string>
     <string name="privacy_policy">Application is 100% open-source.\n
