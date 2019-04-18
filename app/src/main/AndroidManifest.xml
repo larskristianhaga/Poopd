@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="lars.wherehaveishit">
+  xmlns:tools="http://schemas.android.com/tools"
+  package="lars.wherehaveishit">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/poop_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+  <application
+    android:allowBackup="true"
+    android:icon="@mipmap/poop_launcher"
+    android:label="@string/app_name"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    tools:ignore="GoogleAppIndexingWarning">
+    <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+    <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="@string/google_maps_key"/>
 
-        <activity
-            android:name=".MapsActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+    <activity
+      android:name=".MapsActivity"
+      android:theme="@style/AppTheme.NoActionBar">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity
+      android:icon="@drawable/ic_add_24dp"
+      android:label="@string/add_new_poop"
+      android:name=".AddShitActivity"
+      android:parentActivityName=".MapsActivity">
+    </activity>
+    <activity
+      android:icon="@drawable/ic_help_24dp"
+      android:label="@string/help"
+      android:name=".HowToUseActivity"
+      android:parentActivityName=".MapsActivity">
+    </activity>
+    <activity
+      android:icon="@drawable/ic_statistics_24dp"
+      android:label="@string/statistics"
+      android:name=".StatisticsActivity"
+      android:parentActivityName=".MapsActivity">
+    </activity>
+    <activity
+      android:label="@string/poop_details"
+      android:name=".DetailedActivity"
+      android:parentActivityName=".ListPoopsActivity">
+    </activity>
+    <activity
+      android:icon="@drawable/ic_edit_location_24dp"
+      android:label="@string/edit_poop_location"
+      android:name=".EditLocationActivity"
+      android:parentActivityName=".AddShitActivity">
+    </activity>
+    <activity
+      android:icon="@drawable/ic_settings_24dp"
+      android:label="@string/settings"
+      android:name=".SettingsActivity"
+      android:parentActivityName=".MapsActivity">
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value="lars.wherehaveishit.MapsActivity"/>
+    </activity>
+    <activity
+      android:icon="@drawable/ic_add_24dp"
+      android:label="@string/add_custom_poop"
+      android:name=".CustomPoopActivity"
+      android:parentActivityName=".MapsActivity">
+    </activity>
+    <activity
+      android:icon="@drawable/ic_list_24dp"
+      android:label="@string/all_poops"
+      android:name=".ListPoopsActivity"
+      android:parentActivityName=".MapsActivity">
+    </activity>
+    <activity
+      android:icon="@drawable/ic_edit_location_24dp"
+      android:label="@string/title_activity_custom_marker_map"
+      android:name=".CustomMarkerMapActivity"
+      android:parentActivityName=".CustomPoopActivity">
+    </activity>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".AddShitActivity"
-            android:icon="@drawable/ic_add_24dp"
-            android:label="@string/add_new_poop"
-            android:parentActivityName=".MapsActivity">
-        </activity>
-        <activity
-            android:name=".HowToUseActivity"
-            android:icon="@drawable/ic_help_24dp"
-            android:label="@string/help"
-            android:parentActivityName=".MapsActivity">
-        </activity>
-        <activity
-            android:name=".StatisticsActivity"
-            android:icon="@drawable/ic_statistics_24dp"
-            android:label="@string/statistics"
-            android:parentActivityName=".MapsActivity">
-        </activity>
-        <activity
-            android:name=".DetailedActivity"
-            android:label="@string/poop_details"
-            android:parentActivityName=".ListPoopsActivity">
-        </activity>
-        <activity
-            android:name=".EditLocationActivity"
-            android:icon="@drawable/ic_edit_location_24dp"
-            android:label="@string/edit_poop_location"
-            android:parentActivityName=".AddShitActivity">
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:icon="@drawable/ic_settings_24dp"
-            android:label="@string/settings"
-            android:parentActivityName=".MapsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="lars.wherehaveishit.MapsActivity"/>
-        </activity>
-        <activity
-            android:name=".CustomPoopActivity"
-            android:icon="@drawable/ic_add_24dp"
-            android:label="@string/add_custom_poop"
-            android:parentActivityName=".MapsActivity">
-        </activity>
-        <activity
-            android:name=".ListPoopsActivity"
-            android:icon="@drawable/ic_list_24dp"
-            android:label="@string/all_poops"
-            android:parentActivityName=".MapsActivity">
-        </activity>
-        <activity
-            android:name=".CustomMarkerMapActivity"
-            android:icon="@drawable/ic_edit_location_24dp"
-            android:label="@string/title_activity_custom_marker_map"
-            android:parentActivityName=".CustomPoopActivity">
-        </activity>
+    <meta-data
+      android:name="com.google.android.backup.api_key"
+      android:value="AEdPqrEAAAAIpkfMaBwh5Cl0-m3_ANzoHgkOv6lAD7mDt-jhCQ"/>
 
-        <meta-data
-            android:name="com.google.android.backup.api_key"
-            android:value="AEdPqrEAAAAIpkfMaBwh5Cl0-m3_ANzoHgkOv6lAD7mDt-jhCQ"/>
-
-    </application>
+  </application>
 
 </manifest>
