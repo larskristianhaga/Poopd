@@ -56,7 +56,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     static GoogleMap mMap;
     private static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 99;
     FloatingActionButton btn_addPoop;
-    ImageView noInternett;
+    ImageView noInternet;
     ImageView noGPS;
     DBHandler db;
     public static int mapTypeValue;
@@ -77,7 +77,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = findViewById(R.id.toolbar);
         btn_addPoop = findViewById(R.id.btn_addShit);
         noGPS = findViewById(R.id.noGPS);
-        noInternett = findViewById(R.id.noInternett);
+        noInternet = findViewById(R.id.noInternett);
         loggedInText = findViewById(R.id.txt_logged_in);
 
         setSupportActionBar(toolbar);
@@ -410,7 +410,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (!isNetworkAvailable())
         {
             Log.i("!NetworkAvaliable", "No");
-            noInternett.setVisibility(View.VISIBLE);
+            noInternet.setVisibility(View.VISIBLE);
         }
 
         // Reads file and marks on the map if mMap is not null
